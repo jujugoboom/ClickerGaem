@@ -9,12 +9,21 @@
 /* Begin PBXBuildFile section */
 		1CF9123B2C95414100A92158 /* ClickerGaemApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9123A2C95414100A92158 /* ClickerGaemApp.swift */; };
 		1CF9123D2C95414100A92158 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9123C2C95414100A92158 /* ContentView.swift */; };
-		1CF9123F2C95414100A92158 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9123E2C95414100A92158 /* Item.swift */; };
 		1CF912412C95414200A92158 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CF912402C95414200A92158 /* Assets.xcassets */; };
 		1CF912442C95414200A92158 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CF912432C95414200A92158 /* Preview Assets.xcassets */; };
 		1CF9124E2C95414200A92158 /* ClickerGaemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9124D2C95414200A92158 /* ClickerGaemTests.swift */; };
 		1CF912582C95414200A92158 /* ClickerGaemUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912572C95414200A92158 /* ClickerGaemUITests.swift */; };
 		1CF9125A2C95414200A92158 /* ClickerGaemUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912592C95414200A92158 /* ClickerGaemUITestsLaunchTests.swift */; };
+		1CF912672C95415800A92158 /* SwiftInfinite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912662C95415800A92158 /* SwiftInfinite.swift */; };
+		1CF912692C9619A000A92158 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912682C9619A000A92158 /* GameState.swift */; };
+		1CF9126D2C97CF5200A92158 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9126C2C97CF5200A92158 /* Game.swift */; };
+		1CF9126F2C97D1F800A92158 /* Ticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9126E2C97D1F800A92158 /* Ticker.swift */; };
+		1CF912712C97D4C300A92158 /* Dimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912702C97D4C300A92158 /* Dimension.swift */; };
+		1CF912752C98121E00A92158 /* DimensionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912742C98121E00A92158 /* DimensionState.swift */; };
+		1CF912772C99116B00A92158 /* DimensionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912762C99116B00A92158 /* DimensionView.swift */; };
+		1CF912792C991BDF00A92158 /* SwiftInfiniteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912782C991BDF00A92158 /* SwiftInfiniteTests.swift */; };
+		1CF9127B2C9BB24900A92158 /* ClickerGaemData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9127A2C9BB24900A92158 /* ClickerGaemData.swift */; };
+		1CF9127E2C9BB2BB00A92158 /* ClickerGaemModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9127C2C9BB2BB00A92158 /* ClickerGaemModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +47,6 @@
 		1CF912372C95414100A92158 /* ClickerGaem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClickerGaem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CF9123A2C95414100A92158 /* ClickerGaemApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickerGaemApp.swift; sourceTree = "<group>"; };
 		1CF9123C2C95414100A92158 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		1CF9123E2C95414100A92158 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		1CF912402C95414200A92158 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1CF912432C95414200A92158 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1CF912492C95414200A92158 /* ClickerGaemTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClickerGaemTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,6 +54,16 @@
 		1CF912532C95414200A92158 /* ClickerGaemUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClickerGaemUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CF912572C95414200A92158 /* ClickerGaemUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickerGaemUITests.swift; sourceTree = "<group>"; };
 		1CF912592C95414200A92158 /* ClickerGaemUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickerGaemUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1CF912662C95415800A92158 /* SwiftInfinite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftInfinite.swift; sourceTree = "<group>"; };
+		1CF912682C9619A000A92158 /* GameState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
+		1CF9126C2C97CF5200A92158 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		1CF9126E2C97D1F800A92158 /* Ticker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ticker.swift; sourceTree = "<group>"; };
+		1CF912702C97D4C300A92158 /* Dimension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dimension.swift; sourceTree = "<group>"; };
+		1CF912742C98121E00A92158 /* DimensionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimensionState.swift; sourceTree = "<group>"; };
+		1CF912762C99116B00A92158 /* DimensionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimensionView.swift; sourceTree = "<group>"; };
+		1CF912782C991BDF00A92158 /* SwiftInfiniteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftInfiniteTests.swift; sourceTree = "<group>"; };
+		1CF9127A2C9BB24900A92158 /* ClickerGaemData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickerGaemData.swift; sourceTree = "<group>"; };
+		1CF9127D2C9BB2BB00A92158 /* ClickerGaemModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ClickerGaemModel.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,10 +115,14 @@
 			isa = PBXGroup;
 			children = (
 				1CF9123A2C95414100A92158 /* ClickerGaemApp.swift */,
+				1CF9127A2C9BB24900A92158 /* ClickerGaemData.swift */,
 				1CF9123C2C95414100A92158 /* ContentView.swift */,
-				1CF9123E2C95414100A92158 /* Item.swift */,
 				1CF912402C95414200A92158 /* Assets.xcassets */,
 				1CF912422C95414200A92158 /* Preview Content */,
+				1CF912662C95415800A92158 /* SwiftInfinite.swift */,
+				1CF912732C9811AB00A92158 /* Game */,
+				1CF912722C98119B00A92158 /* Dimension */,
+				1CF9127C2C9BB2BB00A92158 /* ClickerGaemModel.xcdatamodeld */,
 			);
 			path = ClickerGaem;
 			sourceTree = "<group>";
@@ -117,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				1CF9124D2C95414200A92158 /* ClickerGaemTests.swift */,
+				1CF912782C991BDF00A92158 /* SwiftInfiniteTests.swift */,
 			);
 			path = ClickerGaemTests;
 			sourceTree = "<group>";
@@ -128,6 +151,26 @@
 				1CF912592C95414200A92158 /* ClickerGaemUITestsLaunchTests.swift */,
 			);
 			path = ClickerGaemUITests;
+			sourceTree = "<group>";
+		};
+		1CF912722C98119B00A92158 /* Dimension */ = {
+			isa = PBXGroup;
+			children = (
+				1CF912702C97D4C300A92158 /* Dimension.swift */,
+				1CF912742C98121E00A92158 /* DimensionState.swift */,
+				1CF912762C99116B00A92158 /* DimensionView.swift */,
+			);
+			path = Dimension;
+			sourceTree = "<group>";
+		};
+		1CF912732C9811AB00A92158 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				1CF912682C9619A000A92158 /* GameState.swift */,
+				1CF9126C2C97CF5200A92158 /* Game.swift */,
+				1CF9126E2C97D1F800A92158 /* Ticker.swift */,
+			);
+			path = Game;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,8 +304,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CF9123D2C95414100A92158 /* ContentView.swift in Sources */,
-				1CF9123F2C95414100A92158 /* Item.swift in Sources */,
+				1CF9127E2C9BB2BB00A92158 /* ClickerGaemModel.xcdatamodeld in Sources */,
+				1CF9126F2C97D1F800A92158 /* Ticker.swift in Sources */,
+				1CF9126D2C97CF5200A92158 /* Game.swift in Sources */,
+				1CF912672C95415800A92158 /* SwiftInfinite.swift in Sources */,
+				1CF912712C97D4C300A92158 /* Dimension.swift in Sources */,
 				1CF9123B2C95414100A92158 /* ClickerGaemApp.swift in Sources */,
+				1CF912772C99116B00A92158 /* DimensionView.swift in Sources */,
+				1CF912752C98121E00A92158 /* DimensionState.swift in Sources */,
+				1CF912692C9619A000A92158 /* GameState.swift in Sources */,
+				1CF9127B2C9BB24900A92158 /* ClickerGaemData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +322,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CF9124E2C95414200A92158 /* ClickerGaemTests.swift in Sources */,
+				1CF912792C991BDF00A92158 /* SwiftInfiniteTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -592,6 +644,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1CF9127C2C9BB2BB00A92158 /* ClickerGaemModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1CF9127D2C9BB2BB00A92158 /* ClickerGaemModel.xcdatamodel */,
+			);
+			currentVersion = 1CF9127D2C9BB2BB00A92158 /* ClickerGaemModel.xcdatamodel */;
+			name = ClickerGaemModel.xcdatamodeld;
+			path = /Users/justincovell/Projects/ClickerGaem/ClickerGaem/ClickerGaemModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1CF9122F2C95414100A92158 /* Project object */;
 }
