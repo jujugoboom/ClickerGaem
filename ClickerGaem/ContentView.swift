@@ -14,14 +14,30 @@ struct ContentView: View {
     @State var state: GameState?
     @State var game: GameInstance?
     
+    var dimensions: [Dimension] {
+        guard let dimensionValues = state?.dimensions.values else {
+            return []
+        }
+        return Array(dimensionValues)
+    }
+    
     var body: some View {
         VStack {
             Text("You have \(state?.antimatter ?? 0) antimatter")
             Text("You are getting \(state?.amPerSecond ?? 0) AM/s")
             Text("Total tickspeed: \(state?.ticksPerSecond ?? 0)/s")
-            Button(action: buyTickspeedUpgrade) {
-                Text("Buy tickspeed upgrade for \(state?.tickspeedUpgradeCost ?? 0)").contentShape(.rect)
-            }.disabled(state?.tickspeedUpgradeCost.gt(other: state?.antimatter ?? 0) ?? true)
+            HStack {
+                Button(action: buyTickspeedUpgrade) {
+                    Text("Buy tickspeed upgrade for \(state?.tickspeedUpgradeCost ?? 0)").contentShape(.rect)
+                }.disabled(state?.tickspeedUpgradeCost.gt(other: state?.antimatter ?? 0) ?? true)
+                Button(action: maxTickspeedUpgrade) {
+                    Text("Max tickspeed").disabled(state?.tickspeedUpgradeCost.gt(other: state?.antimatter ?? 0) ?? true)
+                }
+            }
+            Button(action: buyMaxDimensions) {
+                Text("Max all dimensions").disabled((dimensions.first(where: {dimension in dimension.canBuy}) == nil))
+            }
+
             List {
                 ForEach(state?.unlockedDimensions ?? []) { dimension in
                     DimensionView(dimension: dimension)
@@ -44,6 +60,29 @@ struct ContentView: View {
         }
         state?.antimatter = antimatter!.sub(value: tickspeedUpgradeCost!)
         state?.tickSpeedUpgrades = (state?.tickSpeedUpgrades.add(value: 1))!
+    }
+    
+    private func maxTickspeedUpgrade() {
+        while true {
+            let antimatter = state?.antimatter
+            let tickspeedUpgradeCost = state?.tickspeedUpgradeCost
+            guard antimatter != nil && tickspeedUpgradeCost != nil else {
+                return
+            }
+            guard antimatter!.gt(other: tickspeedUpgradeCost!) else {
+                return
+            }
+            state?.antimatter = antimatter!.sub(value: tickspeedUpgradeCost!)
+            state?.tickSpeedUpgrades = (state?.tickSpeedUpgrades.add(value: 1))!
+        }
+    }
+    
+    private func buyMaxDimensions() {
+        dimensions.forEach() { dimension in
+            while dimension.canBuy {
+                dimension.buy(count: dimension.howManyCanBuy)
+            }
+        }
     }
     
     private func initGame() {
