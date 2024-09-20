@@ -32,7 +32,17 @@ struct DimensionView: View {
     
     var body: some View {
         HStack {
-            Text("\(tierFormatter.string(from: dimensionState.tier as NSNumber) ?? "0th") dimension\n\(dimensionState.currCount)")
+            VStack {
+                Text("\(tierFormatter.string(from: dimensionState.tier as NSNumber) ?? "0th") dimension")
+                HStack{
+                    Text("Total: \(dimension.state.currCount.description)").font(.system(size: 10))
+                    Text("+\(dimension.growthRate)%/s").font(.system(size: 10))
+                }
+                HStack{
+                    Text("Purchased: \(dimension.state.purchaseCount)").font(.system(size: 10))
+                    Text("Multiplier \(dimension.multiplier)x").font(.system(size: 10))
+                }
+            }
             Spacer()
             Button(action: buy) {
                 Text("Buy \(dimension.howManyCanBuy.toInt()) for \(dimension.howManyCanBuy.gt(other: 0) ? cost.mul(value: howManyCanBuy) : cost)").contentShape(.rect).disabled(!dimension.canBuy)
@@ -46,5 +56,5 @@ struct DimensionView: View {
 }
 
 #Preview {
-    DimensionView(dimension: Dimension(state: DimensionState(tier: 1, purchaseCount: 0, currCount: 0, unlocked: true), gameState: GameState()))
+    DimensionView(dimension: Dimension(state: DimensionState(tier: 1, purchaseCount: 0, currCount: 0, unlocked: true), gameState: GameState(antimatter: 1e35)))
 }

@@ -51,6 +51,17 @@ class Dimension: Identifiable {
         return ratio.min(other: InfiniteDecimal(integerLiteral: 10 - boughtBefore10)).max(other: 0).floor()
     }
     
+    var perSecond: InfiniteDecimal {
+        state.currCount.mul(value: gameState.ticksPerSecond).mul(value: multiplier)
+    }
+    
+    var growthRate: InfiniteDecimal {
+        guard tier != 8 else {
+            return 0
+        }
+        return gameState.dimensions[tier + 1]?.perSecond.div(value: state.currCount.max(other: 1)).mul(value: 100) ?? 0
+    }
+    
     var canBuy: Bool {
         state.unlocked && howManyCanBuy.gt(other: 0)
     }
@@ -85,12 +96,11 @@ class Dimension: Identifiable {
             return
         }
         if tier == 1 {
-            gameState.antimatter = gameState.antimatter.add(value: state.currCount.mul(value: gameState.ticksPerSecond.mul(value: InfiniteDecimal(source: diff))).mul(value: multiplier))
-            gameState.amPerSecond = state.currCount.mul(value: gameState.ticksPerSecond).mul(value: multiplier)
+            gameState.antimatter = gameState.antimatter.add(value: perSecond.mul(value: InfiniteDecimal(source: diff)))
         } else {
             // Get dimension the tier below this one
             let lowerDimension = gameState.dimensions[tier - 1]!
-            lowerDimension.state.currCount = lowerDimension.state.currCount.add(value: state.currCount.mul(value: gameState.ticksPerSecond.mul(value: InfiniteDecimal(source: diff))).mul(value: multiplier))
+            lowerDimension.state.currCount = lowerDimension.state.currCount.add(value: perSecond.mul(value: InfiniteDecimal(source: diff)))
         }
     }
     

@@ -473,4 +473,3 @@ extension InfiniteDecimalTransformer {
         ValueTransformer.setValueTransformer(transformer, forName: name)
     }
 }
-
