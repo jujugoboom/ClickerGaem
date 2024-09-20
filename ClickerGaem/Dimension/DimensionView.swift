@@ -20,13 +20,19 @@ struct DimensionView: View {
         self.dimension.howManyCanBuy
     }
     
+    var tierFormatter: NumberFormatter {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .ordinal
+        return formatter
+    }
+    
     init(dimension: Dimension) {
         self.dimension = dimension
     }
     
     var body: some View {
         HStack {
-            Text("You have \(dimensionState.currCount) tier\n\(dimensionState.tier) dimensions")
+            Text("\(tierFormatter.string(from: dimensionState.tier as NSNumber) ?? "0th") dimension\n\(dimensionState.currCount)")
             Spacer()
             Button(action: buy) {
                 Text("Buy \(dimension.howManyCanBuy.description) for \(dimension.howManyCanBuy.gt(other: 0) ? cost.mul(value: howManyCanBuy) : cost)")

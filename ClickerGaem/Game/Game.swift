@@ -18,7 +18,7 @@ class GameInstance {
     }
     
     func tick(diff: TimeInterval) {
-        for dimension in state.dimensions {
+        for dimension in state.dimensions.values {
             dimension.tick(diff: diff)
         }
     }
