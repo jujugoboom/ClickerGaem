@@ -128,8 +128,8 @@
             filePath = "ClickerGaem/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
             landmarkName = "initGame()"
             landmarkType = "7">
          </BreakpointContent>
@@ -399,7 +399,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "AE6BCA50-E02C-438A-BF00-A6688F9F6AA3"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClickerGaem/Dimension/Dimension.swift"

@@ -39,7 +39,7 @@ struct DimensionBoost: View {
         HStack{
             Text("You have \(gameState.dimensionBoosts) dimension boosts")
             Button(action: buy) {
-                Text(strCost)
+                Text(strCost).contentShape(.rect)
             }.disabled(!canBuy)
         }
     }
