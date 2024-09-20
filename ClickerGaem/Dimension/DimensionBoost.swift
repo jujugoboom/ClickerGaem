@@ -54,6 +54,5 @@ struct DimensionBoost: View {
         gameState.antimatter = 10
         gameState.tickSpeedUpgrades = 0
         gameState.dimensionBoosts += 1
-        gameState.amPerSecond = 0
     }
 }

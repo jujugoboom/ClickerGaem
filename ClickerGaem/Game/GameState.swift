@@ -21,7 +21,12 @@ import OrderedCollections
     var ticksPerSecond: InfiniteDecimal {
         InfiniteDecimal(source: 1).add(value: tickSpeedUpgrades.mul(value: 1.125))
     }
-    var amPerSecond: InfiniteDecimal = 0
+    var amPerSecond: InfiniteDecimal {
+        guard dimensions.keys.contains(1) else {
+            return 0
+        }
+        return dimensions[1]!.perSecond
+    }
     
     var dimensions: OrderedDictionary<Int, Dimension> {
         return dimensionStates.reduce(into: [:]) {partialResult, nextValue in

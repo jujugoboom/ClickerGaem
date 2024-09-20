@@ -78,7 +78,7 @@ struct ContentView: View {
     }
     
     private func buyMaxDimensions() {
-        dimensions.forEach() { dimension in
+        dimensions.reversed().forEach() { dimension in
             while dimension.canBuy {
                 dimension.buy(count: dimension.howManyCanBuy)
             }
