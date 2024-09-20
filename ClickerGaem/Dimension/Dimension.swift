@@ -52,7 +52,7 @@ class Dimension: Identifiable {
     }
     
     var canBuy: Bool {
-        howManyCanBuy.gt(other: 0)
+        state.unlocked && howManyCanBuy.gt(other: 0)
     }
     
     init(state: DimensionState, gameState: GameState) {
