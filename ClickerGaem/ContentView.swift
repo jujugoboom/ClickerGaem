@@ -45,6 +45,7 @@ struct ContentView: View {
             }
             if let gameState = state {
                 DimensionBoost(gameState: gameState)
+                AntimatterGalaxy(gameState: gameState)
             }
         }.onAppear(perform: initGame)
     }

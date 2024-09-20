@@ -128,8 +128,8 @@
             filePath = "ClickerGaem/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
             landmarkName = "initGame()"
             landmarkType = "7">
          </BreakpointContent>
