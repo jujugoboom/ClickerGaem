@@ -23,8 +23,15 @@ class Dimension: Identifiable {
         InfiniteDecimal(integerLiteral: state.purchaseCount / 10).floor()
     }
     
+    var dimensionBoostMultiplier: InfiniteDecimal {
+        guard tier >= gameState.dimensionBoosts else {
+            return 1
+        }
+        return InfiniteDecimal(integerLiteral: 2).pow(value: InfiniteDecimal(integerLiteral: gameState.dimensionBoosts))
+    }
+    
     var multiplier: InfiniteDecimal {
-        timesBought.mul(value: 2).max(other: 1)
+        timesBought.mul(value: 2).max(other: 1).mul(value: dimensionBoostMultiplier)
     }
     
     var cost: InfiniteDecimal {
@@ -62,6 +69,12 @@ class Dimension: Identifiable {
         let intCount = count.toInt()
         state.purchaseCount += intCount
         state.currCount = state.currCount.add(value: count)
+        if tier < 8 && state.purchaseCount == 10 {
+            guard tier < 3 || gameState.dimensionBoosts >= tier - 3 else {
+                return
+            }
+            gameState.dimensions[tier + 1]?.state.unlocked = true
+        }
     }
     
     /// Handle the last time interval for just this dimension
@@ -76,8 +89,14 @@ class Dimension: Identifiable {
             gameState.amPerSecond = state.currCount.mul(value: gameState.ticksPerSecond).mul(value: multiplier)
         } else {
             // Get dimension the tier below this one
-            let lowerDimension = gameState.dimensions[tier - 2]
+            let lowerDimension = gameState.dimensions[tier - 1]!
             lowerDimension.state.currCount = lowerDimension.state.currCount.add(value: state.currCount.mul(value: gameState.ticksPerSecond.mul(value: InfiniteDecimal(source: diff))).mul(value: multiplier))
         }
+    }
+    
+    func reset() {
+        self.state.purchaseCount = 0
+        self.state.currCount = 0
+        self.state.unlocked = self.state.tier == 1
     }
 }

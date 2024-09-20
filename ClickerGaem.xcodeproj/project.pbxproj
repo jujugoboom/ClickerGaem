@@ -24,6 +24,8 @@
 		1CF912792C991BDF00A92158 /* SwiftInfiniteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912782C991BDF00A92158 /* SwiftInfiniteTests.swift */; };
 		1CF9127B2C9BB24900A92158 /* ClickerGaemData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9127A2C9BB24900A92158 /* ClickerGaemData.swift */; };
 		1CF9127E2C9BB2BB00A92158 /* ClickerGaemModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9127C2C9BB2BB00A92158 /* ClickerGaemModel.xcdatamodeld */; };
+		1CF912842C9CB6D400A92158 /* DimensionBoost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912832C9CB6D400A92158 /* DimensionBoost.swift */; };
+		1CF912872C9D092B00A92158 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 1CF912862C9D092B00A92158 /* OrderedCollections */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +66,7 @@
 		1CF912782C991BDF00A92158 /* SwiftInfiniteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftInfiniteTests.swift; sourceTree = "<group>"; };
 		1CF9127A2C9BB24900A92158 /* ClickerGaemData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickerGaemData.swift; sourceTree = "<group>"; };
 		1CF9127D2C9BB2BB00A92158 /* ClickerGaemModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ClickerGaemModel.xcdatamodel; sourceTree = "<group>"; };
+		1CF912832C9CB6D400A92158 /* DimensionBoost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimensionBoost.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CF912872C9D092B00A92158 /* OrderedCollections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,6 +163,7 @@
 				1CF912702C97D4C300A92158 /* Dimension.swift */,
 				1CF912742C98121E00A92158 /* DimensionState.swift */,
 				1CF912762C99116B00A92158 /* DimensionView.swift */,
+				1CF912832C9CB6D400A92158 /* DimensionBoost.swift */,
 			);
 			path = Dimension;
 			sourceTree = "<group>";
@@ -189,6 +194,9 @@
 			dependencies = (
 			);
 			name = ClickerGaem;
+			packageProductDependencies = (
+				1CF912862C9D092B00A92158 /* OrderedCollections */,
+			);
 			productName = ClickerGaem;
 			productReference = 1CF912372C95414100A92158 /* ClickerGaem.app */;
 			productType = "com.apple.product-type.application";
@@ -261,6 +269,9 @@
 				Base,
 			);
 			mainGroup = 1CF9122E2C95414100A92158;
+			packageReferences = (
+				1CF912852C9D092B00A92158 /* XCRemoteSwiftPackageReference "swift-collections" */,
+			);
 			productRefGroup = 1CF912382C95414100A92158 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -313,6 +324,7 @@
 				1CF912772C99116B00A92158 /* DimensionView.swift in Sources */,
 				1CF912752C98121E00A92158 /* DimensionState.swift in Sources */,
 				1CF912692C9619A000A92158 /* GameState.swift in Sources */,
+				1CF912842C9CB6D400A92158 /* DimensionBoost.swift in Sources */,
 				1CF9127B2C9BB24900A92158 /* ClickerGaemData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -644,6 +656,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1CF912852C9D092B00A92158 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1CF912862C9D092B00A92158 /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1CF912852C9D092B00A92158 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		1CF9127C2C9BB2BB00A92158 /* ClickerGaemModel.xcdatamodeld */ = {

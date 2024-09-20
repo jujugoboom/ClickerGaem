@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import OrderedCollections
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -21,9 +22,12 @@ struct ContentView: View {
             Button(action: buyTickspeedUpgrade) {
                 Text("Buy tickspeed upgrade for \(state?.tickspeedUpgradeCost ?? 0)")
             }.disabled(state?.tickspeedUpgradeCost.gt(other: state?.antimatter ?? 0) ?? true)
-            List {ForEach(state?.dimensions ?? []) { dimension in
+            List {ForEach(state?.unlockedDimensions ?? []) { dimension in
                 DimensionView(dimension: dimension)
             }}
+            if let gameState = state {
+                DimensionBoost(gameState: gameState)
+            }
         }.onAppear(perform: initGame)
     }
     
