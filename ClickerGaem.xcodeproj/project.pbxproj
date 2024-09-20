@@ -25,8 +25,8 @@
 		1CF9127B2C9BB24900A92158 /* ClickerGaemData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9127A2C9BB24900A92158 /* ClickerGaemData.swift */; };
 		1CF9127E2C9BB2BB00A92158 /* ClickerGaemModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9127C2C9BB2BB00A92158 /* ClickerGaemModel.xcdatamodeld */; };
 		1CF912842C9CB6D400A92158 /* DimensionBoost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912832C9CB6D400A92158 /* DimensionBoost.swift */; };
-		1CF912872C9D092B00A92158 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 1CF912862C9D092B00A92158 /* OrderedCollections */; };
 		1CF912892C9D466D00A92158 /* AntimatterGalaxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912882C9D466D00A92158 /* AntimatterGalaxy.swift */; };
+		1CF9128E2C9D4D5200A92158 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 1CF9128D2C9D4D5200A92158 /* OrderedCollections */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,7 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1CF912872C9D092B00A92158 /* OrderedCollections in Frameworks */,
+				1CF9128E2C9D4D5200A92158 /* OrderedCollections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,7 +198,7 @@
 			);
 			name = ClickerGaem;
 			packageProductDependencies = (
-				1CF912862C9D092B00A92158 /* OrderedCollections */,
+				1CF9128D2C9D4D5200A92158 /* OrderedCollections */,
 			);
 			productName = ClickerGaem;
 			productReference = 1CF912372C95414100A92158 /* ClickerGaem.app */;
@@ -273,7 +273,7 @@
 			);
 			mainGroup = 1CF9122E2C95414100A92158;
 			packageReferences = (
-				1CF912852C9D092B00A92158 /* XCRemoteSwiftPackageReference "swift-collections" */,
+				1CF9128C2C9D4D5200A92158 /* XCRemoteSwiftPackageReference "swift-collections" */,
 			);
 			productRefGroup = 1CF912382C95414100A92158 /* Products */;
 			projectDirPath = "";
@@ -662,7 +662,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1CF912852C9D092B00A92158 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+		1CF9128C2C9D4D5200A92158 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-collections.git";
 			requirement = {
@@ -673,9 +673,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		1CF912862C9D092B00A92158 /* OrderedCollections */ = {
+		1CF9128D2C9D4D5200A92158 /* OrderedCollections */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1CF912852C9D092B00A92158 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			package = 1CF9128C2C9D4D5200A92158 /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = OrderedCollections;
 		};
 /* End XCSwiftPackageProductDependency section */

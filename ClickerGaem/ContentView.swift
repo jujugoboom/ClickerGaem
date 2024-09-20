@@ -22,32 +22,35 @@ struct ContentView: View {
     }
     
     var body: some View {
-        VStack {
-            Text("You have \(state?.antimatter ?? 0) antimatter")
-            Text("You are getting \(state?.amPerSecond ?? 0) AM/s")
-            Text("Total tickspeed: \(state?.ticksPerSecond ?? 0)/s")
-            HStack {
-                Button(action: buyTickspeedUpgrade) {
-                    Text("Buy tickspeed upgrade for \(state?.tickspeedUpgradeCost ?? 0)").contentShape(.rect)
-                }.disabled(state?.tickspeedUpgradeCost.gt(other: state?.antimatter ?? 0) ?? true)
-                Button(action: maxTickspeedUpgrade) {
-                    Text("Max tickspeed").disabled(state?.tickspeedUpgradeCost.gt(other: state?.antimatter ?? 0) ?? true)
-                }
-            }
-            Button(action: buyMaxDimensions) {
-                Text("Max all dimensions").disabled((dimensions.first(where: {dimension in dimension.canBuy}) == nil))
-            }
-
-            List {
-                ForEach(state?.unlockedDimensions ?? []) { dimension in
-                    DimensionView(dimension: dimension)
-                }
-            }
-            if let gameState = state {
-                DimensionBoost(gameState: gameState)
-                AntimatterGalaxy(gameState: gameState)
-            }
-        }.onAppear(perform: initGame)
+        TabView {
+                VStack {
+                    Text("You have \(state?.antimatter ?? 0) antimatter")
+                    Text("You are getting \(state?.amPerSecond ?? 0) AM/s")
+                    Text("Total tickspeed: \(state?.ticksPerSecond ?? 0)/s")
+                    HStack {
+                        Button(action: buyTickspeedUpgrade) {
+                            Text("Buy tickspeed upgrade for \(state?.tickspeedUpgradeCost ?? 0)").contentShape(.rect)
+                        }.disabled(state?.tickspeedUpgradeCost.gt(other: state?.antimatter ?? 0) ?? true)
+                        Button(action: maxTickspeedUpgrade) {
+                            Text("Max tickspeed").disabled(state?.tickspeedUpgradeCost.gt(other: state?.antimatter ?? 0) ?? true)
+                        }
+                    }
+                    Button(action: buyMaxDimensions) {
+                        Text("Max all dimensions").disabled((dimensions.first(where: {dimension in dimension.canBuy}) == nil))
+                    }
+                    
+                    List {
+                        ForEach(state?.unlockedDimensions ?? []) { dimension in
+                            DimensionView(dimension: dimension)
+                        }
+                    }
+                    if let gameState = state {
+                        DimensionBoost(gameState: gameState)
+                        AntimatterGalaxy(gameState: gameState)
+                    }
+                }.onAppear(perform: initGame)
+        }.tabItem { Label("Antimatter Dimensions", systemImage: "circle.and.line.horizontal") }
+        
     }
     
     private func buyTickspeedUpgrade() {
