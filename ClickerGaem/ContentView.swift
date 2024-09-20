@@ -20,11 +20,13 @@ struct ContentView: View {
             Text("You are getting \(state?.amPerSecond ?? 0) AM/s")
             Text("Total tickspeed: \(state?.ticksPerSecond ?? 0)/s")
             Button(action: buyTickspeedUpgrade) {
-                Text("Buy tickspeed upgrade for \(state?.tickspeedUpgradeCost ?? 0)")
+                Text("Buy tickspeed upgrade for \(state?.tickspeedUpgradeCost ?? 0)").contentShape(.rect)
             }.disabled(state?.tickspeedUpgradeCost.gt(other: state?.antimatter ?? 0) ?? true)
-            List {ForEach(state?.unlockedDimensions ?? []) { dimension in
-                DimensionView(dimension: dimension)
-            }}
+            List {
+                ForEach(state?.unlockedDimensions ?? []) { dimension in
+                    DimensionView(dimension: dimension)
+                }
+            }
             if let gameState = state {
                 DimensionBoost(gameState: gameState)
             }

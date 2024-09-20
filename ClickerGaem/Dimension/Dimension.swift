@@ -24,7 +24,7 @@ class Dimension: Identifiable {
     }
     
     var dimensionBoostMultiplier: InfiniteDecimal {
-        guard tier >= gameState.dimensionBoosts else {
+        guard tier <= gameState.dimensionBoosts else {
             return 1
         }
         return InfiniteDecimal(integerLiteral: 2).pow(value: InfiniteDecimal(integerLiteral: gameState.dimensionBoosts))

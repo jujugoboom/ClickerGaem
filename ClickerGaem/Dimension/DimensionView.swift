@@ -35,8 +35,8 @@ struct DimensionView: View {
             Text("\(tierFormatter.string(from: dimensionState.tier as NSNumber) ?? "0th") dimension\n\(dimensionState.currCount)")
             Spacer()
             Button(action: buy) {
-                Text("Buy \(dimension.howManyCanBuy.description) for \(dimension.howManyCanBuy.gt(other: 0) ? cost.mul(value: howManyCanBuy) : cost)")
-            }.disabled(!dimension.canBuy)
+                Text("Buy \(dimension.howManyCanBuy.toInt()) for \(dimension.howManyCanBuy.gt(other: 0) ? cost.mul(value: howManyCanBuy) : cost)").contentShape(.rect).disabled(!dimension.canBuy)
+            }
         }
     }
                 
