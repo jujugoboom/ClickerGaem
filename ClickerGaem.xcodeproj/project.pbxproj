@@ -26,6 +26,7 @@
 		1CF9127E2C9BB2BB00A92158 /* ClickerGaemModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9127C2C9BB2BB00A92158 /* ClickerGaemModel.xcdatamodeld */; };
 		1CF912842C9CB6D400A92158 /* DimensionBoost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912832C9CB6D400A92158 /* DimensionBoost.swift */; };
 		1CF912872C9D092B00A92158 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 1CF912862C9D092B00A92158 /* OrderedCollections */; };
+		1CF912892C9D466D00A92158 /* AntimatterGalaxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912882C9D466D00A92158 /* AntimatterGalaxy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		1CF9127A2C9BB24900A92158 /* ClickerGaemData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickerGaemData.swift; sourceTree = "<group>"; };
 		1CF9127D2C9BB2BB00A92158 /* ClickerGaemModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ClickerGaemModel.xcdatamodel; sourceTree = "<group>"; };
 		1CF912832C9CB6D400A92158 /* DimensionBoost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimensionBoost.swift; sourceTree = "<group>"; };
+		1CF912882C9D466D00A92158 /* AntimatterGalaxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntimatterGalaxy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +166,7 @@
 				1CF912742C98121E00A92158 /* DimensionState.swift */,
 				1CF912762C99116B00A92158 /* DimensionView.swift */,
 				1CF912832C9CB6D400A92158 /* DimensionBoost.swift */,
+				1CF912882C9D466D00A92158 /* AntimatterGalaxy.swift */,
 			);
 			path = Dimension;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 				1CF912752C98121E00A92158 /* DimensionState.swift in Sources */,
 				1CF912692C9619A000A92158 /* GameState.swift in Sources */,
 				1CF912842C9CB6D400A92158 /* DimensionBoost.swift in Sources */,
+				1CF912892C9D466D00A92158 /* AntimatterGalaxy.swift in Sources */,
 				1CF9127B2C9BB24900A92158 /* ClickerGaemData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -15,11 +15,12 @@ import OrderedCollections
     var dimensionStates: [DimensionState]
     var tickSpeedUpgrades: InfiniteDecimal = 0
     var dimensionBoosts = 0
+    var amGalaxies = 0
     var totalDimensionBoost: InfiniteDecimal {
         (2 as InfiniteDecimal).pow(value: InfiniteDecimal(integerLiteral: dimensionBoosts))
     }
     var ticksPerSecond: InfiniteDecimal {
-        InfiniteDecimal(source: 1).add(value: tickSpeedUpgrades.mul(value: 1.125))
+        InfiniteDecimal(source: 1).add(value: tickSpeedUpgrades.mul(value: InfiniteDecimal(source: 1.125 * max(Double(amGalaxies) * 1.4, 1))))
     }
     var amPerSecond: InfiniteDecimal {
         guard dimensions.keys.contains(1) else {
