@@ -33,11 +33,12 @@ struct AntimatterGalaxy: View {
             return
         }
         gameState.dimensions.values.forEach() { dimension in
-            dimension.reset()
+            dimension.reset(keepUnlocked: false)
         }
         gameState.antimatter = 10
         gameState.tickSpeedUpgrades = 0
         gameState.dimensionBoosts = 0
+        gameState.sacrificedDimensions = 0
         gameState.amGalaxies += 1
     }
 }

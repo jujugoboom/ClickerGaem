@@ -54,5 +54,7 @@ struct DimensionBoost: View {
         gameState.antimatter = 10
         gameState.tickSpeedUpgrades = 0
         gameState.dimensionBoosts += 1
+        gameState.sacrificedDimensions = 0
+        gameState.dimensions[gameState.dimensionBoosts + 4]?.state.unlocked = true
     }
 }

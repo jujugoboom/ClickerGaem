@@ -33,7 +33,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "38"
             endingLineNumber = "38"
-            landmarkName = "cost"
+            landmarkName = "multiplier"
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
@@ -50,7 +50,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "47"
             endingLineNumber = "47"
-            landmarkName = "howManyCanBuy"
+            landmarkName = "boughtBefore10"
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
@@ -66,7 +66,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "48"
             endingLineNumber = "48"
-            landmarkName = "howManyCanBuy"
+            landmarkName = "boughtBefore10"
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
@@ -128,8 +128,8 @@
             filePath = "ClickerGaem/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
             landmarkName = "initGame()"
             landmarkType = "7">
          </BreakpointContent>
@@ -430,38 +430,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "BA73AEE1-77F2-4F46-9003-8E710B954194"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ClickerGaem/ContentView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "18"
-            endingLineNumber = "18"
-            landmarkName = "dimensions"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "0A81A058-CC05-44FB-B1C2-55FE793ADE74"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ClickerGaem/ContentView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "body"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "B033110B-C200-4290-8A95-BF48EC2C9D3B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -471,7 +439,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "59"
             endingLineNumber = "59"
-            landmarkName = "growthRate"
+            landmarkName = "perSecond"
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
