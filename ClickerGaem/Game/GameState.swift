@@ -16,6 +16,10 @@ import OrderedCollections
     var tickSpeedUpgrades: InfiniteDecimal = 0
     var dimensionBoosts = 0
     var amGalaxies = 0
+    var sacrificedDimensions: InfiniteDecimal = 0
+    var dimensionSacrificeMul: InfiniteDecimal {
+        GameState.dimensionSacrificeMultiplier(sacrificed: sacrificedDimensions)
+    }
     var totalDimensionBoost: InfiniteDecimal {
         (2 as InfiniteDecimal).pow(value: InfiniteDecimal(integerLiteral: dimensionBoosts))
     }
@@ -52,10 +56,14 @@ import OrderedCollections
         var initDimensionStates = dimensionStates
         if initDimensionStates.count == 0 {
             for i in 1...8 {
-                initDimensionStates.append(DimensionState(tier: i, purchaseCount: 0, currCount: 0, unlocked: i == 1))
+                initDimensionStates.append(DimensionState(tier: i, purchaseCount: 0, currCount: 0, unlocked: i <= 4))
             }
 
         }
         self.dimensionStates = initDimensionStates
+    }
+    
+    static func dimensionSacrificeMultiplier(sacrificed: InfiniteDecimal) -> InfiniteDecimal {
+        InfiniteDecimal(source: sacrificed.log10() / 10).max(other: 1).pow(value: 2)
     }
 }

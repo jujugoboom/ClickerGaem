@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C9161AE2C9D4E9D00D1555A /* AntimatterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9161AD2C9D4E9D00D1555A /* AntimatterView.swift */; };
 		1CF9123B2C95414100A92158 /* ClickerGaemApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9123A2C95414100A92158 /* ClickerGaemApp.swift */; };
 		1CF9123D2C95414100A92158 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9123C2C95414100A92158 /* ContentView.swift */; };
 		1CF912412C95414200A92158 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CF912402C95414200A92158 /* Assets.xcassets */; };
@@ -47,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1C9161AD2C9D4E9D00D1555A /* AntimatterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntimatterView.swift; sourceTree = "<group>"; };
 		1CF912372C95414100A92158 /* ClickerGaem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClickerGaem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CF9123A2C95414100A92158 /* ClickerGaemApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickerGaemApp.swift; sourceTree = "<group>"; };
 		1CF9123C2C95414100A92158 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				1CF912732C9811AB00A92158 /* Game */,
 				1CF912722C98119B00A92158 /* Dimension */,
 				1CF9127C2C9BB2BB00A92158 /* ClickerGaemModel.xcdatamodeld */,
+				1C9161AD2C9D4E9D00D1555A /* AntimatterView.swift */,
 			);
 			path = ClickerGaem;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				1CF9126F2C97D1F800A92158 /* Ticker.swift in Sources */,
 				1CF9126D2C97CF5200A92158 /* Game.swift in Sources */,
 				1CF912672C95415800A92158 /* SwiftInfinite.swift in Sources */,
+				1C9161AE2C9D4E9D00D1555A /* AntimatterView.swift in Sources */,
 				1CF912712C97D4C300A92158 /* Dimension.swift in Sources */,
 				1CF9123B2C95414100A92158 /* ClickerGaemApp.swift in Sources */,
 				1CF912772C99116B00A92158 /* DimensionView.swift in Sources */,
