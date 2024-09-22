@@ -17,7 +17,11 @@ struct ContentView: View {
     var body: some View {
         TabView {
             if let gameState = state {
-                AntimatterView(state: gameState).tabItem { Label("Antimatter Dimensions", systemImage: "circle.and.line.horizontal")
+                AntimatterView(state: gameState).tabItem {
+                    Label("Antimatter Dimensions", systemImage: "circle.and.line.horizontal")
+                }
+                AutobuyerView(gameState: gameState).tabItem {
+                    Label("Autobuyers", systemImage: "autostartstop")
                 }
             }
         }.onAppear(perform: initGame)

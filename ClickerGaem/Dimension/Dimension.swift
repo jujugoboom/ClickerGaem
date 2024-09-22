@@ -8,7 +8,7 @@
 import Foundation
 
 /// Main dimension class. Setup expecting that there are a max of 8 dimensions, and will fail if set to a 9th tier
-class Dimension: Identifiable {
+class Dimension: Identifiable, Tickable {
     let tierPrices: [Int: InfiniteDecimal] = [1: 10, 2: 100, 3: 10000, 4: 1e6, 5: 1e9, 6: 1e13, 7: 1e18, 8: 1e24]
     let basePriceIncreases: [Int: InfiniteDecimal] = [1: 1e3, 2: 5e3, 3: 1e4, 4: 1.2e4, 5: 1.8e4, 6: 2.6e4, 7: 3.2e4, 8: 4.2e4]
     

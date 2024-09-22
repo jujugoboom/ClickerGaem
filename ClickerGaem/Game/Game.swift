@@ -8,7 +8,7 @@
 import Foundation
 
 /// Right now just exists to setup the main game loop, but may handle more in the future
-class GameInstance {
+class GameInstance: Tickable {
     let state: GameState
     var ticker: Ticker? = nil
     
@@ -20,6 +20,9 @@ class GameInstance {
     func tick(diff: TimeInterval) {
         for dimension in state.dimensions.values {
             dimension.tick(diff: diff)
+        }
+        for autobuyer in state.autobuyers {
+            autobuyer.tick(diff: diff)
         }
     }
 }
