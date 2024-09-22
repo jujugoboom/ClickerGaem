@@ -49,8 +49,10 @@ import OrderedCollections
         InfiniteDecimal().pow10(value: tickSpeedUpgrades.add(value: 3).toDouble())
     }
     
+    var autobuyers: [Autobuyer] = []
+    
     /// Generate initial game state with expected defaults. 
-    init(updateInterval: Double = 0.05, antimatter: InfiniteDecimal = 10, dimensionStates: [DimensionState] = []) {
+    init(updateInterval: Double = 0.05, antimatter: InfiniteDecimal = 10, dimensionStates: [DimensionState] = [], autobuyers: [Autobuyer] = []) {
         self.updateInterval = updateInterval
         self.antimatter = antimatter
         var initDimensionStates = dimensionStates
@@ -58,9 +60,16 @@ import OrderedCollections
             for i in 1...8 {
                 initDimensionStates.append(DimensionState(tier: i, purchaseCount: 0, currCount: 0, unlocked: i <= 4))
             }
-
         }
         self.dimensionStates = initDimensionStates
+        var initAutoBuyers = autobuyers
+        if initAutoBuyers.count == 0 {
+            for i in 1...8 {
+                initAutoBuyers.append(AMDimensionAutobuyer(gameState: self, tier: i, buyRate: 0.5 + (0.1 * (Double(i) - 1)), purchaseAmount: 10))
+                initAutoBuyers.last?.unlock()
+            }
+        }
+        self.autobuyers = initAutoBuyers
     }
     
     static func dimensionSacrificeMultiplier(sacrificed: InfiniteDecimal) -> InfiniteDecimal {

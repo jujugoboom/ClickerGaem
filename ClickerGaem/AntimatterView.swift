@@ -47,7 +47,7 @@ struct AntimatterView: View {
                     DimensionView(dimension: dimension)
                 }
             }
-            DimensionBoost(gameState: state)
+            DimensionBoostView(gameState: state)
             AntimatterGalaxy(gameState: state)
             
         }

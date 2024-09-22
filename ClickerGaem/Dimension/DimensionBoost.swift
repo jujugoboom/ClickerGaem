@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct DimensionBoost: View {
+struct DimensionBoost {
     let gameState: GameState
     var howManyCanBuy: InfiniteDecimal {
         if gameState.dimensionBoosts < 4 {
@@ -44,7 +44,7 @@ struct DimensionBoost: View {
         }
     }
     
-    private func buy() {
+    func buy() {
         guard canBuy else {
             return
         }
@@ -58,3 +58,17 @@ struct DimensionBoost: View {
         gameState.dimensions[gameState.dimensionBoosts + 4]?.state.unlocked = true
     }
 }
+
+struct DimensionBoostView: View {
+    var gameState: GameState
+    var dimensionBoost: DimensionBoost {
+        DimensionBoost(gameState: gameState)
+    }
+    var body: some View {
+        HStack{
+            Text("You have \(gameState.dimensionBoosts) dimension boosts")
+            Button(action: dimensionBoost.buy) {
+                Text(dimensionBoost.strCost).contentShape(.rect)
+            }.disabled(!dimensionBoost.canBuy)
+        }
+    }}

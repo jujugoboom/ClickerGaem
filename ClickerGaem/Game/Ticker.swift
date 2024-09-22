@@ -22,3 +22,7 @@ class Ticker {
         }
     }
 }
+
+protocol Tickable: Identifiable {
+    func tick(diff: TimeInterval)
+}
