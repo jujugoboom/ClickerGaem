@@ -26,6 +26,9 @@ import Foundation
     }
     
     override func tick(diff: TimeInterval) {
+        guard enabled && unlocked else {
+            return
+        }
         // Update our total diff time
         elapsedSinceBuy += diff
         guard elapsedSinceBuy > buyRate else {

@@ -8,7 +8,8 @@
 import Foundation
 
 /// Main dimension state. 
-@Observable final class DimensionState: ObservableObject {
+@Observable
+final class DimensionState: ObservableObject {
     let tier: Int
     var purchaseCount: Int
     var costIncreases: Int {
