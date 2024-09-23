@@ -77,10 +77,14 @@ class Dimension: Identifiable, Tickable {
     
     /// Tries to buy a count of this dimension, returns no information about the success of such an attempt
     func buy(count: InfiniteDecimal) {
-        if count.gt(other: howManyCanBuy) {
+        guard count.lte(other: howManyCanBuy) else {
             return
         }
-        gameState.antimatter = gameState.antimatter.sub(value: cost.mul(value: count))
+        let totalCost = cost.mul(value: count)
+        guard gameState.antimatter.gte(other: totalCost) else {
+            return
+        }
+        gameState.antimatter = gameState.antimatter.sub(value: totalCost)
         let intCount = count.toInt()
         state.purchaseCount += intCount
         state.currCount = state.currCount.add(value: count)

@@ -10,6 +10,7 @@
 		1C30A4F02C9FB77F00FBB096 /* AMDimensionAutobuyer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C30A4EC2C9FB77F00FBB096 /* AMDimensionAutobuyer.swift */; };
 		1C30A4F12C9FB77F00FBB096 /* AutobuyerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C30A4EF2C9FB77F00FBB096 /* AutobuyerView.swift */; };
 		1C30A4F22C9FB77F00FBB096 /* Autobuyer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C30A4ED2C9FB77F00FBB096 /* Autobuyer.swift */; };
+		1C30A5272CA0F72500FBB096 /* BigCrunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C30A5262CA0F72200FBB096 /* BigCrunch.swift */; };
 		1C9161AE2C9D4E9D00D1555A /* AntimatterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9161AD2C9D4E9D00D1555A /* AntimatterView.swift */; };
 		1CF9123B2C95414100A92158 /* ClickerGaemApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9123A2C95414100A92158 /* ClickerGaemApp.swift */; };
 		1CF9123D2C95414100A92158 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9123C2C95414100A92158 /* ContentView.swift */; };
@@ -54,6 +55,7 @@
 		1C30A4EC2C9FB77F00FBB096 /* AMDimensionAutobuyer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMDimensionAutobuyer.swift; sourceTree = "<group>"; };
 		1C30A4ED2C9FB77F00FBB096 /* Autobuyer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Autobuyer.swift; sourceTree = "<group>"; };
 		1C30A4EF2C9FB77F00FBB096 /* AutobuyerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutobuyerView.swift; sourceTree = "<group>"; };
+		1C30A5262CA0F72200FBB096 /* BigCrunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigCrunch.swift; sourceTree = "<group>"; };
 		1C9161AD2C9D4E9D00D1555A /* AntimatterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntimatterView.swift; sourceTree = "<group>"; };
 		1CF912372C95414100A92158 /* ClickerGaem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClickerGaem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CF9123A2C95414100A92158 /* ClickerGaemApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickerGaemApp.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 		1CF912392C95414100A92158 /* ClickerGaem */ = {
 			isa = PBXGroup;
 			children = (
+				1C30A5262CA0F72200FBB096 /* BigCrunch.swift */,
 				1C30A4EE2C9FB77F00FBB096 /* Autobuyer */,
 				1C30A4EF2C9FB77F00FBB096 /* AutobuyerView.swift */,
 				1CF9123A2C95414100A92158 /* ClickerGaemApp.swift */,
@@ -354,6 +357,7 @@
 				1CF912842C9CB6D400A92158 /* DimensionBoost.swift in Sources */,
 				1CF912892C9D466D00A92158 /* AntimatterGalaxy.swift in Sources */,
 				1CF9127B2C9BB24900A92158 /* ClickerGaemData.swift in Sources */,
+				1C30A5272CA0F72500FBB096 /* BigCrunch.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

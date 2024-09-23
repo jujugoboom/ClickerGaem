@@ -20,8 +20,9 @@ struct ContentView: View {
                 AntimatterView(state: gameState).tabItem {
                     Label("Antimatter Dimensions", systemImage: "circle.and.line.horizontal")
                 }
-                AutobuyerView(gameState: gameState).tabItem {
-                    Label("Autobuyers", systemImage: "autostartstop")
+                if gameState.unlockedAutobuyers.count > 0 { AutobuyerView(gameState: gameState).tabItem {
+                        Label("Autobuyers", systemImage: "autostartstop")
+                    }
                 }
             }
         }.onAppear(perform: initGame)

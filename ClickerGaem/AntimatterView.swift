@@ -10,6 +10,9 @@ import SwiftUI
 
 struct AntimatterView: View {
     let state: GameState
+    var bigCrunch: BigCrunch {
+        BigCrunch(state: state)
+    }
     
     var dimensions: [Dimension] {
         Array(state.dimensions.values)
@@ -17,6 +20,22 @@ struct AntimatterView: View {
     
     var currSacrificeMultiplier: InfiniteDecimal{
         GameState.dimensionSacrificeMultiplier(sacrificed: state.sacrificedDimensions.add(value: dimensions.first?.state.currCount ?? 0)).div(value: state.dimensionSacrificeMul)
+    }
+    
+    struct FirstBigCrunch: ViewModifier {
+        var bigCrunch: BigCrunch
+        var state: GameState
+        
+        func body(content: Content) -> some View {
+            if bigCrunch.canBigCrunch && !state.firstInfinity {
+                Button(action: bigCrunch.crunch) {
+                    Text("BIG CRUNCH").padding()
+                }.padding().background().clipShape(RoundedRectangle(cornerRadius: 10)).shadow(radius: 5)
+            } else {
+                content
+            }
+        }
+        
     }
     
     var body: some View {
@@ -41,16 +60,15 @@ struct AntimatterView: View {
             Button(action: buyMaxDimensions) {
                 Text("Max all dimensions").disabled((dimensions.first(where: {dimension in dimension.canBuy}) == nil))
             }
-            
-            List {
+            VStack(spacing: 25) {
                 ForEach(state.unlockedDimensions) { dimension in
                     DimensionView(dimension: dimension)
                 }
-            }
+            }.padding()
+            Spacer()
             DimensionBoostView(gameState: state)
             AntimatterGalaxy(gameState: state)
-            
-        }
+        }.modifier(FirstBigCrunch(bigCrunch: bigCrunch, state: state)).padding()
     }
     
     private func buyTickspeedUpgrade() {
@@ -92,4 +110,8 @@ struct AntimatterView: View {
             dimension.state.currCount = 0
         }
     }
+}
+
+#Preview {
+    AntimatterView(state: GameState())
 }
