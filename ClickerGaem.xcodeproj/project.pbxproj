@@ -19,8 +19,8 @@
 		1C9B5FD22CA2873C00A6A3B8 /* StoredDimensionState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FCE2CA2873C00A6A3B8 /* StoredDimensionState+CoreDataProperties.swift */; };
 		1C9B5FD32CA2873C00A6A3B8 /* StoredGameState+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FCF2CA2873C00A6A3B8 /* StoredGameState+CoreDataClass.swift */; };
 		1C9B5FD42CA2873C00A6A3B8 /* StoredGameState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FD02CA2873C00A6A3B8 /* StoredGameState+CoreDataProperties.swift */; };
-		1C9B5FD72CA2932E00A6A3B8 /* StoredAchievementState+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FD52CA2932E00A6A3B8 /* StoredAchievementState+CoreDataClass.swift */; };
-		1C9B5FD82CA2932E00A6A3B8 /* StoredAchievementState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FD62CA2932E00A6A3B8 /* StoredAchievementState+CoreDataProperties.swift */; };
+		1C9B5FE02CA29F8900A6A3B8 /* StoredAchievementState+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FDE2CA29F8900A6A3B8 /* StoredAchievementState+CoreDataClass.swift */; };
+		1C9B5FE12CA29F8900A6A3B8 /* StoredAchievementState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FDF2CA29F8900A6A3B8 /* StoredAchievementState+CoreDataProperties.swift */; };
 		1CF9123B2C95414100A92158 /* ClickerGaemApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9123A2C95414100A92158 /* ClickerGaemApp.swift */; };
 		1CF9123D2C95414100A92158 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9123C2C95414100A92158 /* ContentView.swift */; };
 		1CF912412C95414200A92158 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CF912402C95414200A92158 /* Assets.xcassets */; };
@@ -72,8 +72,8 @@
 		1C9B5FCE2CA2873C00A6A3B8 /* StoredDimensionState+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredDimensionState+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1C9B5FCF2CA2873C00A6A3B8 /* StoredGameState+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredGameState+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1C9B5FD02CA2873C00A6A3B8 /* StoredGameState+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredGameState+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		1C9B5FD52CA2932E00A6A3B8 /* StoredAchievementState+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredAchievementState+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		1C9B5FD62CA2932E00A6A3B8 /* StoredAchievementState+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredAchievementState+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		1C9B5FDE2CA29F8900A6A3B8 /* StoredAchievementState+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredAchievementState+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1C9B5FDF2CA29F8900A6A3B8 /* StoredAchievementState+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredAchievementState+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1CF912372C95414100A92158 /* ClickerGaem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClickerGaem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CF9123A2C95414100A92158 /* ClickerGaemApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickerGaemApp.swift; sourceTree = "<group>"; };
 		1CF9123C2C95414100A92158 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -184,8 +184,8 @@
 				1C9B5FCE2CA2873C00A6A3B8 /* StoredDimensionState+CoreDataProperties.swift */,
 				1C9B5FCF2CA2873C00A6A3B8 /* StoredGameState+CoreDataClass.swift */,
 				1C9B5FD02CA2873C00A6A3B8 /* StoredGameState+CoreDataProperties.swift */,
-				1C9B5FD52CA2932E00A6A3B8 /* StoredAchievementState+CoreDataClass.swift */,
-				1C9B5FD62CA2932E00A6A3B8 /* StoredAchievementState+CoreDataProperties.swift */,
+				1C9B5FDE2CA29F8900A6A3B8 /* StoredAchievementState+CoreDataClass.swift */,
+				1C9B5FDF2CA29F8900A6A3B8 /* StoredAchievementState+CoreDataProperties.swift */,
 			);
 			path = ClickerGaem;
 			sourceTree = "<group>";
@@ -384,8 +384,8 @@
 				1C9B5FCC2CA27D7100A6A3B8 /* AchievementView.swift in Sources */,
 				1CF912672C95415800A92158 /* SwiftInfinite.swift in Sources */,
 				1C9161AE2C9D4E9D00D1555A /* AntimatterView.swift in Sources */,
-				1C9B5FD72CA2932E00A6A3B8 /* StoredAchievementState+CoreDataClass.swift in Sources */,
-				1C9B5FD82CA2932E00A6A3B8 /* StoredAchievementState+CoreDataProperties.swift in Sources */,
+				1C9B5FE02CA29F8900A6A3B8 /* StoredAchievementState+CoreDataClass.swift in Sources */,
+				1C9B5FE12CA29F8900A6A3B8 /* StoredAchievementState+CoreDataProperties.swift in Sources */,
 				1C30A4F02C9FB77F00FBB096 /* AMDimensionAutobuyer.swift in Sources */,
 				1C30A4F12C9FB77F00FBB096 /* AutobuyerView.swift in Sources */,
 				1C30A4F22C9FB77F00FBB096 /* Autobuyer.swift in Sources */,
