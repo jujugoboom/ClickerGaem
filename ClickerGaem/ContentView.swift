@@ -19,24 +19,27 @@ struct ContentView: View {
     var newAchievementUnlocked: Binding<Bool> {
         achievements.unlockedNewAchievement
     }
-//    @State var game: GameInstance
+    
+    @State private var currentTab = 1
     
     var body: some View {
-        TabView {
+        TabView(selection: $currentTab) {
             AntimatterView().tabItem {
                 Label("Antimatter Dimensions", systemImage: "circle.and.line.horizontal")
-            }
+            }.tag(1)
             if Achievements.shared.unlockedAchievements.count > 0 {
                 AchievementView().tabItem {
                     Label("Achievements", systemImage: "medal.fill")
-                }
+                }.tag(2)
             }
             if gameState.unlockedAutobuyers.count > 0 { AutobuyerView().tabItem {
                     Label("Autobuyers", systemImage: "autostartstop")
-                }
+                }.tag(3)
             }
         }.toast(isPresenting: newAchievementUnlocked) {
             AlertToast(displayMode: .hud, type: .regular, title: Achievements.shared.newAchievementName, subTitle: "Achievement unlocked")
+        } onTap: {
+            currentTab = 2
         }
     }
     
