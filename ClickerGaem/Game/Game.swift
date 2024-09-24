@@ -12,7 +12,9 @@ class GameInstance: Tickable {
     var ticker: Ticker? = nil
     
     init() {
-        GameState.initState()
+        if !GameState.load() {
+            GameState.initState()
+        }
         self.ticker = Ticker(updateInterval: GameState.shared.updateInterval, tick: self.tick)
         _ = Achievements()
     }

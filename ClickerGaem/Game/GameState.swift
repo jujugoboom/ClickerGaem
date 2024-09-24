@@ -7,12 +7,14 @@
 
 import Foundation
 import OrderedCollections
+import SwiftUICore
 
 /// Main game state store. is going to get much worse before it gets better
 @Observable
 final class GameState {
     static let shared = GameState()
     
+    var storedState: StoredGameState
     var updateInterval: Double = 0.05
     var antimatter: InfiniteDecimal = 10
     var dimensionStates: [DimensionState] = []
@@ -56,6 +58,32 @@ final class GameState {
     
     var firstInfinity = false
     
+    class func load() -> Bool {
+        var dimensionStates: [DimensionState] = []
+        for dimensionState in shared.storedState.dimensionStates ?? [] {
+            let storedDimensionState = dimensionState as! StoredDimensionState
+            dimensionStates.append(DimensionState(storedState: storedDimensionState))
+        }
+        dimensionStates.sort(by: {$0.tier < $1.tier})
+        // TODO: Store autobuyers
+        // Forcefully casting antimatter here causes preview to crash
+        GameState.initState(updateInterval: shared.storedState.updateInterval, antimatter: shared.storedState.antimatter as? InfiniteDecimal ?? 0, dimensionStates: dimensionStates)
+        return true
+    }
+    
+    class func save(commit: Bool = true) {
+        shared.storedState.updateInterval = shared.updateInterval
+        shared.storedState.antimatter = shared.antimatter
+        let storedDimensionStates: [StoredDimensionState] = shared.dimensionStates.map(\.storedState)
+        shared.dimensionStates.forEach({$0.save()})
+        shared.storedState.dimensionStates = NSSet(array: storedDimensionStates)
+        Achievements().achievements.forEach({$0.save()})
+        guard commit else {
+            return
+        }
+        try! ClickerGaemData.shared.persistentContainer.viewContext.save()
+    }
+    
     class func initState(updateInterval: Double = 0.05, antimatter: InfiniteDecimal = 10, dimensionStates: [DimensionState] = [], autobuyers: [Autobuyer] = []) {
         shared.updateInterval = updateInterval
         shared.antimatter = antimatter
@@ -80,7 +108,9 @@ final class GameState {
     
     /// Generate initial game state with expected defaults. 
     private init() {
-        
+        let fetchRequest = StoredGameState.createFetchRequest()
+        fetchRequest.fetchLimit = 1
+        storedState = (try? ClickerGaemData.shared.persistentContainer.viewContext.fetch(fetchRequest).first) ?? StoredGameState(context: ClickerGaemData.shared.persistentContainer.viewContext)
     }
     
     static func dimensionSacrificeMultiplier(sacrificed: InfiniteDecimal) -> InfiniteDecimal {
