@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,7 @@
 		1C30A4F12C9FB77F00FBB096 /* AutobuyerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C30A4EF2C9FB77F00FBB096 /* AutobuyerView.swift */; };
 		1C30A4F22C9FB77F00FBB096 /* Autobuyer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C30A4ED2C9FB77F00FBB096 /* Autobuyer.swift */; };
 		1C30A5272CA0F72500FBB096 /* BigCrunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C30A5262CA0F72200FBB096 /* BigCrunch.swift */; };
+		1C30A52C2CA26C4400FBB096 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = 1C30A52B2CA26C4400FBB096 /* AlertToast */; };
 		1C9161AE2C9D4E9D00D1555A /* AntimatterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9161AD2C9D4E9D00D1555A /* AntimatterView.swift */; };
 		1CF9123B2C95414100A92158 /* ClickerGaemApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9123A2C95414100A92158 /* ClickerGaemApp.swift */; };
 		1CF9123D2C95414100A92158 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9123C2C95414100A92158 /* ContentView.swift */; };
@@ -81,12 +82,17 @@
 		1CF912882C9D466D00A92158 /* AntimatterGalaxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntimatterGalaxy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		1C9B5FC52CA279A200A6A3B8 /* Achievements */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Achievements; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		1CF912342C95414100A92158 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				1CF9128E2C9D4D5200A92158 /* OrderedCollections in Frameworks */,
+				1C30A52C2CA26C4400FBB096 /* AlertToast in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,6 +145,7 @@
 		1CF912392C95414100A92158 /* ClickerGaem */ = {
 			isa = PBXGroup;
 			children = (
+				1C9B5FC52CA279A200A6A3B8 /* Achievements */,
 				1C30A5262CA0F72200FBB096 /* BigCrunch.swift */,
 				1C30A4EE2C9FB77F00FBB096 /* Autobuyer */,
 				1C30A4EF2C9FB77F00FBB096 /* AutobuyerView.swift */,
@@ -219,9 +226,13 @@
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				1C9B5FC52CA279A200A6A3B8 /* Achievements */,
+			);
 			name = ClickerGaem;
 			packageProductDependencies = (
 				1CF9128D2C9D4D5200A92158 /* OrderedCollections */,
+				1C30A52B2CA26C4400FBB096 /* AlertToast */,
 			);
 			productName = ClickerGaem;
 			productReference = 1CF912372C95414100A92158 /* ClickerGaem.app */;
@@ -297,6 +308,7 @@
 			mainGroup = 1CF9122E2C95414100A92158;
 			packageReferences = (
 				1CF9128C2C9D4D5200A92158 /* XCRemoteSwiftPackageReference "swift-collections" */,
+				1C30A52A2CA26C4400FBB096 /* XCRemoteSwiftPackageReference "AlertToast" */,
 			);
 			productRefGroup = 1CF912382C95414100A92158 /* Products */;
 			projectDirPath = "";
@@ -447,6 +459,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_PROFILING_CODE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -504,6 +517,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_PROFILING_CODE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -554,6 +568,7 @@
 				DEVELOPMENT_TEAM = 984K82PAX7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_PROFILING_CODE = NO;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -690,6 +705,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1C30A52A2CA26C4400FBB096 /* XCRemoteSwiftPackageReference "AlertToast" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/elai950/AlertToast.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.9;
+			};
+		};
 		1CF9128C2C9D4D5200A92158 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-collections.git";
@@ -701,6 +724,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1C30A52B2CA26C4400FBB096 /* AlertToast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C30A52A2CA26C4400FBB096 /* XCRemoteSwiftPackageReference "AlertToast" */;
+			productName = AlertToast;
+		};
 		1CF9128D2C9D4D5200A92158 /* OrderedCollections */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1CF9128C2C9D4D5200A92158 /* XCRemoteSwiftPackageReference "swift-collections" */;

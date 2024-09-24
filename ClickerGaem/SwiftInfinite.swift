@@ -64,7 +64,7 @@ struct PowersOf10 {
             }
             return "\(mantissa.formatted(.number.precision(.fractionLength(2))))\(InfiniteDecimal.standardAbbreviations[Int(exponent - 1)])"
         }
-        return "\(m.formatted())e\(e)"
+        return "\(m.formatted(.number.precision(.fractionLength(2))))e\(e)"
     }
     
     /// Again, my first swift project. Default init that generally should not be used

@@ -11,6 +11,7 @@ import CoreData
 @main
 struct ClickerGaemApp: App {
     @StateObject private var clickerGaemData = ClickerGaemData.shared
+    @State private var game = GameInstance()
 
     var body: some Scene {
         WindowGroup {
@@ -18,4 +19,7 @@ struct ClickerGaemApp: App {
         }
     }
     
+    init() {
+        _ = game
+    }
 }

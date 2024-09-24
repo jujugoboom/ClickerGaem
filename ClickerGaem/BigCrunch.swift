@@ -12,8 +12,8 @@ class BigCrunch {
         state.antimatter.gte(other: InfiniteDecimal(mantissa: 1.8, exponent: 308))
     }
     
-    init(state: GameState) {
-        self.state = state
+    init() {
+        self.state = GameState.shared
     }
     
     func crunch() {

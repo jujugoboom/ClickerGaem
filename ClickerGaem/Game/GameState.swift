@@ -11,9 +11,11 @@ import OrderedCollections
 /// Main game state store. is going to get much worse before it gets better
 @Observable
 final class GameState {
-    var updateInterval: Double
-    var antimatter: InfiniteDecimal
-    var dimensionStates: [DimensionState]
+    static let shared = GameState()
+    
+    var updateInterval: Double = 0.05
+    var antimatter: InfiniteDecimal = 10
+    var dimensionStates: [DimensionState] = []
     var tickSpeedUpgrades: InfiniteDecimal = 0
     var dimensionBoosts = 0
     var amGalaxies = 0
@@ -54,27 +56,31 @@ final class GameState {
     
     var firstInfinity = false
     
-    /// Generate initial game state with expected defaults. 
-    init(updateInterval: Double = 0.05, antimatter: InfiniteDecimal = 10, dimensionStates: [DimensionState] = [], autobuyers: [Autobuyer] = []) {
-        self.updateInterval = updateInterval
-        self.antimatter = antimatter
+    class func initState(updateInterval: Double = 0.05, antimatter: InfiniteDecimal = 10, dimensionStates: [DimensionState] = [], autobuyers: [Autobuyer] = []) {
+        shared.updateInterval = updateInterval
+        shared.antimatter = antimatter
         var initDimensionStates = dimensionStates
         if initDimensionStates.count == 0 {
             for i in 1...8 {
-                initDimensionStates.append(DimensionState(tier: i, purchaseCount: 0, currCount: 0, unlocked: i <= 4))
+                initDimensionStates.append(DimensionState(tier: i, purchaseCount: 0, currCount: 0, unlocked: true))
             }
         }
-        self.dimensionStates = initDimensionStates
-        self.dimensions = initDimensionStates.reduce(into: [:]) {partialResult, nextValue in
-            partialResult[nextValue.tier] = Dimension(state: nextValue, gameState: self)
+        shared.dimensionStates = initDimensionStates
+        shared.dimensions = initDimensionStates.reduce(into: [:]) {partialResult, nextValue in
+            partialResult[nextValue.tier] = Dimension(state: nextValue)
         }
         var initAutoBuyers = autobuyers
         if initAutoBuyers.count == 0 {
             for i in 1...8 {
-                initAutoBuyers.append(AMDimensionAutobuyer(gameState: self, tier: i, buyRate: 0.5 + (0.1 * (Double(i) - 1)), purchaseAmount: 10))
+                initAutoBuyers.append(AMDimensionAutobuyer(tier: i, buyRate: 0.5 + (0.1 * (Double(i) - 1)), purchaseAmount: 10))
             }
         }
-        self.autobuyers = initAutoBuyers
+        shared.autobuyers = initAutoBuyers
+    }
+    
+    /// Generate initial game state with expected defaults. 
+    private init() {
+        
     }
     
     static func dimensionSacrificeMultiplier(sacrificed: InfiniteDecimal) -> InfiniteDecimal {

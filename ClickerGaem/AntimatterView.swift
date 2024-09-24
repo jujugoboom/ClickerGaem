@@ -9,10 +9,8 @@ import Foundation
 import SwiftUI
 
 struct AntimatterView: View {
-    let state: GameState
-    var bigCrunch: BigCrunch {
-        BigCrunch(state: state)
-    }
+    let state: GameState = GameState.shared
+    var bigCrunch: BigCrunch = BigCrunch()
     
     var dimensions: [Dimension] {
         Array(state.dimensions.values)
@@ -60,14 +58,16 @@ struct AntimatterView: View {
             Button(action: buyMaxDimensions) {
                 Text("Max all dimensions").disabled((dimensions.first(where: {dimension in dimension.canBuy}) == nil))
             }
-            VStack(spacing: 25) {
-                ForEach(state.unlockedDimensions) { dimension in
-                    DimensionView(dimension: dimension)
-                }
-            }.padding()
+            ScrollView {
+                VStack(spacing: 25) {
+                    ForEach(state.unlockedDimensions) { dimension in
+                        DimensionView(dimension: dimension)
+                    }
+                }.padding()
+            }
             Spacer()
             DimensionBoostView(gameState: state)
-            AntimatterGalaxy(gameState: state)
+            AntimatterGalaxy()
         }.modifier(FirstBigCrunch(bigCrunch: bigCrunch, state: state)).padding()
     }
     
@@ -113,5 +113,6 @@ struct AntimatterView: View {
 }
 
 #Preview {
-    AntimatterView(state: GameState())
+    ContentView()
+        .environment(\.managedObjectContext, ClickerGaemData.preview.viewContext)
 }

@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct DimensionBoost {
-    let gameState: GameState
+    let gameState: GameState = GameState.shared
     var howManyCanBuy: InfiniteDecimal {
         if gameState.dimensionBoosts < 4 {
             if canBuy { return 1 } else { return 0 }
@@ -60,10 +60,8 @@ struct DimensionBoost {
 }
 
 struct DimensionBoostView: View {
-    var gameState: GameState
-    var dimensionBoost: DimensionBoost {
-        DimensionBoost(gameState: gameState)
-    }
+    var gameState: GameState = GameState.shared
+    var dimensionBoost: DimensionBoost = DimensionBoost()
     var body: some View {
         HStack{
             Text("You have \(gameState.dimensionBoosts) dimension boosts")

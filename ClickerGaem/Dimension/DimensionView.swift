@@ -20,23 +20,24 @@ struct DimensionView: View {
     }
     
     var body: some View {
-        Group {
-            HStack(spacing: 20) {
-                VStack {
-                    Text("\(tierFormatter.string(from: dimensionState.tier as NSNumber) ?? "0th") dimension")
-                    HStack{
-                        Text("Total: \(dimension.state.currCount.description)").font(.system(size: 10))
-                        Text("+\(dimension.growthRate)%/s").font(.system(size: 10))
-                    }
-                    HStack{
-                        Text("Purchased: \(dimension.state.purchaseCount)").font(.system(size: 10))
-                        Text("Multiplier \(dimension.multiplier)x").font(.system(size: 10))
-                    }
+        HStack(spacing: 20) {
+            VStack {
+                Text("\(tierFormatter.string(from: dimensionState.tier as NSNumber) ?? "0th") dimension")
+                HStack{
+                    Text("Total: \(dimension.state.currCount.description)").font(.system(size: 10))
+                    Text("+\(dimension.growthRate)%/s").font(.system(size: 10))
                 }
-                Button(action: buy) {
-                    Text("Buy \(dimension.howManyCanBuy.toInt()) for \(dimension.cost.mul(value: dimension.howManyCanBuy.max(other: 1)))").contentShape(.rect)
-                }.disabled(!dimension.canBuy).buttonStyle(.bordered)
+                HStack{
+                    Text("Purchased: \(dimension.state.purchaseCount)").font(.system(size: 10))
+                    Text("Multiplier \(dimension.multiplier)x").font(.system(size: 10))
+                }
             }
+            Button(action: buy) {
+                VStack {
+                    Text("Buy \(dimension.howManyCanBuy.toInt())")
+                    Text("\(dimension.cost.mul(value: dimension.howManyCanBuy.max(other: 1)))").font(.system(size: 10))
+                }.contentShape(.rect)
+            }.disabled(!dimension.canBuy).buttonStyle(.bordered).animation(.spring)
         }
     }
                 
@@ -46,5 +47,5 @@ struct DimensionView: View {
 }
 
 #Preview {
-    DimensionView(dimension: Dimension(state: DimensionState(tier: 1, purchaseCount: 0, currCount: 0, unlocked: true), gameState: GameState(antimatter: 1e35)))
+    DimensionView(dimension: Dimension(state: DimensionState(tier: 1, purchaseCount: 0, currCount: 0, unlocked: true)))
 }

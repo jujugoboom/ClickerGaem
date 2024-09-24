@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct AntimatterGalaxy: View {
-    var gameState: GameState
+    let gameState: GameState = GameState.shared
     
     var cost: Int {
         80 + gameState.amGalaxies * 60

@@ -13,7 +13,7 @@ class Dimension: Identifiable, Tickable {
     let basePriceIncreases: [Int: InfiniteDecimal] = [1: 1e3, 2: 5e3, 3: 1e4, 4: 1.2e4, 5: 1.8e4, 6: 2.6e4, 7: 3.2e4, 8: 4.2e4]
     
     var state: DimensionState
-    let gameState: GameState
+    let gameState: GameState = GameState.shared
     
     var tier: Int {
         state.tier
@@ -70,9 +70,8 @@ class Dimension: Identifiable, Tickable {
         state.unlocked && howManyCanBuy.gt(other: 0)
     }
     
-    init(state: DimensionState, gameState: GameState) {
+    init(state: DimensionState) {
         self.state = state
-        self.gameState = gameState
     }
     
     /// Tries to buy a count of this dimension, returns no information about the success of such an attempt

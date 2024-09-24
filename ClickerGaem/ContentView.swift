@@ -8,47 +8,59 @@
 import SwiftUI
 import CoreData
 import OrderedCollections
+import AlertToast
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @State var state: GameState?
-    @State var game: GameInstance?
+    let gameState: GameState = GameState.shared
+    var achievements: Bindable<Achievements> {
+        Bindable(Achievements.shared)
+    }
+    var newAchievementUnlocked: Binding<Bool> {
+        achievements.unlockedNewAchievement
+    }
+//    @State var game: GameInstance
     
     var body: some View {
         TabView {
-            if let gameState = state {
-                AntimatterView(state: gameState).tabItem {
-                    Label("Antimatter Dimensions", systemImage: "circle.and.line.horizontal")
-                }
-                if gameState.unlockedAutobuyers.count > 0 { AutobuyerView(gameState: gameState).tabItem {
-                        Label("Autobuyers", systemImage: "autostartstop")
-                    }
+            AntimatterView().tabItem {
+                Label("Antimatter Dimensions", systemImage: "circle.and.line.horizontal")
+            }
+            if Achievements.shared.unlockedAchievements.count > 0 {
+                AchievementView().tabItem {
+                    Label("Achievements", systemImage: "medal.fill")
                 }
             }
-        }.onAppear(perform: initGame)
+            if gameState.unlockedAutobuyers.count > 0 { AutobuyerView().tabItem {
+                    Label("Autobuyers", systemImage: "autostartstop")
+                }
+            }
+        }.toast(isPresenting: newAchievementUnlocked) {
+            AlertToast(displayMode: .hud, type: .regular, title: Achievements.shared.newAchievementName, subTitle: "Achievement unlocked")
+        }
     }
     
-    private func initGame() {
-        do {
-            let initState = try viewContext.fetch(NSFetchRequest<StoredGameState>(entityName: "StoredGameState"))
-            if initState.isEmpty {
-                let newState = GameState(antimatter: 10)
-                state = newState
-            } else {
-                let storedState = initState[0]
-                let storedDimensionStates = storedState.dimensionStates?.allObjects as? [StoredDimensionState] ?? []
-                var dimensionStates: [DimensionState] = []
-                for storedDimensionState in storedDimensionStates {
-                    dimensionStates.append(DimensionState(tier: Int(storedDimensionState.tier), purchaseCount: Int(storedDimensionState.purchaseCount), currCount: storedDimensionState.currCount as! InfiniteDecimal, unlocked: storedDimensionState.unlocked))
-                }
-                state = GameState(updateInterval: storedState.updateInterval, antimatter: storedState.antimatter as! InfiniteDecimal, dimensionStates: dimensionStates)
-            }
-        } catch {
-            assertionFailure("Failed to generate initial state")
-            return
-        }
-        game = GameInstance(state: state!)
-    }
+//    private func initGame() {
+//        do {
+//            let initState = try viewContext.fetch(NSFetchRequest<StoredGameState>(entityName: "StoredGameState"))
+//            if initState.isEmpty {
+//                let newState = GameState(antimatter: InfiniteDecimal(mantissa: 1, exponent: 200))
+//                state = newState
+//            } else {
+//                let storedState = initState[0]
+//                let storedDimensionStates = storedState.dimensionStates?.allObjects as? [StoredDimensionState] ?? []
+//                var dimensionStates: [DimensionState] = []
+//                for storedDimensionState in storedDimensionStates {
+//                    dimensionStates.append(DimensionState(tier: Int(storedDimensionState.tier), purchaseCount: Int(storedDimensionState.purchaseCount), currCount: storedDimensionState.currCount as! InfiniteDecimal, unlocked: storedDimensionState.unlocked))
+//                }
+//                state = GameState(updateInterval: storedState.updateInterval, antimatter: storedState.antimatter as! InfiniteDecimal, dimensionStates: dimensionStates)
+//            }
+//        } catch {
+//            assertionFailure("Failed to generate initial state")
+//            return
+//        }
+//    game = GameInstance(state: GameState.shared)
+//    }
 }
 
 #Preview {
