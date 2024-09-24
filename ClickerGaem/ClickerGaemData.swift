@@ -23,7 +23,7 @@ class ClickerGaemData: ObservableObject {
             }
         }
         
-        let gameState = GameState()
+        let gameState = GameState.shared
         let storedGameState = StoredGameState(context: container.viewContext)
         storedGameState.antimatter = gameState.antimatter
         gameState.dimensionStates.forEach { dimensionState in

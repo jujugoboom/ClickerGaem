@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct AutobuyerView: View {
-    var gameState: GameState
+    let gameState: GameState = GameState.shared
     var bindableGameState: Bindable<GameState> {
         Bindable(wrappedValue: gameState)
     }
@@ -49,5 +49,5 @@ struct AutobuyerView: View {
 }
 
 #Preview {
-    AutobuyerView(gameState: GameState())
+    AutobuyerView()
 }

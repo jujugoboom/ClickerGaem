@@ -7,7 +7,7 @@
 import Foundation
 
 @Observable class AMDimensionAutobuyer: Autobuyer {
-    var gameState: GameState
+    let gameState: GameState = GameState.shared
     var tier: Int
     var purchaseableCount: InfiniteDecimal {
         gameState.dimensions[tier]?.howManyCanBuy ?? InfiniteDecimal.zeroDecimal
@@ -16,8 +16,7 @@ import Foundation
     var purchaseAmount: InfiniteDecimal
     var elapsedSinceBuy: Double = 0
     
-    init(gameState: GameState, tier: Int, buyRate: Double, purchaseAmount: InfiniteDecimal) {
-        self.gameState = gameState
+    init(tier: Int, buyRate: Double, purchaseAmount: InfiniteDecimal) {
         self.tier = tier
         self.buyRate = buyRate
         self.purchaseAmount = purchaseAmount

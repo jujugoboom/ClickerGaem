@@ -9,19 +9,19 @@ import Foundation
 
 /// Right now just exists to setup the main game loop, but may handle more in the future
 class GameInstance: Tickable {
-    let state: GameState
     var ticker: Ticker? = nil
     
-    init(state: GameState) {
-        self.state = state
-        self.ticker = Ticker(updateInterval: state.updateInterval, tick: self.tick)
+    init() {
+        GameState.initState()
+        self.ticker = Ticker(updateInterval: GameState.shared.updateInterval, tick: self.tick)
+        _ = Achievements()
     }
     
     func tick(diff: TimeInterval) {
-        for dimension in state.dimensions.values {
+        for dimension in GameState.shared.dimensions.values {
             dimension.tick(diff: diff)
         }
-        for autobuyer in state.autobuyers {
+        for autobuyer in GameState.shared.autobuyers {
             autobuyer.tick(diff: diff)
         }
     }
