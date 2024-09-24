@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,14 @@
 		1C30A5272CA0F72500FBB096 /* BigCrunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C30A5262CA0F72200FBB096 /* BigCrunch.swift */; };
 		1C30A52C2CA26C4400FBB096 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = 1C30A52B2CA26C4400FBB096 /* AlertToast */; };
 		1C9161AE2C9D4E9D00D1555A /* AntimatterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9161AD2C9D4E9D00D1555A /* AntimatterView.swift */; };
+		1C9B5FCB2CA27D7100A6A3B8 /* Achievements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FC92CA27D7100A6A3B8 /* Achievements.swift */; };
+		1C9B5FCC2CA27D7100A6A3B8 /* AchievementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FCA2CA27D7100A6A3B8 /* AchievementView.swift */; };
+		1C9B5FD12CA2873C00A6A3B8 /* StoredDimensionState+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FCD2CA2873C00A6A3B8 /* StoredDimensionState+CoreDataClass.swift */; };
+		1C9B5FD22CA2873C00A6A3B8 /* StoredDimensionState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FCE2CA2873C00A6A3B8 /* StoredDimensionState+CoreDataProperties.swift */; };
+		1C9B5FD32CA2873C00A6A3B8 /* StoredGameState+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FCF2CA2873C00A6A3B8 /* StoredGameState+CoreDataClass.swift */; };
+		1C9B5FD42CA2873C00A6A3B8 /* StoredGameState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FD02CA2873C00A6A3B8 /* StoredGameState+CoreDataProperties.swift */; };
+		1C9B5FD72CA2932E00A6A3B8 /* StoredAchievementState+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FD52CA2932E00A6A3B8 /* StoredAchievementState+CoreDataClass.swift */; };
+		1C9B5FD82CA2932E00A6A3B8 /* StoredAchievementState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FD62CA2932E00A6A3B8 /* StoredAchievementState+CoreDataProperties.swift */; };
 		1CF9123B2C95414100A92158 /* ClickerGaemApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9123A2C95414100A92158 /* ClickerGaemApp.swift */; };
 		1CF9123D2C95414100A92158 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9123C2C95414100A92158 /* ContentView.swift */; };
 		1CF912412C95414200A92158 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CF912402C95414200A92158 /* Assets.xcassets */; };
@@ -58,6 +66,14 @@
 		1C30A4EF2C9FB77F00FBB096 /* AutobuyerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutobuyerView.swift; sourceTree = "<group>"; };
 		1C30A5262CA0F72200FBB096 /* BigCrunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigCrunch.swift; sourceTree = "<group>"; };
 		1C9161AD2C9D4E9D00D1555A /* AntimatterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntimatterView.swift; sourceTree = "<group>"; };
+		1C9B5FC92CA27D7100A6A3B8 /* Achievements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievements.swift; sourceTree = "<group>"; };
+		1C9B5FCA2CA27D7100A6A3B8 /* AchievementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementView.swift; sourceTree = "<group>"; };
+		1C9B5FCD2CA2873C00A6A3B8 /* StoredDimensionState+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredDimensionState+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1C9B5FCE2CA2873C00A6A3B8 /* StoredDimensionState+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredDimensionState+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1C9B5FCF2CA2873C00A6A3B8 /* StoredGameState+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredGameState+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1C9B5FD02CA2873C00A6A3B8 /* StoredGameState+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredGameState+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1C9B5FD52CA2932E00A6A3B8 /* StoredAchievementState+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredAchievementState+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		1C9B5FD62CA2932E00A6A3B8 /* StoredAchievementState+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredAchievementState+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		1CF912372C95414100A92158 /* ClickerGaem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClickerGaem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CF9123A2C95414100A92158 /* ClickerGaemApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickerGaemApp.swift; sourceTree = "<group>"; };
 		1CF9123C2C95414100A92158 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -81,10 +97,6 @@
 		1CF912832C9CB6D400A92158 /* DimensionBoost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimensionBoost.swift; sourceTree = "<group>"; };
 		1CF912882C9D466D00A92158 /* AntimatterGalaxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntimatterGalaxy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		1C9B5FC52CA279A200A6A3B8 /* Achievements */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Achievements; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		1CF912342C95414100A92158 /* Frameworks */ = {
@@ -122,6 +134,15 @@
 			path = Autobuyer;
 			sourceTree = "<group>";
 		};
+		1C9B5FD92CA29C4E00A6A3B8 /* Achievements */ = {
+			isa = PBXGroup;
+			children = (
+				1C9B5FC92CA27D7100A6A3B8 /* Achievements.swift */,
+				1C9B5FCA2CA27D7100A6A3B8 /* AchievementView.swift */,
+			);
+			path = Achievements;
+			sourceTree = "<group>";
+		};
 		1CF9122E2C95414100A92158 = {
 			isa = PBXGroup;
 			children = (
@@ -145,7 +166,7 @@
 		1CF912392C95414100A92158 /* ClickerGaem */ = {
 			isa = PBXGroup;
 			children = (
-				1C9B5FC52CA279A200A6A3B8 /* Achievements */,
+				1C9B5FD92CA29C4E00A6A3B8 /* Achievements */,
 				1C30A5262CA0F72200FBB096 /* BigCrunch.swift */,
 				1C30A4EE2C9FB77F00FBB096 /* Autobuyer */,
 				1C30A4EF2C9FB77F00FBB096 /* AutobuyerView.swift */,
@@ -159,6 +180,12 @@
 				1CF912722C98119B00A92158 /* Dimension */,
 				1CF9127C2C9BB2BB00A92158 /* ClickerGaemModel.xcdatamodeld */,
 				1C9161AD2C9D4E9D00D1555A /* AntimatterView.swift */,
+				1C9B5FCD2CA2873C00A6A3B8 /* StoredDimensionState+CoreDataClass.swift */,
+				1C9B5FCE2CA2873C00A6A3B8 /* StoredDimensionState+CoreDataProperties.swift */,
+				1C9B5FCF2CA2873C00A6A3B8 /* StoredGameState+CoreDataClass.swift */,
+				1C9B5FD02CA2873C00A6A3B8 /* StoredGameState+CoreDataProperties.swift */,
+				1C9B5FD52CA2932E00A6A3B8 /* StoredAchievementState+CoreDataClass.swift */,
+				1C9B5FD62CA2932E00A6A3B8 /* StoredAchievementState+CoreDataProperties.swift */,
 			);
 			path = ClickerGaem;
 			sourceTree = "<group>";
@@ -225,9 +252,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				1C9B5FC52CA279A200A6A3B8 /* Achievements */,
 			);
 			name = ClickerGaem;
 			packageProductDependencies = (
@@ -356,12 +380,20 @@
 				1CF9127E2C9BB2BB00A92158 /* ClickerGaemModel.xcdatamodeld in Sources */,
 				1CF9126F2C97D1F800A92158 /* Ticker.swift in Sources */,
 				1CF9126D2C97CF5200A92158 /* Game.swift in Sources */,
+				1C9B5FCB2CA27D7100A6A3B8 /* Achievements.swift in Sources */,
+				1C9B5FCC2CA27D7100A6A3B8 /* AchievementView.swift in Sources */,
 				1CF912672C95415800A92158 /* SwiftInfinite.swift in Sources */,
 				1C9161AE2C9D4E9D00D1555A /* AntimatterView.swift in Sources */,
+				1C9B5FD72CA2932E00A6A3B8 /* StoredAchievementState+CoreDataClass.swift in Sources */,
+				1C9B5FD82CA2932E00A6A3B8 /* StoredAchievementState+CoreDataProperties.swift in Sources */,
 				1C30A4F02C9FB77F00FBB096 /* AMDimensionAutobuyer.swift in Sources */,
 				1C30A4F12C9FB77F00FBB096 /* AutobuyerView.swift in Sources */,
 				1C30A4F22C9FB77F00FBB096 /* Autobuyer.swift in Sources */,
 				1CF912712C97D4C300A92158 /* Dimension.swift in Sources */,
+				1C9B5FD12CA2873C00A6A3B8 /* StoredDimensionState+CoreDataClass.swift in Sources */,
+				1C9B5FD22CA2873C00A6A3B8 /* StoredDimensionState+CoreDataProperties.swift in Sources */,
+				1C9B5FD32CA2873C00A6A3B8 /* StoredGameState+CoreDataClass.swift in Sources */,
+				1C9B5FD42CA2873C00A6A3B8 /* StoredGameState+CoreDataProperties.swift in Sources */,
 				1CF9123B2C95414100A92158 /* ClickerGaemApp.swift in Sources */,
 				1CF912772C99116B00A92158 /* DimensionView.swift in Sources */,
 				1CF912752C98121E00A92158 /* DimensionState.swift in Sources */,

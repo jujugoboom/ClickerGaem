@@ -40,30 +40,10 @@ struct ContentView: View {
             AlertToast(displayMode: .hud, type: .regular, title: Achievements.shared.newAchievementName, subTitle: "Achievement unlocked")
         } onTap: {
             currentTab = 2
-        }
+        }.onReceive(NotificationCenter.default.publisher(for: UIScene.willDeactivateNotification), perform: { _ in
+            GameState.save()
+        })
     }
-    
-//    private func initGame() {
-//        do {
-//            let initState = try viewContext.fetch(NSFetchRequest<StoredGameState>(entityName: "StoredGameState"))
-//            if initState.isEmpty {
-//                let newState = GameState(antimatter: InfiniteDecimal(mantissa: 1, exponent: 200))
-//                state = newState
-//            } else {
-//                let storedState = initState[0]
-//                let storedDimensionStates = storedState.dimensionStates?.allObjects as? [StoredDimensionState] ?? []
-//                var dimensionStates: [DimensionState] = []
-//                for storedDimensionState in storedDimensionStates {
-//                    dimensionStates.append(DimensionState(tier: Int(storedDimensionState.tier), purchaseCount: Int(storedDimensionState.purchaseCount), currCount: storedDimensionState.currCount as! InfiniteDecimal, unlocked: storedDimensionState.unlocked))
-//                }
-//                state = GameState(updateInterval: storedState.updateInterval, antimatter: storedState.antimatter as! InfiniteDecimal, dimensionStates: dimensionStates)
-//            }
-//        } catch {
-//            assertionFailure("Failed to generate initial state")
-//            return
-//        }
-//    game = GameInstance(state: GameState.shared)
-//    }
 }
 
 #Preview {
