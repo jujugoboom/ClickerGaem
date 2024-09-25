@@ -12,12 +12,26 @@ class Ticker {
     var timer: Timer? = nil
     let tick: (TimeInterval) -> Void
     var lastRun: Date
+    var updateInterval: TimeInterval
     
     init(updateInterval: TimeInterval, tick: @escaping (TimeInterval) -> Void) {
         self.tick = tick
         self.lastRun = Date()
+        self.updateInterval = updateInterval
+        self.startTimer()
+    }
+    
+    func startTimer() {
+        guard self.timer == nil else { return }
+        print(updateInterval)
         self.timer = Timer.scheduledTimer(timeInterval: updateInterval, target: self, selector: #selector(timerFunc), userInfo: nil, repeats: true)
         RunLoop.current.add(self.timer!, forMode: .common)
+    }
+    
+    func reset() {
+        self.timer?.invalidate()
+        self.timer = nil
+        self.startTimer()
     }
     
     @objc private func timerFunc(timer: Timer) {
