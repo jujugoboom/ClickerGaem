@@ -11,11 +11,13 @@ class Achievement<T>: Identifiable {
     let id: Int
     let name: String
     let description: String
+    let value: () -> T
+    let execute: (T, Achievement) -> Void
     var storedState: StoredAchievementState?
     private var initialized = false
     var unlocked = false {
         didSet {
-            guard initialized else {
+            guard initialized && unlocked else {
                 return
             }
             Achievements.shared.newAchievementName = name
@@ -29,12 +31,22 @@ class Achievement<T>: Identifiable {
         req.fetchLimit = 1
         req.predicate = NSPredicate(format: "id == %d", self.id)
         guard let maybeStoredState = try? ClickerGaemData.shared.persistentContainer.viewContext.fetch(req).first else {
+            // Reset our current unlocked state if we're reloading
+            self.unlocked = false
             storedState = StoredAchievementState(context: ClickerGaemData.shared.persistentContainer.viewContext)
             return false
         }
         storedState = maybeStoredState
         unlocked = storedState!.unlocked
         return true
+    }
+    
+    func reload() {
+        _ = load()
+        guard !unlocked else {
+            return
+        }
+        withContinousObservation(of: self.value(), execute: execute)
     }
     
     func save(commit: Bool = false) {
@@ -45,7 +57,9 @@ class Achievement<T>: Identifiable {
         self.id = id
         self.name = name
         self.description = description
-        guard !self.load() && !unlocked else {
+        self.value = value
+        self.execute = execute
+        guard !self.load() || !unlocked else {
             self.initialized = true
             return
         }
@@ -128,5 +142,9 @@ class Achievements {
     
     var unlockedAchievements: [Achievement<Any>] {
         achievements.filter(\.unlocked) as! [Achievement<Any>]
+    }
+    
+    func reload() {
+        self.achievements.forEach({$0.reload()})
     }
 }

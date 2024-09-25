@@ -8,9 +8,17 @@
 import Foundation
 
 /// Right now just exists to setup the main game loop, but may handle more in the future
-class GameInstance: Tickable {
+@MainActor
+class GameInstance {
+    static let shared = GameInstance()
     var ticker: Ticker? = nil
     
+    func reset() {
+        self.ticker?.updateInterval = GameState.shared.updateInterval
+        self.ticker?.reset()
+    }
+    
+    @MainActor
     init() {
         if !GameState.load() {
             GameState.initState()

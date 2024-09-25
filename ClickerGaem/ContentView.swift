@@ -36,11 +36,16 @@ struct ContentView: View {
                     Label("Autobuyers", systemImage: "autostartstop")
                 }.tag(3)
             }
+            SettingsView().environment(\.managedObjectContext, viewContext).tabItem {
+                Label("Settings", systemImage: "gear")
+            }.tag(4)
         }.toast(isPresenting: newAchievementUnlocked) {
             AlertToast(displayMode: .hud, type: .regular, title: Achievements.shared.newAchievementName, subTitle: "Achievement unlocked")
         } onTap: {
             currentTab = 2
         }.onReceive(NotificationCenter.default.publisher(for: UIScene.willDeactivateNotification), perform: { _ in
+            GameState.save()
+        }).onReceive(NotificationCenter.default.publisher(for: UIApplication.willTerminateNotification), perform: { _ in
             GameState.save()
         })
     }

@@ -20,7 +20,7 @@ class BigCrunch {
         guard canBigCrunch else {
             return
         }
-        state.antimatter = 0
+        state.antimatter = 100
         state.dimensionBoosts = 0
         state.sacrificedDimensions = 0
         state.amGalaxies = 0
