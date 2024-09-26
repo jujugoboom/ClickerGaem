@@ -6,14 +6,17 @@
 //
 
 import Foundation
+import OrderedCollections
 
 /// Main dimension class. Setup expecting that there are a max of 8 dimensions, and will fail if set to a 9th tier
+@Observable
 class Dimension: Identifiable, Tickable {
     let tierPrices: [Int: InfiniteDecimal] = [1: 10, 2: 100, 3: 10000, 4: 1e6, 5: 1e9, 6: 1e13, 7: 1e18, 8: 1e24]
     let basePriceIncreases: [Int: InfiniteDecimal] = [1: 1e3, 2: 5e3, 3: 1e4, 4: 1.2e4, 5: 1.8e4, 6: 2.6e4, 7: 3.2e4, 8: 4.2e4]
     
     var state: DimensionState
-    let gameState: GameState = GameState.shared
+    var storedState: StoredDimensionState?
+    var antimatterState: AntimatterState { Antimatter.shared.state }
     
     var tier: Int {
         state.tier
@@ -24,16 +27,16 @@ class Dimension: Identifiable, Tickable {
     }
     
     var dimensionBoostMultiplier: InfiniteDecimal {
-        guard tier <= gameState.dimensionBoosts else {
+        guard tier <= antimatterState.dimensionBoosts else {
             return 1
         }
-        return InfiniteDecimal(integerLiteral: 2).pow(value: InfiniteDecimal(integerLiteral: gameState.dimensionBoosts))
+        return InfiniteDecimal(integerLiteral: 2).pow(value: InfiniteDecimal(integerLiteral: antimatterState.dimensionBoosts))
     }
     
     var multiplier: InfiniteDecimal {
         var val = timesBought.mul(value: 2).max(other: 1).mul(value: dimensionBoostMultiplier)
         if tier == 8 {
-            val = val.mul(value: gameState.dimensionSacrificeMul)
+            val = val.mul(value: antimatterState.dimensionSacrificeMul)
         }
         return val
     }
@@ -51,27 +54,27 @@ class Dimension: Identifiable, Tickable {
         guard cost.isFinite() else {
             return 0
         }
-        let ratio = gameState.antimatter.div(value: cost)
+        let ratio = antimatterState.antimatter.div(value: cost)
         return ratio.min(other: InfiniteDecimal(integerLiteral: 10 - boughtBefore10)).max(other: 0).floor()
     }
     
     var perSecond: InfiniteDecimal {
-        state.currCount.mul(value: gameState.ticksPerSecond).mul(value: multiplier)
+        state.currCount.mul(value: antimatterState.ticksPerSecond).mul(value: multiplier)
     }
     
     var growthRate: InfiniteDecimal {
         guard tier != 8 else {
             return 0
         }
-        return gameState.dimensions[tier + 1]?.perSecond.div(value: state.currCount.max(other: 1)).mul(value: 100) ?? 0
+        return Dimensions.shared.dimensions[tier + 1]?.perSecond.div(value: state.currCount.max(other: 1)).mul(value: 100) ?? 0
     }
     
     var canBuy: Bool {
         state.unlocked && howManyCanBuy.gt(other: 0)
     }
     
-    init(state: DimensionState) {
-        self.state = state
+    init(tier: Int) {
+        self.state = DimensionState(tier: tier)
     }
     
     /// Tries to buy a count of this dimension, returns no information about the success of such an attempt
@@ -80,10 +83,10 @@ class Dimension: Identifiable, Tickable {
             return
         }
         let totalCost = cost.mul(value: count)
-        guard gameState.antimatter.gte(other: totalCost) else {
+        guard antimatterState.antimatter.gte(other: totalCost) else {
             return
         }
-        gameState.antimatter = gameState.antimatter.sub(value: totalCost)
+        antimatterState.antimatter = antimatterState.antimatter.sub(value: totalCost)
         let intCount = count.toInt()
         state.purchaseCount += intCount
         state.currCount = state.currCount.add(value: count)
@@ -97,10 +100,10 @@ class Dimension: Identifiable, Tickable {
             return
         }
         if tier == 1 {
-            gameState.antimatter = gameState.antimatter.add(value: perSecond.mul(value: InfiniteDecimal(source: diff)))
+            antimatterState.antimatter = antimatterState.antimatter.add(value: perSecond.mul(value: InfiniteDecimal(source: diff)))
         } else {
             // Get dimension the tier below this one
-            let lowerDimension = gameState.dimensions[tier - 1]!
+            let lowerDimension = Dimensions.shared.dimensions[tier - 1]!
             lowerDimension.state.currCount = lowerDimension.state.currCount.add(value: perSecond.mul(value: InfiniteDecimal(source: diff)))
         }
     }
@@ -113,5 +116,32 @@ class Dimension: Identifiable, Tickable {
         } else {
             self.state.unlocked = self.state.unlocked
         }
+    }
+}
+
+@Observable
+class Dimensions: Resettable {
+    
+    private static var _shared: Dimensions?
+    static var shared: Dimensions {
+        if _shared == nil { _shared = Dimensions() }
+        return _shared!
+    }
+    
+    let dimensions: OrderedDictionary<Int, Dimension> = [1: Dimension(tier: 1), 2: Dimension(tier: 2), 3: Dimension(tier: 3), 4: Dimension(tier: 4), 5: Dimension(tier: 5), 6: Dimension(tier: 6), 7: Dimension(tier: 7), 8: Dimension(tier: 8)]
+    
+    var unlockedDimensions: [Dimension] {
+        dimensions.values.filter() {dimension in
+            dimension.state.unlocked
+        }
+    }
+    
+    static func reset() {
+        Dimensions._shared?.dimensions.values.forEach({$0.state.reset(keepUnlocked: false)})
+        Dimensions._shared?.dimensions.values.forEach({$0.state.load()})
+        Dimensions._shared?.dimensions[1]?.state.unlocked = true
+        Dimensions._shared?.dimensions[2]?.state.unlocked = true
+        Dimensions._shared?.dimensions[3]?.state.unlocked = true
+        Dimensions._shared?.dimensions[4]?.state.unlocked = true
     }
 }

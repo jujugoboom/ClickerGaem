@@ -7,8 +7,8 @@
 import SwiftUI
 
 struct AchievementView: View {
-    var achievements: [Achievement<Any>] {
-        Achievements.shared.achievements as! [Achievement<Any>]
+    var achievements: [Achievement] {
+        Achievements.shared.achievements
     }
     var body: some View {
         List{
@@ -20,7 +20,7 @@ struct AchievementView: View {
                     }
                     Spacer()
                     Label(achievement.unlocked ? "Unlocked" : "Locked", systemImage: achievement.unlocked ? "checkmark.circle.fill" : "lock.circle.fill").labelStyle(.iconOnly).foregroundStyle(achievement.unlocked ? .green : .red)
-                }
+                }.saveOnExit(saveable: achievement)
             }
         }
     }

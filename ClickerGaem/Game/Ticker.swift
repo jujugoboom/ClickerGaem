@@ -18,14 +18,22 @@ class Ticker {
         self.tick = tick
         self.lastRun = Date()
         self.updateInterval = updateInterval
-        self.startTimer()
     }
     
     func startTimer() {
-        guard self.timer == nil else { return }
-        print(updateInterval)
+        guard self.timer == nil else {
+            return
+        }
         self.timer = Timer.scheduledTimer(timeInterval: updateInterval, target: self, selector: #selector(timerFunc), userInfo: nil, repeats: true)
         RunLoop.current.add(self.timer!, forMode: .common)
+    }
+    
+    func stopTimer() {
+        guard self.timer != nil else {
+            return
+        }
+        self.timer?.invalidate()
+        self.timer = nil
     }
     
     func reset() {

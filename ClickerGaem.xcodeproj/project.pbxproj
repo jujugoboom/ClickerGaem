@@ -22,6 +22,10 @@
 		1C9B5FE02CA29F8900A6A3B8 /* StoredAchievementState+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FDE2CA29F8900A6A3B8 /* StoredAchievementState+CoreDataClass.swift */; };
 		1C9B5FE12CA29F8900A6A3B8 /* StoredAchievementState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FDF2CA29F8900A6A3B8 /* StoredAchievementState+CoreDataProperties.swift */; };
 		1C9B5FE52CA39DAF00A6A3B8 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FE42CA39DAF00A6A3B8 /* SettingsView.swift */; };
+		1C9B5FF12CA3BDDE00A6A3B8 /* AntimatterState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FF02CA3BDD900A6A3B8 /* AntimatterState.swift */; };
+		1C9B5FF42CA3BE3900A6A3B8 /* StoredAntimatterState+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FF22CA3BE3900A6A3B8 /* StoredAntimatterState+CoreDataClass.swift */; };
+		1C9B5FF52CA3BE3900A6A3B8 /* StoredAntimatterState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FF32CA3BE3900A6A3B8 /* StoredAntimatterState+CoreDataProperties.swift */; };
+		1C9B5FF72CA3C04000A6A3B8 /* Antimatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FF62CA3C03E00A6A3B8 /* Antimatter.swift */; };
 		1CF9123B2C95414100A92158 /* ClickerGaemApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9123A2C95414100A92158 /* ClickerGaemApp.swift */; };
 		1CF9123D2C95414100A92158 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9123C2C95414100A92158 /* ContentView.swift */; };
 		1CF912412C95414200A92158 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CF912402C95414200A92158 /* Assets.xcassets */; };
@@ -76,6 +80,10 @@
 		1C9B5FDE2CA29F8900A6A3B8 /* StoredAchievementState+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredAchievementState+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1C9B5FDF2CA29F8900A6A3B8 /* StoredAchievementState+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredAchievementState+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1C9B5FE42CA39DAF00A6A3B8 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		1C9B5FF02CA3BDD900A6A3B8 /* AntimatterState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntimatterState.swift; sourceTree = "<group>"; };
+		1C9B5FF22CA3BE3900A6A3B8 /* StoredAntimatterState+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredAntimatterState+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1C9B5FF32CA3BE3900A6A3B8 /* StoredAntimatterState+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredAntimatterState+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1C9B5FF62CA3C03E00A6A3B8 /* Antimatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Antimatter.swift; sourceTree = "<group>"; };
 		1CF912372C95414100A92158 /* ClickerGaem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClickerGaem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CF9123A2C95414100A92158 /* ClickerGaemApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickerGaemApp.swift; sourceTree = "<group>"; };
 		1CF9123C2C95414100A92158 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -141,8 +149,25 @@
 			children = (
 				1C9B5FC92CA27D7100A6A3B8 /* Achievements.swift */,
 				1C9B5FCA2CA27D7100A6A3B8 /* AchievementView.swift */,
+				1C9B5FDE2CA29F8900A6A3B8 /* StoredAchievementState+CoreDataClass.swift */,
+				1C9B5FDF2CA29F8900A6A3B8 /* StoredAchievementState+CoreDataProperties.swift */,
 			);
 			path = Achievements;
+			sourceTree = "<group>";
+		};
+		1C9B5FE72CA3B72100A6A3B8 /* Antimatter */ = {
+			isa = PBXGroup;
+			children = (
+				1C9B5FF62CA3C03E00A6A3B8 /* Antimatter.swift */,
+				1C9B5FF22CA3BE3900A6A3B8 /* StoredAntimatterState+CoreDataClass.swift */,
+				1C9B5FF32CA3BE3900A6A3B8 /* StoredAntimatterState+CoreDataProperties.swift */,
+				1C9B5FF02CA3BDD900A6A3B8 /* AntimatterState.swift */,
+				1CF912882C9D466D00A92158 /* AntimatterGalaxy.swift */,
+				1C9161AD2C9D4E9D00D1555A /* AntimatterView.swift */,
+				1CF912722C98119B00A92158 /* Dimension */,
+				1CF912832C9CB6D400A92158 /* DimensionBoost.swift */,
+			);
+			path = Antimatter;
 			sourceTree = "<group>";
 		};
 		1CF9122E2C95414100A92158 = {
@@ -169,26 +194,19 @@
 			isa = PBXGroup;
 			children = (
 				1C9B5FD92CA29C4E00A6A3B8 /* Achievements */,
-				1C30A5262CA0F72200FBB096 /* BigCrunch.swift */,
+				1C9B5FE72CA3B72100A6A3B8 /* Antimatter */,
+				1CF912402C95414200A92158 /* Assets.xcassets */,
 				1C30A4EE2C9FB77F00FBB096 /* Autobuyer */,
 				1C30A4EF2C9FB77F00FBB096 /* AutobuyerView.swift */,
+				1C30A5262CA0F72200FBB096 /* BigCrunch.swift */,
 				1CF9123A2C95414100A92158 /* ClickerGaemApp.swift */,
 				1CF9127A2C9BB24900A92158 /* ClickerGaemData.swift */,
-				1CF9123C2C95414100A92158 /* ContentView.swift */,
-				1C9B5FE42CA39DAF00A6A3B8 /* SettingsView.swift */,
-				1CF912402C95414200A92158 /* Assets.xcassets */,
-				1CF912422C95414200A92158 /* Preview Content */,
-				1CF912662C95415800A92158 /* SwiftInfinite.swift */,
-				1CF912732C9811AB00A92158 /* Game */,
-				1CF912722C98119B00A92158 /* Dimension */,
 				1CF9127C2C9BB2BB00A92158 /* ClickerGaemModel.xcdatamodeld */,
-				1C9161AD2C9D4E9D00D1555A /* AntimatterView.swift */,
-				1C9B5FCD2CA2873C00A6A3B8 /* StoredDimensionState+CoreDataClass.swift */,
-				1C9B5FCE2CA2873C00A6A3B8 /* StoredDimensionState+CoreDataProperties.swift */,
-				1C9B5FCF2CA2873C00A6A3B8 /* StoredGameState+CoreDataClass.swift */,
-				1C9B5FD02CA2873C00A6A3B8 /* StoredGameState+CoreDataProperties.swift */,
-				1C9B5FDE2CA29F8900A6A3B8 /* StoredAchievementState+CoreDataClass.swift */,
-				1C9B5FDF2CA29F8900A6A3B8 /* StoredAchievementState+CoreDataProperties.swift */,
+				1CF9123C2C95414100A92158 /* ContentView.swift */,
+				1CF912732C9811AB00A92158 /* Game */,
+				1CF912422C95414200A92158 /* Preview Content */,
+				1C9B5FE42CA39DAF00A6A3B8 /* SettingsView.swift */,
+				1CF912662C95415800A92158 /* SwiftInfinite.swift */,
 			);
 			path = ClickerGaem;
 			sourceTree = "<group>";
@@ -225,8 +243,8 @@
 				1CF912702C97D4C300A92158 /* Dimension.swift */,
 				1CF912742C98121E00A92158 /* DimensionState.swift */,
 				1CF912762C99116B00A92158 /* DimensionView.swift */,
-				1CF912832C9CB6D400A92158 /* DimensionBoost.swift */,
-				1CF912882C9D466D00A92158 /* AntimatterGalaxy.swift */,
+				1C9B5FCD2CA2873C00A6A3B8 /* StoredDimensionState+CoreDataClass.swift */,
+				1C9B5FCE2CA2873C00A6A3B8 /* StoredDimensionState+CoreDataProperties.swift */,
 			);
 			path = Dimension;
 			sourceTree = "<group>";
@@ -234,8 +252,10 @@
 		1CF912732C9811AB00A92158 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				1CF912682C9619A000A92158 /* GameState.swift */,
 				1CF9126C2C97CF5200A92158 /* Game.swift */,
+				1CF912682C9619A000A92158 /* GameState.swift */,
+				1C9B5FCF2CA2873C00A6A3B8 /* StoredGameState+CoreDataClass.swift */,
+				1C9B5FD02CA2873C00A6A3B8 /* StoredGameState+CoreDataProperties.swift */,
 				1CF9126E2C97D1F800A92158 /* Ticker.swift */,
 			);
 			path = Game;
@@ -381,6 +401,7 @@
 			files = (
 				1CF9123D2C95414100A92158 /* ContentView.swift in Sources */,
 				1CF9127E2C9BB2BB00A92158 /* ClickerGaemModel.xcdatamodeld in Sources */,
+				1C9B5FF72CA3C04000A6A3B8 /* Antimatter.swift in Sources */,
 				1CF9126F2C97D1F800A92158 /* Ticker.swift in Sources */,
 				1CF9126D2C97CF5200A92158 /* Game.swift in Sources */,
 				1C9B5FCB2CA27D7100A6A3B8 /* Achievements.swift in Sources */,
@@ -399,6 +420,7 @@
 				1C9B5FD42CA2873C00A6A3B8 /* StoredGameState+CoreDataProperties.swift in Sources */,
 				1CF9123B2C95414100A92158 /* ClickerGaemApp.swift in Sources */,
 				1CF912772C99116B00A92158 /* DimensionView.swift in Sources */,
+				1C9B5FF12CA3BDDE00A6A3B8 /* AntimatterState.swift in Sources */,
 				1C9B5FE52CA39DAF00A6A3B8 /* SettingsView.swift in Sources */,
 				1CF912752C98121E00A92158 /* DimensionState.swift in Sources */,
 				1CF912692C9619A000A92158 /* GameState.swift in Sources */,
@@ -406,6 +428,8 @@
 				1CF912892C9D466D00A92158 /* AntimatterGalaxy.swift in Sources */,
 				1CF9127B2C9BB24900A92158 /* ClickerGaemData.swift in Sources */,
 				1C30A5272CA0F72500FBB096 /* BigCrunch.swift in Sources */,
+				1C9B5FF42CA3BE3900A6A3B8 /* StoredAntimatterState+CoreDataClass.swift in Sources */,
+				1C9B5FF52CA3BE3900A6A3B8 /* StoredAntimatterState+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -584,7 +608,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.01;
 				PRODUCT_BUNDLE_IDENTIFIER = com.justincovell.ClickerGaem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -614,7 +638,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.01;
 				PRODUCT_BUNDLE_IDENTIFIER = com.justincovell.ClickerGaem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

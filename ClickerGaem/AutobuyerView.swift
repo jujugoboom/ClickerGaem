@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct AutobuyerView: View {
-    let gameState: GameState = GameState.shared
+    var gameState: GameState {GameInstance.shared.state}
     var bindableGameState: Bindable<GameState> {
         Bindable(wrappedValue: gameState)
     }

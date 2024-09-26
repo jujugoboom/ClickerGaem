@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct DimensionView: View {
-    var dimension: Dimension
+    var tier: Int
+    var dimension: Dimension {
+        Dimensions.shared.dimensions[tier]!
+    }
     var dimensionState: DimensionState {
         self.dimension.state
     }
@@ -38,7 +41,7 @@ struct DimensionView: View {
                     Text("\(dimension.cost.mul(value: dimension.howManyCanBuy.max(other: 1)))").font(.system(size: 10))
                 }.contentShape(.rect)
             }.disabled(!dimension.canBuy).buttonStyle(.bordered).animation(.spring)
-        }
+        }.saveOnExit(saveable: dimension.state)
     }
                 
     private func buy() {
@@ -47,5 +50,5 @@ struct DimensionView: View {
 }
 
 #Preview {
-    DimensionView(dimension: Dimension(state: DimensionState(tier: 1, purchaseCount: 0, currCount: 0, unlocked: true)))
+    DimensionView(tier: 1)
 }

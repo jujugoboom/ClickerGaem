@@ -7,33 +7,37 @@
 
 import Foundation
 
+protocol Resettable {
+    static func reset() async
+}
+
 /// Right now just exists to setup the main game loop, but may handle more in the future
-@MainActor
-class GameInstance {
-    static let shared = GameInstance()
+class GameInstance: Resettable {
+    private static var _shared: GameInstance?
+    static var shared: GameInstance {
+        if _shared == nil { _shared = GameInstance() }
+        return _shared!
+    }
+    var state: GameState
     var ticker: Ticker? = nil
     
-    func reset() {
-        self.ticker?.updateInterval = GameState.shared.updateInterval
-        self.ticker?.reset()
-    }
-    
-    @MainActor
     init() {
-        if !GameState.load() {
-            GameState.initState()
-        }
-        self.ticker = Ticker(updateInterval: GameState.shared.updateInterval, tick: self.tick)
-        _ = Achievements()
+        self.state = GameState()
+        self.ticker = Ticker(updateInterval: state.updateInterval, tick: self.tick)
     }
     
     func tick(diff: TimeInterval) {
-        for dimension in GameState.shared.dimensions.values {
+        for dimension in Dimensions.shared.dimensions.values {
             dimension.tick(diff: diff)
         }
-        for autobuyer in GameState.shared.autobuyers {
-            autobuyer.tick(diff: diff)
-        }
+//        for autobuyer in state.autobuyers {
+//            autobuyer.tick(diff: diff)
+//        }
+    }
+    
+    static func reset() {
+        _shared?.state.reset()
+        _shared?.state.load()
     }
 }
 

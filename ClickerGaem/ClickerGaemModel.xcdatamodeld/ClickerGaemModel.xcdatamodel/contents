@@ -4,17 +4,20 @@
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="unlocked" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
     </entity>
+    <entity name="StoredAntimatterState" representedClassName="StoredAntimatterState" syncable="YES">
+        <attribute name="antimatter" optional="YES" attributeType="Transformable" valueTransformerName="InfiniteDecimalTransformer"/>
+        <attribute name="dimensionBoosts" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="galaxies" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="sacrificedDimensions" optional="YES" attributeType="Transformable" valueTransformerName="InfiniteDecimalTransformer"/>
+        <attribute name="tickSpeedUpgrades" optional="YES" attributeType="Transformable" valueTransformerName="InfiniteDecimalTransformer"/>
+    </entity>
     <entity name="StoredDimensionState" representedClassName="StoredDimensionState" syncable="YES">
         <attribute name="currCount" optional="YES" attributeType="Transformable" valueTransformerName="InfiniteDecimalTransformer"/>
         <attribute name="purchaseCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="tier" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="unlocked" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <relationship name="gameState" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StoredGameState" inverseName="dimensionStates" inverseEntity="StoredGameState"/>
     </entity>
     <entity name="StoredGameState" representedClassName="StoredGameState" syncable="YES">
-        <attribute name="antimatter" optional="YES" attributeType="Transformable" valueTransformerName="InfiniteDecimalTransformer"/>
-        <attribute name="ticksPerSecond" optional="YES" attributeType="Transformable" valueTransformerName="InfiniteDecimalTransformer"/>
         <attribute name="updateInterval" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="dimensionStates" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="StoredDimensionState" inverseName="gameState" inverseEntity="StoredDimensionState"/>
     </entity>
 </model>

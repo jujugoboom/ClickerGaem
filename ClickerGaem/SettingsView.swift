@@ -25,27 +25,39 @@ struct SettingsView: View {
     }
     
     private func clearSaveData() {
+        GameInstance.shared.ticker?.stopTimer()
+        
         let dimensionsReq = NSFetchRequest<NSFetchRequestResult>(entityName: "StoredDimensionState")
         let dimensionDeleteReq = NSBatchDeleteRequest(fetchRequest: dimensionsReq)
         let achievementsReq = NSFetchRequest<NSFetchRequestResult>(entityName: "StoredAchievementState")
         let achievementDeleteReq = NSBatchDeleteRequest(fetchRequest: achievementsReq)
         let gameReq = NSFetchRequest<NSFetchRequestResult>(entityName: "StoredGameState")
         let gameDeleteReq = NSBatchDeleteRequest(fetchRequest: gameReq)
+        let antimatterReq = NSFetchRequest<NSFetchRequestResult>(entityName: "StoredAntimatterState")
+        let antimatterDeleteReq = NSBatchDeleteRequest(fetchRequest: antimatterReq)
         
         do {
             try viewContext.execute(dimensionDeleteReq)
             try viewContext.execute(achievementDeleteReq)
             try viewContext.execute(gameDeleteReq)
+            try viewContext.execute(antimatterDeleteReq)
             
             try viewContext.save()
+            
+
+            GameInstance.reset()
+            Antimatter.reset()
+            Dimensions.reset()
+            // Always do achievements last so they can reset themselves properly
+            Achievements.reset()
+            
         } catch let error as NSError{
             debugPrint(error)
         }
-        GameState.shared.storedState = StoredGameState(context: viewContext)
-        GameState.initState()
-        GameInstance.shared.reset()
-        Achievements.shared.reload()
+        // Restart game loop
+        GameInstance.shared.ticker?.startTimer()
     }
+    
 }
 
 #Preview {
