@@ -2,7 +2,7 @@
 //  StoredGameState+CoreDataProperties.swift
 //  ClickerGaem
 //
-//  Created by Justin Covell on 9/24/24.
+//  Created by Justin Covell on 9/25/24.
 //
 //
 
@@ -12,7 +12,7 @@ import CoreData
 
 extension StoredGameState {
 
-    @nonobjc public class func createFetchRequest() -> NSFetchRequest<StoredGameState> {
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<StoredGameState> {
         return NSFetchRequest<StoredGameState>(entityName: "StoredGameState")
     }
 
