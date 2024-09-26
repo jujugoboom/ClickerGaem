@@ -36,11 +36,11 @@ class AntimatterState: Saveable {
     }
     
     func load() {
-        let req = StoredAntimatterState.createFetchRequest()
+        let req = StoredAntimatterState.fetchRequest()
         req.fetchLimit = 1
         let context = ClickerGaemData.shared.persistentContainer.newBackgroundContext()
         guard let maybeStoredState = try? context.fetch(req).first else {
-            self.storedState = StoredAntimatterState(context: context)
+            self.storedState = StoredAntimatterState(context: ClickerGaemData.shared.persistentContainer.viewContext)
             self.storedState?.antimatter = antimatter
             self.storedState?.tickSpeedUpgrades = tickSpeedUpgrades
             self.storedState?.sacrificedDimensions = sacrificedDimensions

@@ -27,12 +27,12 @@ class Achievement: Saveable, Identifiable {
     }
     
     func load() {
-        let req = StoredAchievementState.createFetchRequest()
+        let req = StoredAchievementState.fetchRequest()
         req.fetchLimit = 1
         req.predicate = NSPredicate(format: "id == %d", self.id)
         let context = ClickerGaemData.shared.persistentContainer.newBackgroundContext()
         guard let maybeStoredState = try? context.fetch(req).first else {
-            storedState = StoredAchievementState(context: context)
+            storedState = StoredAchievementState(context: ClickerGaemData.shared.persistentContainer.viewContext)
             storedState?.unlocked = unlocked
             return
         }

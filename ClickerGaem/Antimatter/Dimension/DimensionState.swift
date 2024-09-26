@@ -29,12 +29,12 @@ final class DimensionState: Saveable {
     }
     
     func load() {
-        let req = StoredDimensionState.createFetchRequest()
+        let req = StoredDimensionState.fetchRequest()
         req.fetchLimit = 1
         req.predicate = NSPredicate(format: "tier == %d", self.tier)
         let context = ClickerGaemData.shared.persistentContainer.newBackgroundContext()
         guard let maybeStoredState = try? context.fetch(req).first else {
-            self.storedState = StoredDimensionState(context: context)
+            self.storedState = StoredDimensionState(context: ClickerGaemData.shared.persistentContainer.viewContext)
             self.storedState!.tier = Int64(tier)
             self.storedState!.currCount = currCount
             self.storedState!.purchaseCount = Int64(purchaseCount)

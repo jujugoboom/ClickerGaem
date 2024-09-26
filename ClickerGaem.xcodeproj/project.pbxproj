@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C0A28502CA518DC00FDB204 /* ClickerGaemModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1C0A284D2CA5188600FDB204 /* ClickerGaemModel.xcdatamodeld */; };
 		1C30A4F02C9FB77F00FBB096 /* AMDimensionAutobuyer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C30A4EC2C9FB77F00FBB096 /* AMDimensionAutobuyer.swift */; };
 		1C30A4F12C9FB77F00FBB096 /* AutobuyerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C30A4EF2C9FB77F00FBB096 /* AutobuyerView.swift */; };
 		1C30A4F22C9FB77F00FBB096 /* Autobuyer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C30A4ED2C9FB77F00FBB096 /* Autobuyer.swift */; };
@@ -15,18 +16,17 @@
 		1C9161AE2C9D4E9D00D1555A /* AntimatterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9161AD2C9D4E9D00D1555A /* AntimatterView.swift */; };
 		1C9B5FCB2CA27D7100A6A3B8 /* Achievements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FC92CA27D7100A6A3B8 /* Achievements.swift */; };
 		1C9B5FCC2CA27D7100A6A3B8 /* AchievementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FCA2CA27D7100A6A3B8 /* AchievementView.swift */; };
-		1C9B5FD12CA2873C00A6A3B8 /* StoredDimensionState+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FCD2CA2873C00A6A3B8 /* StoredDimensionState+CoreDataClass.swift */; };
-		1C9B5FD22CA2873C00A6A3B8 /* StoredDimensionState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FCE2CA2873C00A6A3B8 /* StoredDimensionState+CoreDataProperties.swift */; };
-		1C9B5FD32CA2873C00A6A3B8 /* StoredGameState+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FCF2CA2873C00A6A3B8 /* StoredGameState+CoreDataClass.swift */; };
-		1C9B5FD42CA2873C00A6A3B8 /* StoredGameState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FD02CA2873C00A6A3B8 /* StoredGameState+CoreDataProperties.swift */; };
-		1C9B5FE02CA29F8900A6A3B8 /* StoredAchievementState+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FDE2CA29F8900A6A3B8 /* StoredAchievementState+CoreDataClass.swift */; };
-		1C9B5FE12CA29F8900A6A3B8 /* StoredAchievementState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FDF2CA29F8900A6A3B8 /* StoredAchievementState+CoreDataProperties.swift */; };
 		1C9B5FE52CA39DAF00A6A3B8 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FE42CA39DAF00A6A3B8 /* SettingsView.swift */; };
 		1C9B5FF12CA3BDDE00A6A3B8 /* AntimatterState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FF02CA3BDD900A6A3B8 /* AntimatterState.swift */; };
-		1C9B5FF42CA3BE3900A6A3B8 /* StoredAntimatterState+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FF22CA3BE3900A6A3B8 /* StoredAntimatterState+CoreDataClass.swift */; };
-		1C9B5FF52CA3BE3900A6A3B8 /* StoredAntimatterState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FF32CA3BE3900A6A3B8 /* StoredAntimatterState+CoreDataProperties.swift */; };
 		1C9B5FF72CA3C04000A6A3B8 /* Antimatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FF62CA3C03E00A6A3B8 /* Antimatter.swift */; };
-		1C9B5FF82CA4F82C00A6A3B8 /* ClickerGaemModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9127C2C9BB2BB00A92158 /* ClickerGaemModel.xcdatamodeld */; };
+		1C9B60022CA4FC2F00A6A3B8 /* StoredDimensionState+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FFE2CA4FC2F00A6A3B8 /* StoredDimensionState+CoreDataClass.swift */; };
+		1C9B60032CA4FC2F00A6A3B8 /* StoredDimensionState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FFF2CA4FC2F00A6A3B8 /* StoredDimensionState+CoreDataProperties.swift */; };
+		1C9B60042CA4FC2F00A6A3B8 /* StoredGameState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B60012CA4FC2F00A6A3B8 /* StoredGameState+CoreDataProperties.swift */; };
+		1C9B60052CA4FC2F00A6A3B8 /* StoredAchievementState+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FFA2CA4FC2F00A6A3B8 /* StoredAchievementState+CoreDataClass.swift */; };
+		1C9B60062CA4FC2F00A6A3B8 /* StoredAntimatterState+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FFC2CA4FC2F00A6A3B8 /* StoredAntimatterState+CoreDataClass.swift */; };
+		1C9B60072CA4FC2F00A6A3B8 /* StoredAntimatterState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FFD2CA4FC2F00A6A3B8 /* StoredAntimatterState+CoreDataProperties.swift */; };
+		1C9B60082CA4FC2F00A6A3B8 /* StoredGameState+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B60002CA4FC2F00A6A3B8 /* StoredGameState+CoreDataClass.swift */; };
+		1C9B60092CA4FC2F00A6A3B8 /* StoredAchievementState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FFB2CA4FC2F00A6A3B8 /* StoredAchievementState+CoreDataProperties.swift */; };
 		1CF9123B2C95414100A92158 /* ClickerGaemApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9123A2C95414100A92158 /* ClickerGaemApp.swift */; };
 		1CF9123D2C95414100A92158 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9123C2C95414100A92158 /* ContentView.swift */; };
 		1CF912412C95414200A92158 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CF912402C95414200A92158 /* Assets.xcassets */; };
@@ -66,6 +66,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1C0A284E2CA5188600FDB204 /* ClickerGaemModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ClickerGaemModel.xcdatamodel; sourceTree = "<group>"; };
 		1C30A4EC2C9FB77F00FBB096 /* AMDimensionAutobuyer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMDimensionAutobuyer.swift; sourceTree = "<group>"; };
 		1C30A4ED2C9FB77F00FBB096 /* Autobuyer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Autobuyer.swift; sourceTree = "<group>"; };
 		1C30A4EF2C9FB77F00FBB096 /* AutobuyerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutobuyerView.swift; sourceTree = "<group>"; };
@@ -73,17 +74,17 @@
 		1C9161AD2C9D4E9D00D1555A /* AntimatterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntimatterView.swift; sourceTree = "<group>"; };
 		1C9B5FC92CA27D7100A6A3B8 /* Achievements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievements.swift; sourceTree = "<group>"; };
 		1C9B5FCA2CA27D7100A6A3B8 /* AchievementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementView.swift; sourceTree = "<group>"; };
-		1C9B5FCD2CA2873C00A6A3B8 /* StoredDimensionState+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredDimensionState+CoreDataClass.swift"; sourceTree = "<group>"; };
-		1C9B5FCE2CA2873C00A6A3B8 /* StoredDimensionState+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredDimensionState+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		1C9B5FCF2CA2873C00A6A3B8 /* StoredGameState+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredGameState+CoreDataClass.swift"; sourceTree = "<group>"; };
-		1C9B5FD02CA2873C00A6A3B8 /* StoredGameState+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredGameState+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		1C9B5FDE2CA29F8900A6A3B8 /* StoredAchievementState+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredAchievementState+CoreDataClass.swift"; sourceTree = "<group>"; };
-		1C9B5FDF2CA29F8900A6A3B8 /* StoredAchievementState+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredAchievementState+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1C9B5FE42CA39DAF00A6A3B8 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		1C9B5FF02CA3BDD900A6A3B8 /* AntimatterState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntimatterState.swift; sourceTree = "<group>"; };
-		1C9B5FF22CA3BE3900A6A3B8 /* StoredAntimatterState+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredAntimatterState+CoreDataClass.swift"; sourceTree = "<group>"; };
-		1C9B5FF32CA3BE3900A6A3B8 /* StoredAntimatterState+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredAntimatterState+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1C9B5FF62CA3C03E00A6A3B8 /* Antimatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Antimatter.swift; sourceTree = "<group>"; };
+		1C9B5FFA2CA4FC2F00A6A3B8 /* StoredAchievementState+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredAchievementState+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1C9B5FFB2CA4FC2F00A6A3B8 /* StoredAchievementState+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredAchievementState+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1C9B5FFC2CA4FC2F00A6A3B8 /* StoredAntimatterState+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredAntimatterState+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1C9B5FFD2CA4FC2F00A6A3B8 /* StoredAntimatterState+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredAntimatterState+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1C9B5FFE2CA4FC2F00A6A3B8 /* StoredDimensionState+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredDimensionState+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1C9B5FFF2CA4FC2F00A6A3B8 /* StoredDimensionState+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredDimensionState+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1C9B60002CA4FC2F00A6A3B8 /* StoredGameState+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredGameState+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1C9B60012CA4FC2F00A6A3B8 /* StoredGameState+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredGameState+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1CF912372C95414100A92158 /* ClickerGaem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClickerGaem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CF9123A2C95414100A92158 /* ClickerGaemApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickerGaemApp.swift; sourceTree = "<group>"; };
 		1CF9123C2C95414100A92158 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -103,7 +104,6 @@
 		1CF912762C99116B00A92158 /* DimensionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimensionView.swift; sourceTree = "<group>"; };
 		1CF912782C991BDF00A92158 /* SwiftInfiniteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftInfiniteTests.swift; sourceTree = "<group>"; };
 		1CF9127A2C9BB24900A92158 /* ClickerGaemData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickerGaemData.swift; sourceTree = "<group>"; };
-		1CF9127D2C9BB2BB00A92158 /* ClickerGaemModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ClickerGaemModel.xcdatamodel; sourceTree = "<group>"; };
 		1CF912832C9CB6D400A92158 /* DimensionBoost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimensionBoost.swift; sourceTree = "<group>"; };
 		1CF912882C9D466D00A92158 /* AntimatterGalaxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntimatterGalaxy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -148,9 +148,9 @@
 			isa = PBXGroup;
 			children = (
 				1C9B5FC92CA27D7100A6A3B8 /* Achievements.swift */,
+				1C9B5FFA2CA4FC2F00A6A3B8 /* StoredAchievementState+CoreDataClass.swift */,
+				1C9B5FFB2CA4FC2F00A6A3B8 /* StoredAchievementState+CoreDataProperties.swift */,
 				1C9B5FCA2CA27D7100A6A3B8 /* AchievementView.swift */,
-				1C9B5FDE2CA29F8900A6A3B8 /* StoredAchievementState+CoreDataClass.swift */,
-				1C9B5FDF2CA29F8900A6A3B8 /* StoredAchievementState+CoreDataProperties.swift */,
 			);
 			path = Achievements;
 			sourceTree = "<group>";
@@ -159,9 +159,9 @@
 			isa = PBXGroup;
 			children = (
 				1C9B5FF62CA3C03E00A6A3B8 /* Antimatter.swift */,
-				1C9B5FF22CA3BE3900A6A3B8 /* StoredAntimatterState+CoreDataClass.swift */,
-				1C9B5FF32CA3BE3900A6A3B8 /* StoredAntimatterState+CoreDataProperties.swift */,
 				1C9B5FF02CA3BDD900A6A3B8 /* AntimatterState.swift */,
+				1C9B5FFC2CA4FC2F00A6A3B8 /* StoredAntimatterState+CoreDataClass.swift */,
+				1C9B5FFD2CA4FC2F00A6A3B8 /* StoredAntimatterState+CoreDataProperties.swift */,
 				1CF912882C9D466D00A92158 /* AntimatterGalaxy.swift */,
 				1C9161AD2C9D4E9D00D1555A /* AntimatterView.swift */,
 				1CF912722C98119B00A92158 /* Dimension */,
@@ -193,6 +193,7 @@
 		1CF912392C95414100A92158 /* ClickerGaem */ = {
 			isa = PBXGroup;
 			children = (
+				1C0A284D2CA5188600FDB204 /* ClickerGaemModel.xcdatamodeld */,
 				1C9B5FD92CA29C4E00A6A3B8 /* Achievements */,
 				1C9B5FE72CA3B72100A6A3B8 /* Antimatter */,
 				1CF912402C95414200A92158 /* Assets.xcassets */,
@@ -201,7 +202,6 @@
 				1C30A5262CA0F72200FBB096 /* BigCrunch.swift */,
 				1CF9123A2C95414100A92158 /* ClickerGaemApp.swift */,
 				1CF9127A2C9BB24900A92158 /* ClickerGaemData.swift */,
-				1CF9127C2C9BB2BB00A92158 /* ClickerGaemModel.xcdatamodeld */,
 				1CF9123C2C95414100A92158 /* ContentView.swift */,
 				1CF912732C9811AB00A92158 /* Game */,
 				1CF912422C95414200A92158 /* Preview Content */,
@@ -243,8 +243,8 @@
 				1CF912702C97D4C300A92158 /* Dimension.swift */,
 				1CF912742C98121E00A92158 /* DimensionState.swift */,
 				1CF912762C99116B00A92158 /* DimensionView.swift */,
-				1C9B5FCD2CA2873C00A6A3B8 /* StoredDimensionState+CoreDataClass.swift */,
-				1C9B5FCE2CA2873C00A6A3B8 /* StoredDimensionState+CoreDataProperties.swift */,
+				1C9B5FFE2CA4FC2F00A6A3B8 /* StoredDimensionState+CoreDataClass.swift */,
+				1C9B5FFF2CA4FC2F00A6A3B8 /* StoredDimensionState+CoreDataProperties.swift */,
 			);
 			path = Dimension;
 			sourceTree = "<group>";
@@ -254,8 +254,8 @@
 			children = (
 				1CF9126C2C97CF5200A92158 /* Game.swift */,
 				1CF912682C9619A000A92158 /* GameState.swift */,
-				1C9B5FCF2CA2873C00A6A3B8 /* StoredGameState+CoreDataClass.swift */,
-				1C9B5FD02CA2873C00A6A3B8 /* StoredGameState+CoreDataProperties.swift */,
+				1C9B60002CA4FC2F00A6A3B8 /* StoredGameState+CoreDataClass.swift */,
+				1C9B60012CA4FC2F00A6A3B8 /* StoredGameState+CoreDataProperties.swift */,
 				1CF9126E2C97D1F800A92158 /* Ticker.swift */,
 			);
 			path = Game;
@@ -399,7 +399,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C9B5FF82CA4F82C00A6A3B8 /* ClickerGaemModel.xcdatamodeld in Sources */,
+				1C0A28502CA518DC00FDB204 /* ClickerGaemModel.xcdatamodeld in Sources */,
 				1CF9123D2C95414100A92158 /* ContentView.swift in Sources */,
 				1C9B5FF72CA3C04000A6A3B8 /* Antimatter.swift in Sources */,
 				1CF9126F2C97D1F800A92158 /* Ticker.swift in Sources */,
@@ -407,17 +407,19 @@
 				1C9B5FCB2CA27D7100A6A3B8 /* Achievements.swift in Sources */,
 				1C9B5FCC2CA27D7100A6A3B8 /* AchievementView.swift in Sources */,
 				1CF912672C95415800A92158 /* SwiftInfinite.swift in Sources */,
+				1C9B60022CA4FC2F00A6A3B8 /* StoredDimensionState+CoreDataClass.swift in Sources */,
+				1C9B60032CA4FC2F00A6A3B8 /* StoredDimensionState+CoreDataProperties.swift in Sources */,
+				1C9B60042CA4FC2F00A6A3B8 /* StoredGameState+CoreDataProperties.swift in Sources */,
+				1C9B60052CA4FC2F00A6A3B8 /* StoredAchievementState+CoreDataClass.swift in Sources */,
+				1C9B60062CA4FC2F00A6A3B8 /* StoredAntimatterState+CoreDataClass.swift in Sources */,
+				1C9B60072CA4FC2F00A6A3B8 /* StoredAntimatterState+CoreDataProperties.swift in Sources */,
+				1C9B60082CA4FC2F00A6A3B8 /* StoredGameState+CoreDataClass.swift in Sources */,
+				1C9B60092CA4FC2F00A6A3B8 /* StoredAchievementState+CoreDataProperties.swift in Sources */,
 				1C9161AE2C9D4E9D00D1555A /* AntimatterView.swift in Sources */,
-				1C9B5FE02CA29F8900A6A3B8 /* StoredAchievementState+CoreDataClass.swift in Sources */,
-				1C9B5FE12CA29F8900A6A3B8 /* StoredAchievementState+CoreDataProperties.swift in Sources */,
 				1C30A4F02C9FB77F00FBB096 /* AMDimensionAutobuyer.swift in Sources */,
 				1C30A4F12C9FB77F00FBB096 /* AutobuyerView.swift in Sources */,
 				1C30A4F22C9FB77F00FBB096 /* Autobuyer.swift in Sources */,
 				1CF912712C97D4C300A92158 /* Dimension.swift in Sources */,
-				1C9B5FD12CA2873C00A6A3B8 /* StoredDimensionState+CoreDataClass.swift in Sources */,
-				1C9B5FD22CA2873C00A6A3B8 /* StoredDimensionState+CoreDataProperties.swift in Sources */,
-				1C9B5FD32CA2873C00A6A3B8 /* StoredGameState+CoreDataClass.swift in Sources */,
-				1C9B5FD42CA2873C00A6A3B8 /* StoredGameState+CoreDataProperties.swift in Sources */,
 				1CF9123B2C95414100A92158 /* ClickerGaemApp.swift in Sources */,
 				1CF912772C99116B00A92158 /* DimensionView.swift in Sources */,
 				1C9B5FF12CA3BDDE00A6A3B8 /* AntimatterState.swift in Sources */,
@@ -428,8 +430,6 @@
 				1CF912892C9D466D00A92158 /* AntimatterGalaxy.swift in Sources */,
 				1CF9127B2C9BB24900A92158 /* ClickerGaemData.swift in Sources */,
 				1C30A5272CA0F72500FBB096 /* BigCrunch.swift in Sources */,
-				1C9B5FF42CA3BE3900A6A3B8 /* StoredAntimatterState+CoreDataClass.swift in Sources */,
-				1C9B5FF52CA3BE3900A6A3B8 /* StoredAntimatterState+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -793,14 +793,13 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		1CF9127C2C9BB2BB00A92158 /* ClickerGaemModel.xcdatamodeld */ = {
+		1C0A284D2CA5188600FDB204 /* ClickerGaemModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				1CF9127D2C9BB2BB00A92158 /* ClickerGaemModel.xcdatamodel */,
+				1C0A284E2CA5188600FDB204 /* ClickerGaemModel.xcdatamodel */,
 			);
-			currentVersion = 1CF9127D2C9BB2BB00A92158 /* ClickerGaemModel.xcdatamodel */;
-			name = ClickerGaemModel.xcdatamodeld;
-			path = /Users/justincovell/Projects/ClickerGaem/ClickerGaem/ClickerGaemModel.xcdatamodeld;
+			currentVersion = 1C0A284E2CA5188600FDB204 /* ClickerGaemModel.xcdatamodel */;
+			path = ClickerGaemModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
