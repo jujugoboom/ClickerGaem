@@ -31,15 +31,16 @@ final class GameState: Saveable {
     
     func load() {
         // TODO: Store autobuyers
-        let fetchRequest = StoredGameState.fetchRequest()
-        fetchRequest.fetchLimit = 1
-        let context = ClickerGaemData.shared.persistentContainer.newBackgroundContext()
-        guard let maybeStoredState = try? context.fetch(fetchRequest).first else {
-            storedState = StoredGameState(context: ClickerGaemData.shared.persistentContainer.viewContext)
-            storedState!.updateInterval = updateInterval
-            return
+        ClickerGaemData.shared.persistentContainer.viewContext.performAndWait {
+            let fetchRequest = StoredGameState.fetchRequest()
+            fetchRequest.fetchLimit = 1
+            guard let maybeStoredState = try? ClickerGaemData.shared.persistentContainer.viewContext.fetch(fetchRequest).first else {
+                storedState = StoredGameState(context: ClickerGaemData.shared.persistentContainer.viewContext)
+                storedState!.updateInterval = updateInterval
+                return
+            }
+            storedState = maybeStoredState
         }
-        storedState = maybeStoredState
         updateInterval = storedState!.updateInterval
         return
     }

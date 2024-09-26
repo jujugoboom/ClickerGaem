@@ -36,19 +36,20 @@ class AntimatterState: Saveable {
     }
     
     func load() {
-        let req = StoredAntimatterState.fetchRequest()
-        req.fetchLimit = 1
-        let context = ClickerGaemData.shared.persistentContainer.newBackgroundContext()
-        guard let maybeStoredState = try? context.fetch(req).first else {
-            self.storedState = StoredAntimatterState(context: ClickerGaemData.shared.persistentContainer.viewContext)
-            self.storedState?.antimatter = antimatter
-            self.storedState?.tickSpeedUpgrades = tickSpeedUpgrades
-            self.storedState?.sacrificedDimensions = sacrificedDimensions
-            self.storedState?.dimensionBoosts = Int64(dimensionBoosts)
-            self.storedState?.galaxies = Int64(amGalaxies)
-            return
+        ClickerGaemData.shared.persistentContainer.viewContext.performAndWait {
+            let req = StoredAntimatterState.fetchRequest()
+            req.fetchLimit = 1
+            guard let maybeStoredState = try? ClickerGaemData.shared.persistentContainer.viewContext.fetch(req).first else {
+                self.storedState = StoredAntimatterState(context: ClickerGaemData.shared.persistentContainer.viewContext)
+                self.storedState?.antimatter = antimatter
+                self.storedState?.tickSpeedUpgrades = tickSpeedUpgrades
+                self.storedState?.sacrificedDimensions = sacrificedDimensions
+                self.storedState?.dimensionBoosts = Int64(dimensionBoosts)
+                self.storedState?.galaxies = Int64(amGalaxies)
+                return
+            }
+            self.storedState = maybeStoredState
         }
-        self.storedState = maybeStoredState
         self.antimatter = storedState!.antimatter as! InfiniteDecimal
         self.tickSpeedUpgrades = storedState!.tickSpeedUpgrades as! InfiniteDecimal
         self.sacrificedDimensions = storedState!.sacrificedDimensions as! InfiniteDecimal

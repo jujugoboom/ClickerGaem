@@ -29,19 +29,20 @@ final class DimensionState: Saveable {
     }
     
     func load() {
-        let req = StoredDimensionState.fetchRequest()
-        req.fetchLimit = 1
-        req.predicate = NSPredicate(format: "tier == %d", self.tier)
-        let context = ClickerGaemData.shared.persistentContainer.newBackgroundContext()
-        guard let maybeStoredState = try? context.fetch(req).first else {
-            self.storedState = StoredDimensionState(context: ClickerGaemData.shared.persistentContainer.viewContext)
-            self.storedState!.tier = Int64(tier)
-            self.storedState!.currCount = currCount
-            self.storedState!.purchaseCount = Int64(purchaseCount)
-            self.storedState!.unlocked = unlocked
-            return
+        ClickerGaemData.shared.persistentContainer.viewContext.performAndWait {
+            let req = StoredDimensionState.fetchRequest()
+            req.fetchLimit = 1
+            req.predicate = NSPredicate(format: "tier == %d", self.tier)
+            guard let maybeStoredState = try? ClickerGaemData.shared.persistentContainer.viewContext.fetch(req).first else {
+                self.storedState = StoredDimensionState(context: ClickerGaemData.shared.persistentContainer.viewContext)
+                self.storedState!.tier = Int64(tier)
+                self.storedState!.currCount = currCount
+                self.storedState!.purchaseCount = Int64(purchaseCount)
+                self.storedState!.unlocked = unlocked
+                return
+            }
+            self.storedState = maybeStoredState
         }
-        self.storedState = maybeStoredState
         self.purchaseCount = Int(storedState!.purchaseCount)
         self.unlocked = storedState!.unlocked
         self.currCount = storedState!.currCount as! InfiniteDecimal
