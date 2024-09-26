@@ -67,6 +67,7 @@
 
 /* Begin PBXFileReference section */
 		1C0A284E2CA5188600FDB204 /* ClickerGaemModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ClickerGaemModel.xcdatamodel; sourceTree = "<group>"; };
+		1C0A28512CA51F2600FDB204 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		1C30A4EC2C9FB77F00FBB096 /* AMDimensionAutobuyer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMDimensionAutobuyer.swift; sourceTree = "<group>"; };
 		1C30A4ED2C9FB77F00FBB096 /* Autobuyer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Autobuyer.swift; sourceTree = "<group>"; };
 		1C30A4EF2C9FB77F00FBB096 /* AutobuyerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutobuyerView.swift; sourceTree = "<group>"; };
@@ -193,6 +194,7 @@
 		1CF912392C95414100A92158 /* ClickerGaem */ = {
 			isa = PBXGroup;
 			children = (
+				1C0A28512CA51F2600FDB204 /* Info.plist */,
 				1C0A284D2CA5188600FDB204 /* ClickerGaemModel.xcdatamodeld */,
 				1C9B5FD92CA29C4E00A6A3B8 /* Achievements */,
 				1C9B5FE72CA3B72100A6A3B8 /* Antimatter */,
@@ -599,6 +601,7 @@
 				DEVELOPMENT_TEAM = 984K82PAX7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ClickerGaem/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -629,6 +632,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				GENERATE_PROFILING_CODE = NO;
+				INFOPLIST_FILE = ClickerGaem/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
