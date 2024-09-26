@@ -26,6 +26,7 @@
 		1C9B5FF42CA3BE3900A6A3B8 /* StoredAntimatterState+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FF22CA3BE3900A6A3B8 /* StoredAntimatterState+CoreDataClass.swift */; };
 		1C9B5FF52CA3BE3900A6A3B8 /* StoredAntimatterState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FF32CA3BE3900A6A3B8 /* StoredAntimatterState+CoreDataProperties.swift */; };
 		1C9B5FF72CA3C04000A6A3B8 /* Antimatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FF62CA3C03E00A6A3B8 /* Antimatter.swift */; };
+		1C9B5FF82CA4F82C00A6A3B8 /* ClickerGaemModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9127C2C9BB2BB00A92158 /* ClickerGaemModel.xcdatamodeld */; };
 		1CF9123B2C95414100A92158 /* ClickerGaemApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9123A2C95414100A92158 /* ClickerGaemApp.swift */; };
 		1CF9123D2C95414100A92158 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9123C2C95414100A92158 /* ContentView.swift */; };
 		1CF912412C95414200A92158 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CF912402C95414200A92158 /* Assets.xcassets */; };
@@ -42,7 +43,6 @@
 		1CF912772C99116B00A92158 /* DimensionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912762C99116B00A92158 /* DimensionView.swift */; };
 		1CF912792C991BDF00A92158 /* SwiftInfiniteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912782C991BDF00A92158 /* SwiftInfiniteTests.swift */; };
 		1CF9127B2C9BB24900A92158 /* ClickerGaemData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9127A2C9BB24900A92158 /* ClickerGaemData.swift */; };
-		1CF9127E2C9BB2BB00A92158 /* ClickerGaemModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9127C2C9BB2BB00A92158 /* ClickerGaemModel.xcdatamodeld */; };
 		1CF912842C9CB6D400A92158 /* DimensionBoost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912832C9CB6D400A92158 /* DimensionBoost.swift */; };
 		1CF912892C9D466D00A92158 /* AntimatterGalaxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912882C9D466D00A92158 /* AntimatterGalaxy.swift */; };
 		1CF9128E2C9D4D5200A92158 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 1CF9128D2C9D4D5200A92158 /* OrderedCollections */; };
@@ -399,8 +399,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C9B5FF82CA4F82C00A6A3B8 /* ClickerGaemModel.xcdatamodeld in Sources */,
 				1CF9123D2C95414100A92158 /* ContentView.swift in Sources */,
-				1CF9127E2C9BB2BB00A92158 /* ClickerGaemModel.xcdatamodeld in Sources */,
 				1C9B5FF72CA3C04000A6A3B8 /* Antimatter.swift in Sources */,
 				1CF9126F2C97D1F800A92158 /* Ticker.swift in Sources */,
 				1CF9126D2C97CF5200A92158 /* Game.swift in Sources */,
