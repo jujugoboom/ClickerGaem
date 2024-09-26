@@ -20,7 +20,6 @@ extension StoredDimensionState {
     @NSManaged public var purchaseCount: Int64
     @NSManaged public var tier: Int64
     @NSManaged public var unlocked: Bool
-    @NSManaged public var gameState: StoredGameState?
 
 }
 

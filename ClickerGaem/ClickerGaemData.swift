@@ -22,21 +22,7 @@ class ClickerGaemData: ObservableObject {
                 fatalError("Failed to load persistent stores: \(error.localizedDescription)")
             }
         }
-        
-        let gameState = GameState.shared
-        let storedGameState = StoredGameState(context: container.viewContext)
-        storedGameState.antimatter = gameState.antimatter
-        gameState.dimensionStates.forEach { dimensionState in
-            let storedDimensionState = StoredDimensionState(context: container.viewContext)
-            storedDimensionState.currCount = dimensionState.currCount
-            storedDimensionState.purchaseCount = Int64(dimensionState.purchaseCount)
-            storedDimensionState.tier = Int64(dimensionState.tier)
-            storedDimensionState.unlocked = dimensionState.unlocked
-            storedGameState.addToDimensionStates(storedDimensionState)
-        }
-        storedGameState.ticksPerSecond = gameState.ticksPerSecond
-        storedGameState.updateInterval = gameState.updateInterval
-        
+
         return container
     }
     

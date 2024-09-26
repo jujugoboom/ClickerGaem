@@ -5,14 +5,15 @@
 //  Created by Justin Covell on 9/23/24.
 //
 import Foundation
+import CoreData
 
 @Observable
-class Achievement<T>: Identifiable {
+class Achievement: Saveable, Identifiable {
     let id: Int
     let name: String
     let description: String
-    let value: () -> T
-    let execute: (T, Achievement) -> Void
+    let value: () -> Any
+    let execute: (Any, Achievement) -> Void
     var storedState: StoredAchievementState?
     private var initialized = false
     var unlocked = false {
@@ -22,45 +23,45 @@ class Achievement<T>: Identifiable {
             }
             Achievements.shared.newAchievementName = name
             Achievements.shared.unlockedNewAchievement = true
-            print("Unlocked \(name)")
         }
     }
     
-    func load() -> Bool {
+    func load() {
         let req = StoredAchievementState.createFetchRequest()
         req.fetchLimit = 1
         req.predicate = NSPredicate(format: "id == %d", self.id)
-        guard let maybeStoredState = try? ClickerGaemData.shared.persistentContainer.viewContext.fetch(req).first else {
-            // Reset our current unlocked state if we're reloading
-            self.unlocked = false
-            storedState = StoredAchievementState(context: ClickerGaemData.shared.persistentContainer.viewContext)
-            return false
-        }
-        storedState = maybeStoredState
-        unlocked = storedState!.unlocked
-        return true
-    }
-    
-    func reload() {
-        _ = load()
-        guard !unlocked else {
+        let context = ClickerGaemData.shared.persistentContainer.newBackgroundContext()
+        guard let maybeStoredState = try? context.fetch(req).first else {
+            storedState = StoredAchievementState(context: context)
+            storedState?.unlocked = unlocked
             return
         }
-        withContinousObservation(of: self.value(), execute: execute)
+        storedState = maybeStoredState
+        unlocked = storedState?.unlocked ?? false
+        return
     }
     
-    func save(commit: Bool = false) {
-        storedState!.unlocked = unlocked
+    func save(objectContext: NSManagedObjectContext) {
+        if storedState == nil {
+            storedState = StoredAchievementState(context: objectContext)
+        }
+        storedState?.unlocked = unlocked
+        try? objectContext.save()
     }
     
-    init(id: Int, name: String, description: String, of value: @escaping @autoclosure () -> T, execute: @escaping (T, Achievement) -> Void) {
+    func reset() {
+        self.unlocked = false
+    }
+    
+    init(id: Int, name: String, description: String, of value: @escaping @autoclosure () -> Any, execute: @escaping (Any, Achievement) -> Void) {
         self.id = id
         self.name = name
         self.description = description
         self.value = value
         self.execute = execute
-        guard !self.load() || !unlocked else {
-            self.initialized = true
+        self.load()
+        guard !unlocked else {
+            // Already unlocked, no need to monitor
             return
         }
         // Should set unlocked initial value
@@ -71,7 +72,7 @@ class Achievement<T>: Identifiable {
         withContinousObservation(of: value(), execute: execute)
     }
     
-    func withContinousObservation(of value: @escaping @autoclosure () -> T, execute: @escaping (T, Achievement) -> Void) {
+    func withContinousObservation(of value: @escaping @autoclosure () -> Any, execute: @escaping (Any, Achievement) -> Void) {
         guard !self.unlocked else {
             return
         }
@@ -86,65 +87,74 @@ class Achievement<T>: Identifiable {
 }
 
 @Observable
-class Achievements {
-    static var shared = Achievements()
+class Achievements: Resettable {
+    private static var _shared: Achievements?
+    static var shared: Achievements {
+        if _shared == nil { _shared = Achievements() }
+        return _shared!
+    }
     var unlockedNewAchievement = false
     var newAchievementName = ""
-    static let eleventh = Achievement(id: 11, name: "You gotta start somewhere", description: "Buy first antimatter dimension", of: GameState.shared.dimensions[1]!.state.purchaseCount) { purchaseCount, achievement in
-        if purchaseCount > 0 {
+    let eleventh = Achievement(id: 11, name: "You gotta start somewhere", description: "Buy first antimatter dimension", of: Dimensions.shared.dimensions[1]!.state.purchaseCount) { purchaseCount, achievement in
+        if purchaseCount as! Int > 0 {
             achievement.unlocked = true
         }
     }
     
-    static let twelfth = Achievement(id: 12, name: "100 antimatter is a lot", description: "Buy a 2nd Antimatter Dimension", of: GameState.shared.dimensions[2]!.state.purchaseCount) { purchaseCount, achievement in
-        if purchaseCount > 0 {
+    let twelfth = Achievement(id: 12, name: "100 antimatter is a lot", description: "Buy a 2nd Antimatter Dimension", of: Dimensions.shared.dimensions[2]!.state.purchaseCount) { purchaseCount, achievement in
+        if purchaseCount as! Int > 0 {
             achievement.unlocked = true
         }
     }
     
-    static let thirteenth = Achievement(id: 13, name: "Half life 3 CONFIRMED", description: "Buy a 3rd Antimatter Dimension.", of: GameState.shared.dimensions[3]!.state.purchaseCount) {purchaseCount, achievement in
-        if purchaseCount > 0 {
+    let thirteenth = Achievement(id: 13, name: "Half life 3 CONFIRMED", description: "Buy a 3rd Antimatter Dimension.", of: Dimensions.shared.dimensions[3]!.state.purchaseCount) {purchaseCount, achievement in
+        if purchaseCount as! Int > 0 {
             achievement.unlocked = true
         }
     }
     
-    static let fourteenth = Achievement(id: 14, name: "L4D: Left 4 Dimensions", description: "Buy a 4th Antimatter Dimension.", of: GameState.shared.dimensions[4]!.state.purchaseCount) {purchaseCount, achievement in
-        if purchaseCount > 0 {
+    let fourteenth = Achievement(id: 14, name: "L4D: Left 4 Dimensions", description: "Buy a 4th Antimatter Dimension.", of: Dimensions.shared.dimensions[4]!.state.purchaseCount) {purchaseCount, achievement in
+        if purchaseCount as! Int > 0 {
             achievement.unlocked = true
         }
     }
     
-    static let fifteenth = Achievement(id: 15, name: "5 Dimension Antimatter Punch", description: "Buy a 5th Antimatter Dimension.", of: GameState.shared.dimensions[5]!.state.purchaseCount) {purchaseCount, achievement in
-        if purchaseCount > 0 {
+    let fifteenth = Achievement(id: 15, name: "5 Dimension Antimatter Punch", description: "Buy a 5th Antimatter Dimension.", of: Dimensions.shared.dimensions[5]!.state.purchaseCount) {purchaseCount, achievement in
+        if purchaseCount as! Int > 0 {
             achievement.unlocked = true
         }
     }
     
-    static let sixteenth = Achievement(id: 16, name: "We couldn't afford 9", description: "Buy a 6th Antimatter Dimension.", of: GameState.shared.dimensions[6]!.state.purchaseCount) {purchaseCount, achievement in
-        if purchaseCount > 0 {
+    let sixteenth = Achievement(id: 16, name: "We couldn't afford 9", description: "Buy a 6th Antimatter Dimension.", of: Dimensions.shared.dimensions[6]!.state.purchaseCount) {purchaseCount, achievement in
+        if purchaseCount as! Int > 0 {
             achievement.unlocked = true
         }
     }
     
-    static let seventeenth = Achievement(id: 17, name: "Not a luck related achievement", description: "Buy a 7th Antimatter Dimension.", of: GameState.shared.dimensions[7]!.state.purchaseCount) {purchaseCount, achievement in
-        if purchaseCount > 0 {
+    let seventeenth = Achievement(id: 17, name: "Not a luck related achievement", description: "Buy a 7th Antimatter Dimension.", of: Dimensions.shared.dimensions[7]!.state.purchaseCount) {purchaseCount, achievement in
+        if purchaseCount as! Int > 0 {
             achievement.unlocked = true
         }
     }
     
-    static let eighteenth = Achievement(id: 18, name: "90 degrees to infinity", description: "Buy a 8th Antimatter Dimension.", of: GameState.shared.dimensions[8]!.state.purchaseCount) {purchaseCount, achievement in
-        if purchaseCount > 0 {
+    let eighteenth = Achievement(id: 18, name: "90 degrees to infinity", description: "Buy a 8th Antimatter Dimension.", of: Dimensions.shared.dimensions[8]!.state.purchaseCount) {purchaseCount, achievement in
+        if purchaseCount as! Int > 0 {
             achievement.unlocked = true
         }
     }
     
-    let achievements = [Achievements.eleventh, Achievements.twelfth, Achievements.thirteenth, Achievements.fourteenth, Achievements.fifteenth, Achievements.sixteenth, Achievements.seventeenth, Achievements.eighteenth]
+    var achievements: [Achievement] { [eleventh, twelfth, thirteenth, fourteenth, fifteenth, sixteenth, seventeenth, eighteenth] }
     
-    var unlockedAchievements: [Achievement<Any>] {
-        achievements.filter(\.unlocked) as! [Achievement<Any>]
+    var unlockedAchievements: [Achievement] {
+        achievements.filter(\.unlocked)
     }
     
-    func reload() {
-        self.achievements.forEach({$0.reload()})
+    init() {
+        print("Achievements initialized")
+    }
+    
+    static func reset() {
+        _shared?.achievements.forEach({$0.reset()})
+        _shared?.achievements.forEach({$0.load()})
     }
 }

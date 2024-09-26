@@ -9,23 +9,24 @@ import Foundation
 import SwiftUI
 
 struct AntimatterView: View {
-    let state: GameState = GameState.shared
+    var state: AntimatterState {
+        Antimatter.shared.state
+    }
     var bigCrunch: BigCrunch = BigCrunch()
     
     var dimensions: [Dimension] {
-        Array(state.dimensions.values)
+        Array(Dimensions.shared.dimensions.values)
     }
     
     var currSacrificeMultiplier: InfiniteDecimal{
-        GameState.dimensionSacrificeMultiplier(sacrificed: state.sacrificedDimensions.add(value: dimensions.first?.state.currCount ?? 0)).div(value: state.dimensionSacrificeMul)
+        Antimatter.dimensionSacrificeMultiplier(sacrificed: state.sacrificedDimensions.add(value: dimensions.first?.state.currCount ?? 0)).div(value: state.dimensionSacrificeMul)
     }
     
     struct FirstBigCrunch: ViewModifier {
         var bigCrunch: BigCrunch
-        var state: GameState
         
         func body(content: Content) -> some View {
-            if bigCrunch.canBigCrunch && !state.firstInfinity {
+            if bigCrunch.canBigCrunch && !GameInstance.shared.state.firstInfinity {
                 Button(action: bigCrunch.crunch) {
                     Text("BIG CRUNCH").padding()
                 }.padding().background().clipShape(RoundedRectangle(cornerRadius: 10)).shadow(radius: 5)
@@ -60,15 +61,15 @@ struct AntimatterView: View {
             }
             ScrollView {
                 VStack(spacing: 25) {
-                    ForEach(state.unlockedDimensions) { dimension in
-                        DimensionView(dimension: dimension)
+                    ForEach(Dimensions.shared.unlockedDimensions) { dimension in
+                        DimensionView(tier: dimension.tier)
                     }
                 }.padding()
             }
             Spacer()
-            DimensionBoostView(gameState: state)
+            DimensionBoostView()
             AntimatterGalaxy()
-        }.modifier(FirstBigCrunch(bigCrunch: bigCrunch, state: state)).padding()
+        }.modifier(FirstBigCrunch(bigCrunch: bigCrunch)).padding().saveOnExit(saveable: Antimatter.shared.state)
     }
     
     private func buyTickspeedUpgrade() {

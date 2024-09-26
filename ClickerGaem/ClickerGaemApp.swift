@@ -19,6 +19,6 @@ struct ClickerGaemApp: App {
     }
     
     init() {
-        _ = GameInstance.shared
+        GameInstance.shared.ticker?.startTimer()
     }
 }

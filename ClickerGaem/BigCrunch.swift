@@ -6,26 +6,28 @@
 //
 
 class BigCrunch {
-    var state: GameState
-    
-    var canBigCrunch: Bool {
-        state.antimatter.gte(other: InfiniteDecimal(mantissa: 1.8, exponent: 308))
+    var state: GameState {
+        GameInstance.shared.state
     }
     
-    init() {
-        self.state = GameState.shared
+    var antimatterState: AntimatterState {
+        Antimatter.shared.state
+    }
+    
+    var canBigCrunch: Bool {
+        Antimatter.shared.state.antimatter.gte(other: InfiniteDecimal(mantissa: 1.8, exponent: 308))
     }
     
     func crunch() {
         guard canBigCrunch else {
             return
         }
-        state.antimatter = 100
-        state.dimensionBoosts = 0
-        state.sacrificedDimensions = 0
-        state.amGalaxies = 0
-        state.tickSpeedUpgrades = 0
+        antimatterState.antimatter = 100
+        antimatterState.dimensionBoosts = 0
+        antimatterState.sacrificedDimensions = 0
+        antimatterState.amGalaxies = 0
+        antimatterState.tickSpeedUpgrades = 0
         state.firstInfinity = true
-        state.dimensions.forEach({$1.reset()})
+        Dimensions.shared.dimensions.forEach({$1.reset()})
     }
 }
