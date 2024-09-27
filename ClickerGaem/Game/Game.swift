@@ -34,9 +34,7 @@ class GameInstance: Resettable {
             ticker?.stopTimer()
             self.state.simulating = true
         }
-        DispatchQueue.main.asyncAndWait {
-            simulate(diff: timeOffline, ticks: 1000)
-        }
+        simulate(diff: timeOffline, ticks: 1000)
         DispatchQueue.main.asyncAndWait {
             state.simulating = false
             Task {
@@ -47,12 +45,14 @@ class GameInstance: Resettable {
         }
     }
     
-    @MainActor private func simulate(diff: TimeInterval, ticks: Int) {
+    private func simulate(diff: TimeInterval, ticks: Int) {
         let perTick = diff / Double(ticks)
         for i in 0...ticks {
             tick(diff: perTick)
             guard i % 10 == 0 else { continue }
-            self.state.currSimulatingTick = i
+            DispatchQueue.main.asyncAndWait {
+                self.state.currSimulatingTick = i
+            }
         }
     }
     
