@@ -13,7 +13,7 @@ import UIKit
 
 protocol Saveable {
     func load()
-    func save(objectContext: NSManagedObjectContext, notification: NotificationCenter.Publisher.Output)
+    func save(objectContext: NSManagedObjectContext, notification: NotificationCenter.Publisher.Output?)
 }
 
 extension Saveable {
@@ -55,13 +55,14 @@ final class GameState: Saveable {
         return
     }
     
-    func save(objectContext: NSManagedObjectContext, notification: NotificationCenter.Publisher.Output) {
+    func save(objectContext: NSManagedObjectContext, notification: NotificationCenter.Publisher.Output? = nil) {
         if storedState == nil {
             storedState = StoredGameState(context: objectContext)
         }
         storedState!.updateInterval = updateInterval
         storedState!.lastSaveTime = Date().timeIntervalSinceReferenceDate
         try! objectContext.save()
+        print("Saved game")
     }
     
     func reset() {

@@ -57,7 +57,7 @@ class AntimatterState: Saveable {
         self.amGalaxies = Int(storedState!.galaxies)
     }
     
-    func save(objectContext: NSManagedObjectContext, notification: NotificationCenter.Publisher.Output) {
+    func save(objectContext: NSManagedObjectContext, notification: NotificationCenter.Publisher.Output? = nil) {
         if storedState == nil {
             storedState = StoredAntimatterState(context: objectContext)
         }
