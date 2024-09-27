@@ -42,7 +42,7 @@ class Achievement: Saveable, Identifiable {
         return
     }
     
-    func save(objectContext: NSManagedObjectContext) {
+    func save(objectContext: NSManagedObjectContext, notification: NotificationCenter.Publisher.Output) {
         if storedState == nil {
             storedState = StoredAchievementState(context: objectContext)
         }

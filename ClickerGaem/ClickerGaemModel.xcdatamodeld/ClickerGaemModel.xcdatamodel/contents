@@ -18,6 +18,7 @@
         <attribute name="unlocked" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
     </entity>
     <entity name="StoredGameState" representedClassName="StoredGameState" syncable="YES">
+        <attribute name="lastSaveTime" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="updateInterval" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
 </model>

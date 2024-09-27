@@ -10,10 +10,23 @@ import CoreData
 import OrderedCollections
 import AlertToast
 
+struct SimulatingView: View {
+    var body: some View {
+        ProgressView(value: Double(GameInstance.shared.state.currSimulatingTick), total: 1000, label: {Text("Simulating offline progress...")}).padding()
+    }
+}
+
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.scenePhase) var scenePhase
     var gameState: GameState {
         GameInstance.shared.state
+    }
+    var bindableGameState: Bindable<GameState> {
+        Bindable(GameInstance.shared.state)
+    }
+    var isSimulating: Binding<Bool> {
+        bindableGameState.simulating
     }
     var achievements: Bindable<Achievements> {
         Bindable(Achievements.shared)
@@ -21,6 +34,8 @@ struct ContentView: View {
     var newAchievementUnlocked: Binding<Bool> {
         achievements.unlockedNewAchievement
     }
+    
+    @State var modal = true
     
     @State private var currentTab = 1
     
@@ -42,6 +57,16 @@ struct ContentView: View {
                 Label("Settings", systemImage: "gear")
             }.tag(4)
         }
+        .onChange(of: scenePhase, initial: true) {
+            if scenePhase == .active {
+                Task.detached {
+                    GameInstance.shared.simulateSinceLastSave()
+                }
+            }
+        }
+        .sheet(isPresented: isSimulating) {
+            SimulatingView()
+        }
         .toast(isPresenting: newAchievementUnlocked) {
             AlertToast(displayMode: .hud, type: .regular, title: Achievements.shared.newAchievementName, subTitle: "Achievement unlocked")
         } onTap: {
@@ -55,10 +80,10 @@ struct SaveOnExit: ViewModifier {
     let saveable: Saveable
     
     func body(content: Content) -> some View {
-        content.onReceive(NotificationCenter.default.publisher(for: UIScene.willDeactivateNotification), perform: { _ in
-            saveable.save(objectContext: viewContext)
-        }).onReceive(NotificationCenter.default.publisher(for: UIApplication.willTerminateNotification), perform: { _ in
-            saveable.save(objectContext: viewContext)
+        content.onReceive(NotificationCenter.default.publisher(for: UIScene.willDeactivateNotification), perform: { notification in
+            saveable.save(objectContext: viewContext, notification: notification)
+        }).onReceive(NotificationCenter.default.publisher(for: UIApplication.willTerminateNotification), perform: { notification in
+            saveable.save(objectContext: viewContext, notification: notification)
         })
     }
 }

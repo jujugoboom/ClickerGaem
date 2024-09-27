@@ -48,7 +48,7 @@ final class DimensionState: Saveable {
         self.currCount = storedState!.currCount as! InfiniteDecimal
     }
     
-    func save(objectContext: NSManagedObjectContext) {
+    func save(objectContext: NSManagedObjectContext, notification: NotificationCenter.Publisher.Output) {
         if storedState == nil {
             storedState = StoredDimensionState(context: objectContext)
         }
