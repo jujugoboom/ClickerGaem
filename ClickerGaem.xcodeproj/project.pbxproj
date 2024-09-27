@@ -7,44 +7,44 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1C0A28502CA518DC00FDB204 /* ClickerGaemModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1C0A284D2CA5188600FDB204 /* ClickerGaemModel.xcdatamodeld */; };
-		1C30A4F02C9FB77F00FBB096 /* AMDimensionAutobuyer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C30A4EC2C9FB77F00FBB096 /* AMDimensionAutobuyer.swift */; };
-		1C30A4F12C9FB77F00FBB096 /* AutobuyerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C30A4EF2C9FB77F00FBB096 /* AutobuyerView.swift */; };
-		1C30A4F22C9FB77F00FBB096 /* Autobuyer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C30A4ED2C9FB77F00FBB096 /* Autobuyer.swift */; };
-		1C30A5272CA0F72500FBB096 /* BigCrunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C30A5262CA0F72200FBB096 /* BigCrunch.swift */; };
+		1C0A28962CA647A500FDB204 /* ClickerGaemModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1C0A284D2CA5188600FDB204 /* ClickerGaemModel.xcdatamodeld */; };
+		1C0A28972CA647A500FDB204 /* Achievements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FC92CA27D7100A6A3B8 /* Achievements.swift */; };
+		1C0A28982CA647A500FDB204 /* StoredAchievementState+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FFA2CA4FC2F00A6A3B8 /* StoredAchievementState+CoreDataClass.swift */; };
+		1C0A28992CA647A500FDB204 /* StoredAchievementState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FFB2CA4FC2F00A6A3B8 /* StoredAchievementState+CoreDataProperties.swift */; };
+		1C0A289A2CA647A500FDB204 /* AchievementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FCA2CA27D7100A6A3B8 /* AchievementView.swift */; };
+		1C0A289B2CA647A500FDB204 /* Antimatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FF62CA3C03E00A6A3B8 /* Antimatter.swift */; };
+		1C0A289C2CA647A500FDB204 /* AntimatterState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FF02CA3BDD900A6A3B8 /* AntimatterState.swift */; };
+		1C0A289D2CA647A500FDB204 /* StoredAntimatterState+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FFC2CA4FC2F00A6A3B8 /* StoredAntimatterState+CoreDataClass.swift */; };
+		1C0A289E2CA647A500FDB204 /* StoredAntimatterState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FFD2CA4FC2F00A6A3B8 /* StoredAntimatterState+CoreDataProperties.swift */; };
+		1C0A289F2CA647A500FDB204 /* AntimatterGalaxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912882C9D466D00A92158 /* AntimatterGalaxy.swift */; };
+		1C0A28A02CA647A500FDB204 /* AntimatterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9161AD2C9D4E9D00D1555A /* AntimatterView.swift */; };
+		1C0A28A12CA647A500FDB204 /* Dimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912702C97D4C300A92158 /* Dimension.swift */; };
+		1C0A28A22CA647A500FDB204 /* DimensionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912742C98121E00A92158 /* DimensionState.swift */; };
+		1C0A28A32CA647A500FDB204 /* DimensionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912762C99116B00A92158 /* DimensionView.swift */; };
+		1C0A28A42CA647A500FDB204 /* StoredDimensionState+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FFE2CA4FC2F00A6A3B8 /* StoredDimensionState+CoreDataClass.swift */; };
+		1C0A28A52CA647A500FDB204 /* StoredDimensionState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FFF2CA4FC2F00A6A3B8 /* StoredDimensionState+CoreDataProperties.swift */; };
+		1C0A28A62CA647A500FDB204 /* DimensionBoost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912832C9CB6D400A92158 /* DimensionBoost.swift */; };
+		1C0A28A82CA647A500FDB204 /* AMDimensionAutobuyer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C30A4EC2C9FB77F00FBB096 /* AMDimensionAutobuyer.swift */; };
+		1C0A28A92CA647A500FDB204 /* Autobuyer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C30A4ED2C9FB77F00FBB096 /* Autobuyer.swift */; };
+		1C0A28AA2CA647A500FDB204 /* AutobuyerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C30A4EF2C9FB77F00FBB096 /* AutobuyerView.swift */; };
+		1C0A28AB2CA647A500FDB204 /* BigCrunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C30A5262CA0F72200FBB096 /* BigCrunch.swift */; };
+		1C0A28AC2CA647A500FDB204 /* ClickerGaemApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9123A2C95414100A92158 /* ClickerGaemApp.swift */; };
+		1C0A28AD2CA647A500FDB204 /* ClickerGaemData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9127A2C9BB24900A92158 /* ClickerGaemData.swift */; };
+		1C0A28AE2CA647A500FDB204 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9123C2C95414100A92158 /* ContentView.swift */; };
+		1C0A28AF2CA647A500FDB204 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9126C2C97CF5200A92158 /* Game.swift */; };
+		1C0A28B02CA647A500FDB204 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912682C9619A000A92158 /* GameState.swift */; };
+		1C0A28B12CA647A500FDB204 /* StoredGameState+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B60002CA4FC2F00A6A3B8 /* StoredGameState+CoreDataClass.swift */; };
+		1C0A28B22CA647A500FDB204 /* StoredGameState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B60012CA4FC2F00A6A3B8 /* StoredGameState+CoreDataProperties.swift */; };
+		1C0A28B32CA647A500FDB204 /* Ticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9126E2C97D1F800A92158 /* Ticker.swift */; };
+		1C0A28B52CA647A500FDB204 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FE42CA39DAF00A6A3B8 /* SettingsView.swift */; };
+		1C0A28B62CA647A500FDB204 /* SwiftInfinite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912662C95415800A92158 /* SwiftInfinite.swift */; };
 		1C30A52C2CA26C4400FBB096 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = 1C30A52B2CA26C4400FBB096 /* AlertToast */; };
-		1C9161AE2C9D4E9D00D1555A /* AntimatterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9161AD2C9D4E9D00D1555A /* AntimatterView.swift */; };
-		1C9B5FCB2CA27D7100A6A3B8 /* Achievements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FC92CA27D7100A6A3B8 /* Achievements.swift */; };
-		1C9B5FCC2CA27D7100A6A3B8 /* AchievementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FCA2CA27D7100A6A3B8 /* AchievementView.swift */; };
-		1C9B5FE52CA39DAF00A6A3B8 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FE42CA39DAF00A6A3B8 /* SettingsView.swift */; };
-		1C9B5FF12CA3BDDE00A6A3B8 /* AntimatterState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FF02CA3BDD900A6A3B8 /* AntimatterState.swift */; };
-		1C9B5FF72CA3C04000A6A3B8 /* Antimatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FF62CA3C03E00A6A3B8 /* Antimatter.swift */; };
-		1C9B60022CA4FC2F00A6A3B8 /* StoredDimensionState+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FFE2CA4FC2F00A6A3B8 /* StoredDimensionState+CoreDataClass.swift */; };
-		1C9B60032CA4FC2F00A6A3B8 /* StoredDimensionState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FFF2CA4FC2F00A6A3B8 /* StoredDimensionState+CoreDataProperties.swift */; };
-		1C9B60042CA4FC2F00A6A3B8 /* StoredGameState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B60012CA4FC2F00A6A3B8 /* StoredGameState+CoreDataProperties.swift */; };
-		1C9B60052CA4FC2F00A6A3B8 /* StoredAchievementState+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FFA2CA4FC2F00A6A3B8 /* StoredAchievementState+CoreDataClass.swift */; };
-		1C9B60062CA4FC2F00A6A3B8 /* StoredAntimatterState+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FFC2CA4FC2F00A6A3B8 /* StoredAntimatterState+CoreDataClass.swift */; };
-		1C9B60072CA4FC2F00A6A3B8 /* StoredAntimatterState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FFD2CA4FC2F00A6A3B8 /* StoredAntimatterState+CoreDataProperties.swift */; };
-		1C9B60082CA4FC2F00A6A3B8 /* StoredGameState+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B60002CA4FC2F00A6A3B8 /* StoredGameState+CoreDataClass.swift */; };
-		1C9B60092CA4FC2F00A6A3B8 /* StoredAchievementState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FFB2CA4FC2F00A6A3B8 /* StoredAchievementState+CoreDataProperties.swift */; };
-		1CF9123B2C95414100A92158 /* ClickerGaemApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9123A2C95414100A92158 /* ClickerGaemApp.swift */; };
-		1CF9123D2C95414100A92158 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9123C2C95414100A92158 /* ContentView.swift */; };
 		1CF912412C95414200A92158 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CF912402C95414200A92158 /* Assets.xcassets */; };
 		1CF912442C95414200A92158 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CF912432C95414200A92158 /* Preview Assets.xcassets */; };
 		1CF9124E2C95414200A92158 /* ClickerGaemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9124D2C95414200A92158 /* ClickerGaemTests.swift */; };
 		1CF912582C95414200A92158 /* ClickerGaemUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912572C95414200A92158 /* ClickerGaemUITests.swift */; };
 		1CF9125A2C95414200A92158 /* ClickerGaemUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912592C95414200A92158 /* ClickerGaemUITestsLaunchTests.swift */; };
-		1CF912672C95415800A92158 /* SwiftInfinite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912662C95415800A92158 /* SwiftInfinite.swift */; };
-		1CF912692C9619A000A92158 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912682C9619A000A92158 /* GameState.swift */; };
-		1CF9126D2C97CF5200A92158 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9126C2C97CF5200A92158 /* Game.swift */; };
-		1CF9126F2C97D1F800A92158 /* Ticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9126E2C97D1F800A92158 /* Ticker.swift */; };
-		1CF912712C97D4C300A92158 /* Dimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912702C97D4C300A92158 /* Dimension.swift */; };
-		1CF912752C98121E00A92158 /* DimensionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912742C98121E00A92158 /* DimensionState.swift */; };
-		1CF912772C99116B00A92158 /* DimensionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912762C99116B00A92158 /* DimensionView.swift */; };
 		1CF912792C991BDF00A92158 /* SwiftInfiniteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912782C991BDF00A92158 /* SwiftInfiniteTests.swift */; };
-		1CF9127B2C9BB24900A92158 /* ClickerGaemData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9127A2C9BB24900A92158 /* ClickerGaemData.swift */; };
-		1CF912842C9CB6D400A92158 /* DimensionBoost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912832C9CB6D400A92158 /* DimensionBoost.swift */; };
-		1CF912892C9D466D00A92158 /* AntimatterGalaxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912882C9D466D00A92158 /* AntimatterGalaxy.swift */; };
 		1CF9128E2C9D4D5200A92158 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 1CF9128D2C9D4D5200A92158 /* OrderedCollections */; };
 /* End PBXBuildFile section */
 
@@ -270,7 +270,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1CF9125D2C95414200A92158 /* Build configuration list for PBXNativeTarget "ClickerGaem" */;
 			buildPhases = (
-				1CF912332C95414100A92158 /* Sources */,
+				1C0A28952CA6477B00FDB204 /* Sources */,
 				1CF912342C95414100A92158 /* Frameworks */,
 				1CF912352C95414100A92158 /* Resources */,
 			);
@@ -397,41 +397,41 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		1CF912332C95414100A92158 /* Sources */ = {
+		1C0A28952CA6477B00FDB204 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C0A28502CA518DC00FDB204 /* ClickerGaemModel.xcdatamodeld in Sources */,
-				1CF9123D2C95414100A92158 /* ContentView.swift in Sources */,
-				1C9B5FF72CA3C04000A6A3B8 /* Antimatter.swift in Sources */,
-				1CF9126F2C97D1F800A92158 /* Ticker.swift in Sources */,
-				1CF9126D2C97CF5200A92158 /* Game.swift in Sources */,
-				1C9B5FCB2CA27D7100A6A3B8 /* Achievements.swift in Sources */,
-				1C9B5FCC2CA27D7100A6A3B8 /* AchievementView.swift in Sources */,
-				1CF912672C95415800A92158 /* SwiftInfinite.swift in Sources */,
-				1C9B60022CA4FC2F00A6A3B8 /* StoredDimensionState+CoreDataClass.swift in Sources */,
-				1C9B60032CA4FC2F00A6A3B8 /* StoredDimensionState+CoreDataProperties.swift in Sources */,
-				1C9B60042CA4FC2F00A6A3B8 /* StoredGameState+CoreDataProperties.swift in Sources */,
-				1C9B60052CA4FC2F00A6A3B8 /* StoredAchievementState+CoreDataClass.swift in Sources */,
-				1C9B60062CA4FC2F00A6A3B8 /* StoredAntimatterState+CoreDataClass.swift in Sources */,
-				1C9B60072CA4FC2F00A6A3B8 /* StoredAntimatterState+CoreDataProperties.swift in Sources */,
-				1C9B60082CA4FC2F00A6A3B8 /* StoredGameState+CoreDataClass.swift in Sources */,
-				1C9B60092CA4FC2F00A6A3B8 /* StoredAchievementState+CoreDataProperties.swift in Sources */,
-				1C9161AE2C9D4E9D00D1555A /* AntimatterView.swift in Sources */,
-				1C30A4F02C9FB77F00FBB096 /* AMDimensionAutobuyer.swift in Sources */,
-				1C30A4F12C9FB77F00FBB096 /* AutobuyerView.swift in Sources */,
-				1C30A4F22C9FB77F00FBB096 /* Autobuyer.swift in Sources */,
-				1CF912712C97D4C300A92158 /* Dimension.swift in Sources */,
-				1CF9123B2C95414100A92158 /* ClickerGaemApp.swift in Sources */,
-				1CF912772C99116B00A92158 /* DimensionView.swift in Sources */,
-				1C9B5FF12CA3BDDE00A6A3B8 /* AntimatterState.swift in Sources */,
-				1C9B5FE52CA39DAF00A6A3B8 /* SettingsView.swift in Sources */,
-				1CF912752C98121E00A92158 /* DimensionState.swift in Sources */,
-				1CF912692C9619A000A92158 /* GameState.swift in Sources */,
-				1CF912842C9CB6D400A92158 /* DimensionBoost.swift in Sources */,
-				1CF912892C9D466D00A92158 /* AntimatterGalaxy.swift in Sources */,
-				1CF9127B2C9BB24900A92158 /* ClickerGaemData.swift in Sources */,
-				1C30A5272CA0F72500FBB096 /* BigCrunch.swift in Sources */,
+				1C0A28962CA647A500FDB204 /* ClickerGaemModel.xcdatamodeld in Sources */,
+				1C0A28972CA647A500FDB204 /* Achievements.swift in Sources */,
+				1C0A28982CA647A500FDB204 /* StoredAchievementState+CoreDataClass.swift in Sources */,
+				1C0A28992CA647A500FDB204 /* StoredAchievementState+CoreDataProperties.swift in Sources */,
+				1C0A289A2CA647A500FDB204 /* AchievementView.swift in Sources */,
+				1C0A289B2CA647A500FDB204 /* Antimatter.swift in Sources */,
+				1C0A289C2CA647A500FDB204 /* AntimatterState.swift in Sources */,
+				1C0A289D2CA647A500FDB204 /* StoredAntimatterState+CoreDataClass.swift in Sources */,
+				1C0A289E2CA647A500FDB204 /* StoredAntimatterState+CoreDataProperties.swift in Sources */,
+				1C0A289F2CA647A500FDB204 /* AntimatterGalaxy.swift in Sources */,
+				1C0A28A02CA647A500FDB204 /* AntimatterView.swift in Sources */,
+				1C0A28A12CA647A500FDB204 /* Dimension.swift in Sources */,
+				1C0A28A22CA647A500FDB204 /* DimensionState.swift in Sources */,
+				1C0A28A32CA647A500FDB204 /* DimensionView.swift in Sources */,
+				1C0A28A42CA647A500FDB204 /* StoredDimensionState+CoreDataClass.swift in Sources */,
+				1C0A28A52CA647A500FDB204 /* StoredDimensionState+CoreDataProperties.swift in Sources */,
+				1C0A28A62CA647A500FDB204 /* DimensionBoost.swift in Sources */,
+				1C0A28A82CA647A500FDB204 /* AMDimensionAutobuyer.swift in Sources */,
+				1C0A28A92CA647A500FDB204 /* Autobuyer.swift in Sources */,
+				1C0A28AA2CA647A500FDB204 /* AutobuyerView.swift in Sources */,
+				1C0A28AB2CA647A500FDB204 /* BigCrunch.swift in Sources */,
+				1C0A28AC2CA647A500FDB204 /* ClickerGaemApp.swift in Sources */,
+				1C0A28AD2CA647A500FDB204 /* ClickerGaemData.swift in Sources */,
+				1C0A28AE2CA647A500FDB204 /* ContentView.swift in Sources */,
+				1C0A28AF2CA647A500FDB204 /* Game.swift in Sources */,
+				1C0A28B02CA647A500FDB204 /* GameState.swift in Sources */,
+				1C0A28B12CA647A500FDB204 /* StoredGameState+CoreDataClass.swift in Sources */,
+				1C0A28B22CA647A500FDB204 /* StoredGameState+CoreDataProperties.swift in Sources */,
+				1C0A28B32CA647A500FDB204 /* Ticker.swift in Sources */,
+				1C0A28B52CA647A500FDB204 /* SettingsView.swift in Sources */,
+				1C0A28B62CA647A500FDB204 /* SwiftInfinite.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

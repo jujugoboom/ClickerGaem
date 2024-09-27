@@ -17,6 +17,7 @@ extension StoredGameState {
     }
 
     @NSManaged public var updateInterval: Double
+    @NSManaged public var lastSaveTime: Double
 
 }
 

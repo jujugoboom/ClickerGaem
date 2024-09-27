@@ -9,10 +9,15 @@ import Foundation
 import OrderedCollections
 import SwiftUICore
 import CoreData
+import UIKit
 
 protocol Saveable {
     func load()
-    func save(objectContext: NSManagedObjectContext)
+    func save(objectContext: NSManagedObjectContext, notification: NotificationCenter.Publisher.Output)
+}
+
+extension Saveable {
+    
 }
 
 /// Main game state store. is going to get much worse before it gets better
@@ -28,6 +33,11 @@ final class GameState: Saveable {
     }
     
     var firstInfinity = false
+    
+    @MainActor
+    var simulating = false
+    @MainActor
+    var currSimulatingTick = 0
     
     func load() {
         // TODO: Store autobuyers
@@ -45,11 +55,12 @@ final class GameState: Saveable {
         return
     }
     
-    func save(objectContext: NSManagedObjectContext) {
+    func save(objectContext: NSManagedObjectContext, notification: NotificationCenter.Publisher.Output) {
         if storedState == nil {
             storedState = StoredGameState(context: objectContext)
         }
         storedState!.updateInterval = updateInterval
+        storedState!.lastSaveTime = Date().timeIntervalSinceReferenceDate
         try! objectContext.save()
     }
     
