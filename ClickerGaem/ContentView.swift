@@ -59,9 +59,13 @@ struct ContentView: View {
         }
         .onChange(of: scenePhase, initial: true) {
             if scenePhase == .active {
+                GameInstance.shared.saveTicker?.startTimer()
                 Task.detached {
                     GameInstance.shared.simulateSinceLastSave()
                 }
+            }
+            if scenePhase == .inactive || scenePhase == .background {
+                GameInstance.shared.saveTicker?.stopTimer()
             }
         }
         .sheet(isPresented: isSimulating) {

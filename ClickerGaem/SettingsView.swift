@@ -26,6 +26,7 @@ struct SettingsView: View {
     
     private func clearSaveData() {
         GameInstance.shared.ticker?.stopTimer()
+        GameInstance.shared.saveTicker?.stopTimer()
         
         let dimensionsReq = NSFetchRequest<NSFetchRequestResult>(entityName: "StoredDimensionState")
         let dimensionDeleteReq = NSBatchDeleteRequest(fetchRequest: dimensionsReq)
@@ -56,6 +57,7 @@ struct SettingsView: View {
         }
         // Restart game loop
         GameInstance.shared.ticker?.startTimer()
+        GameInstance.shared.saveTicker?.startTimer()
     }
     
 }

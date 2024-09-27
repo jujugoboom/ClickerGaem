@@ -20,15 +20,19 @@ class GameInstance: Resettable {
     }
     var state: GameState
     var ticker: Ticker? = nil
+    var saveTicker: Ticker? = nil
     
     init() {
         self.state = GameState()
         self.ticker = Ticker(updateInterval: state.updateInterval, tick: self.tick)
+        self.saveTicker = Ticker(updateInterval: 5, tick: self.saveTick)
+        self.saveTicker?.startTimer()
     }
     
     func simulateSinceLastSave() {
         guard let lastSave = state.storedState?.lastSaveTime else { return }
         let timeOffline = Date.timeIntervalSinceReferenceDate - lastSave
+        print("\(timeOffline)s offline")
         guard timeOffline > 5 else { return }
         DispatchQueue.main.asyncAndWait {
             ticker?.stopTimer()
@@ -68,6 +72,20 @@ class GameInstance: Resettable {
     static func reset() {
         _shared?.state.reset()
         _shared?.state.load()
+    }
+    
+    func saveTick(diff: TimeInterval) {
+        saveGame()
+    }
+    
+    func saveGame() {
+        ClickerGaemData.shared.persistentContainer.viewContext.performAndWait {
+            let context = ClickerGaemData.shared.persistentContainer.viewContext
+            Antimatter.shared.state.save(objectContext: context)
+            Dimensions.shared.dimensions.values.forEach({$0.state.save(objectContext: context)})
+            Achievements.shared.achievements.forEach({$0.save(objectContext: context)})
+            GameInstance.shared.state.save(objectContext: context)
+        }
     }
 }
 
