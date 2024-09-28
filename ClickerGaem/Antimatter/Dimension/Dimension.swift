@@ -12,7 +12,7 @@ import OrderedCollections
 @Observable
 class Dimension: Identifiable, Tickable {
     let tierPrices: [Int: InfiniteDecimal] = [1: 10, 2: 100, 3: 10000, 4: 1e6, 5: 1e9, 6: 1e13, 7: 1e18, 8: 1e24]
-    let basePriceIncreases: [Int: InfiniteDecimal] = [1: 1e3, 2: 5e3, 3: 1e4, 4: 1.2e4, 5: 1.8e4, 6: 2.6e4, 7: 3.2e4, 8: 4.2e4]
+    let basePriceIncreases: [Int: InfiniteDecimal] = [1: 1e3, 2: 1e4, 3: 1e5, 4: 1e6, 5: 1e8, 6: 1e10, 7: 1e12, 8: 1e15]
     
     var state: DimensionState
     var storedState: StoredDimensionState?
@@ -104,7 +104,7 @@ class Dimension: Identifiable, Tickable {
         } else {
             // Get dimension the tier below this one
             let lowerDimension = Dimensions.shared.dimensions[tier - 1]!
-            lowerDimension.state.currCount = lowerDimension.state.currCount.add(value: perSecond.mul(value: InfiniteDecimal(source: diff)))
+            lowerDimension.state.currCount = lowerDimension.state.currCount.add(value: perSecond.mul(value: InfiniteDecimal(source: diff / 10)))
         }
     }
     

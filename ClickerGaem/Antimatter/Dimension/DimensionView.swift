@@ -27,7 +27,7 @@ struct DimensionView: View {
             VStack {
                 Text("\(tierFormatter.string(from: dimensionState.tier as NSNumber) ?? "0th") dimension")
                 HStack{
-                    Text("Total: \(dimension.state.currCount.description)").font(.system(size: 10))
+                    Text("Total: \(dimension.state.currCount.floor())").font(.system(size: 10))
                     Text("+\(dimension.growthRate)%/s").font(.system(size: 10))
                 }
                 HStack{

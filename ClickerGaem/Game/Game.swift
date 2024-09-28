@@ -32,13 +32,24 @@ class GameInstance: Resettable {
     func simulateSinceLastSave() {
         guard let lastSave = state.storedState?.lastSaveTime else { return }
         let timeOffline = Date.timeIntervalSinceReferenceDate - lastSave
+        guard timeOffline > 5 else {
+            // Don't show the UI for short simulations
+            DispatchQueue.main.asyncAndWait {
+                ticker?.stopTimer()
+            }
+            simulate(diff: timeOffline, maxTicks: 1000)
+            DispatchQueue.main.asyncAndWait {
+                state.currSimulatingTick = 0
+                ticker?.startTimer()
+            }
+            return
+        }
         print("\(timeOffline)s offline")
-        guard timeOffline > 5 else { return }
         DispatchQueue.main.asyncAndWait {
             ticker?.stopTimer()
             self.state.simulating = true
         }
-        simulate(diff: timeOffline, ticks: 1000)
+        simulate(diff: timeOffline, maxTicks: 1000)
         DispatchQueue.main.asyncAndWait {
             state.simulating = false
             Task {
@@ -49,8 +60,13 @@ class GameInstance: Resettable {
         }
     }
     
-    private func simulate(diff: TimeInterval, ticks: Int) {
-        let perTick = diff / Double(ticks)
+    private func simulate(diff: TimeInterval, maxTicks: Int) {
+        var ticks = maxTicks
+        var perTick = diff / Double(ticks)
+        if perTick < state.updateInterval {
+            perTick = state.updateInterval
+            ticks = Int(diff / perTick)
+        }
         for i in 0...ticks {
             tick(diff: perTick)
             guard i % 10 == 0 else { continue }
@@ -61,7 +77,7 @@ class GameInstance: Resettable {
     }
     
     func tick(diff: TimeInterval) {
-        for dimension in Dimensions.shared.dimensions.values {
+        for dimension in Dimensions.shared.dimensions.values.reversed() {
             dimension.tick(diff: diff)
         }
 //        for autobuyer in state.autobuyers {
