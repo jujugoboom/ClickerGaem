@@ -62,7 +62,6 @@ final class GameState: Saveable {
         storedState!.updateInterval = updateInterval
         storedState!.lastSaveTime = Date().timeIntervalSinceReferenceDate
         try! objectContext.save()
-        print("Saved game")
     }
     
     func reset() {
