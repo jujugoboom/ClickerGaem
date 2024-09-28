@@ -44,7 +44,6 @@ class GameInstance: Resettable {
             }
             return
         }
-        print("\(timeOffline)s offline")
         DispatchQueue.main.asyncAndWait {
             ticker?.stopTimer()
             self.state.simulating = true

@@ -257,8 +257,8 @@
             filePath = "ClickerGaem/Game/Game.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
             landmarkName = "tick(diff:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -886,8 +886,8 @@
             filePath = "ClickerGaem/Game/Game.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "simulateSinceLastSave()"
             landmarkType = "7">
          </BreakpointContent>
@@ -902,8 +902,8 @@
             filePath = "ClickerGaem/Game/Game.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
             landmarkName = "reset()"
             landmarkType = "7">
          </BreakpointContent>
