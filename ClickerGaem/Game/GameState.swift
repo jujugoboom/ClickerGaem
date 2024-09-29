@@ -29,7 +29,7 @@ final class GameState: Saveable {
     var autobuyers: [Autobuyer] = []
     
     var unlockedAutobuyers: [Autobuyer] {
-        autobuyers.filter({$0.unlocked})
+        autobuyers.filter({$0.state.unlocked})
     }
     
     var firstInfinity = false
@@ -73,7 +73,7 @@ final class GameState: Saveable {
         var initAutoBuyers = autobuyers
         if initAutoBuyers.count == 0 {
             for i in 1...8 {
-                initAutoBuyers.append(AMDimensionAutobuyer(tier: i, buyRate: 0.5 + (0.1 * (Double(i) - 1)), purchaseAmount: 10))
+                initAutoBuyers.append(AMDimensionAutobuyer(tier: i, purchaseAmount: 10))
             }
         }
         self.autobuyers = initAutoBuyers

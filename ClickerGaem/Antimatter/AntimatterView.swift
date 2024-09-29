@@ -69,7 +69,7 @@ struct AntimatterView: View {
             Spacer()
             DimensionBoostView()
             AntimatterGalaxy()
-        }.modifier(FirstBigCrunch(bigCrunch: bigCrunch)).padding().saveOnExit(saveable: Antimatter.shared.state)
+        }.modifier(FirstBigCrunch(bigCrunch: bigCrunch)).padding()
     }
     
     private func buyTickspeedUpgrade() {

@@ -33,6 +33,7 @@ class Achievement: Saveable, Identifiable {
             req.predicate = NSPredicate(format: "id == %d", self.id)
             guard let maybeStoredState = try? ClickerGaemData.shared.persistentContainer.viewContext.fetch(req).first else {
                 storedState = StoredAchievementState(context: ClickerGaemData.shared.persistentContainer.viewContext)
+                storedState?.id = Int64(id)
                 storedState?.unlocked = unlocked
                 return
             }

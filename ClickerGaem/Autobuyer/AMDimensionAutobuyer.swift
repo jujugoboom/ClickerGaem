@@ -9,23 +9,30 @@ import Foundation
 @Observable class AMDimensionAutobuyer: Autobuyer {
     var gameState: GameState {GameInstance.shared.state}
     var tier: Int
+    var cost: InfiniteDecimal {
+        Decimals.e10.pow(value: InfiniteDecimal(integerLiteral: tier - 1)).mul(value: Decimals.e40);
+    }
+    var unlocked: Bool {
+        Antimatter.shared.state.totalAntimatter.gte(other: cost)
+    }
     var purchaseableCount: InfiniteDecimal {
         Dimensions.shared.dimensions[tier]?.howManyCanBuy ?? InfiniteDecimal.zeroDecimal
     }
-    var buyRate: Double
+    var buyRate: Double {
+        [500, 600, 700, 800, 900, 1000, 1100, 1200][tier] / 1000
+    }
     var purchaseAmount: InfiniteDecimal
     var elapsedSinceBuy: Double = 0
     
-    init(tier: Int, buyRate: Double, purchaseAmount: InfiniteDecimal) {
+    init(tier: Int, purchaseAmount: InfiniteDecimal = 10) {
         self.tier = tier
-        self.buyRate = buyRate
         self.purchaseAmount = purchaseAmount
         super.init()
         self.type = .amdimension
     }
     
     override func tick(diff: TimeInterval) {
-        guard enabled && unlocked else {
+        guard state.enabled && state.unlocked else {
             return
         }
         // Update our total diff time

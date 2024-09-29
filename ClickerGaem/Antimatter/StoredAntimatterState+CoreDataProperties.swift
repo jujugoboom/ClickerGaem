@@ -21,6 +21,7 @@ extension StoredAntimatterState {
     @NSManaged public var galaxies: Int64
     @NSManaged public var sacrificedDimensions: NSObject?
     @NSManaged public var tickSpeedUpgrades: NSObject?
+    @NSManaged public var totalAntimatter: NSObject?
 
 }
 

@@ -11,6 +11,7 @@ import CoreData
 class AntimatterState: Saveable {
     var storedState: StoredAntimatterState?
     var antimatter: InfiniteDecimal = 10
+    var totalAntimatter: InfiniteDecimal = 10
     var tickSpeedUpgrades: InfiniteDecimal = 0
     var dimensionBoosts = 0
     var amGalaxies = 0
@@ -21,8 +22,21 @@ class AntimatterState: Saveable {
     var totalDimensionBoost: InfiniteDecimal {
         (2 as InfiniteDecimal).pow(value: InfiniteDecimal(integerLiteral: dimensionBoosts))
     }
+    var tickspeedMultiplier: InfiniteDecimal {
+        guard amGalaxies > 3 else {
+            var baseMultiplier = 1 / 1.1245;
+            if amGalaxies == 1 { baseMultiplier = 1 / 1.11888888 }
+            if amGalaxies == 2 { baseMultiplier = 1 / 1.11267177 }
+            let perGalaxy = 0.02
+            return InfiniteDecimal(source: 0.01).max(other: InfiniteDecimal(source: baseMultiplier - (Double(amGalaxies) * perGalaxy)))
+        }
+        let baseMultiplier = 0.8
+        let galaxies = amGalaxies - 2
+        let perGalaxy = InfiniteDecimal(source: 0.965)
+        return perGalaxy.pow(value: InfiniteDecimal(integerLiteral: galaxies - 2)).mul(value: InfiniteDecimal(source: baseMultiplier))
+    }
     var ticksPerSecond: InfiniteDecimal {
-        InfiniteDecimal(source: 1).add(value: tickSpeedUpgrades.mul(value: InfiniteDecimal(source: 1.125 * max(Double(amGalaxies) * 1.4, 1))))
+        InfiniteDecimal(source: 1e3).div(value: InfiniteDecimal(source: 1e3).mul(value: tickspeedMultiplier.pow(value: tickSpeedUpgrades)))
     }
     var amPerSecond: InfiniteDecimal {
         guard Dimensions.shared.dimensions.keys.contains(1) else {
@@ -46,6 +60,7 @@ class AntimatterState: Saveable {
                 self.storedState?.sacrificedDimensions = sacrificedDimensions
                 self.storedState?.dimensionBoosts = Int64(dimensionBoosts)
                 self.storedState?.galaxies = Int64(amGalaxies)
+                self.storedState?.totalAntimatter = totalAntimatter
                 return
             }
             self.storedState = maybeStoredState
@@ -55,6 +70,7 @@ class AntimatterState: Saveable {
         self.sacrificedDimensions = storedState!.sacrificedDimensions as! InfiniteDecimal
         self.dimensionBoosts = Int(storedState!.dimensionBoosts)
         self.amGalaxies = Int(storedState!.galaxies)
+        self.totalAntimatter = storedState!.totalAntimatter as? InfiniteDecimal ?? self.antimatter
     }
     
     func save(objectContext: NSManagedObjectContext, notification: NotificationCenter.Publisher.Output? = nil) {
@@ -66,6 +82,7 @@ class AntimatterState: Saveable {
         self.storedState!.sacrificedDimensions = sacrificedDimensions
         self.storedState!.dimensionBoosts = Int64(dimensionBoosts)
         self.storedState!.galaxies = Int64(amGalaxies)
+        self.storedState!.totalAntimatter = totalAntimatter
         try? objectContext.save()
     }
     

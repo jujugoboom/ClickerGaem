@@ -32,12 +32,13 @@ class GameInstance: Resettable {
     func simulateSinceLastSave() {
         guard let lastSave = state.storedState?.lastSaveTime else { return }
         let timeOffline = Date.timeIntervalSinceReferenceDate - lastSave
+        print("Offline for \(timeOffline)s")
         guard timeOffline > 5 else {
             // Don't show the UI for short simulations
             DispatchQueue.main.asyncAndWait {
                 ticker?.stopTimer()
             }
-            simulate(diff: timeOffline, maxTicks: 1000)
+            simulate(diff: timeOffline, maxTicks: 10000)
             DispatchQueue.main.asyncAndWait {
                 state.currSimulatingTick = 0
                 ticker?.startTimer()
@@ -51,9 +52,7 @@ class GameInstance: Resettable {
         simulate(diff: timeOffline, maxTicks: 1000)
         DispatchQueue.main.asyncAndWait {
             state.simulating = false
-            Task {
-                state.currSimulatingTick = 0
-            }
+            state.currSimulatingTick = 0
 
             ticker?.startTimer()
         }
@@ -67,9 +66,8 @@ class GameInstance: Resettable {
             ticks = Int(diff / perTick)
         }
         for i in 0...ticks {
-            tick(diff: perTick)
-            guard i % 10 == 0 else { continue }
             DispatchQueue.main.asyncAndWait {
+                tick(diff: perTick)
                 self.state.currSimulatingTick = i
             }
         }

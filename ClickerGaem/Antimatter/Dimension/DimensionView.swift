@@ -41,7 +41,7 @@ struct DimensionView: View {
                     Text("\(dimension.cost.mul(value: dimension.howManyCanBuy.max(other: 1)))").font(.system(size: 10))
                 }.contentShape(.rect)
             }.disabled(!dimension.canBuy).buttonStyle(.bordered).animation(.spring, value: dimension.canBuy)
-        }.saveOnExit(saveable: dimension.state)
+        }
     }
                 
     private func buy() {
