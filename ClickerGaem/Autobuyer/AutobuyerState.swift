@@ -47,6 +47,12 @@ class AutobuyerState: Saveable {
         storedState?.autobuyCount = Int64(autobuyCount)
         try? objectContext.save()
     }
+    
+    func reset() {
+        self.enabled = false
+        self.unlocked = false
+        self.load()
+    }
 }
 
 @Observable
@@ -61,5 +67,10 @@ class BuyableAutobuyerState: AutobuyerState {
     override func save(objectContext: NSManagedObjectContext, notification: NotificationCenter.Publisher.Output? = nil) {
         storedState?.purchased = purchased
         super.save(objectContext: objectContext, notification: notification)
+    }
+    
+    override func reset() {
+        purchased = false
+        super.reset()
     }
 }

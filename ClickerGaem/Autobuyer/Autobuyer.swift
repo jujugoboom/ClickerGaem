@@ -47,7 +47,7 @@ extension BuyableAutobuyer {
    }
 }
 
-class Autobuyers: Tickable {
+class Autobuyers: Tickable, Resettable {
     static let shared = Autobuyers()
     let dimensionAutobuyers: [AMDimensionAutobuyer] = (1...8).map({AMDimensionAutobuyer(tier: $0)})
     var autobuyers: [any Autobuyer] = []
@@ -64,5 +64,9 @@ class Autobuyers: Tickable {
     
     func tick(diff: TimeInterval) {
         autobuyers.forEach({$0.tick(diff: diff)})
+    }
+    
+    static func reset() {
+        Autobuyers.shared.autobuyers.forEach({$0.state.reset()})
     }
 }
