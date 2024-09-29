@@ -92,6 +92,7 @@ class AntimatterState: Saveable {
         self.sacrificedDimensions = 0
         self.dimensionBoosts = 0
         self.amGalaxies = 0
+        self.totalAntimatter = antimatter
     }
     
     init() {

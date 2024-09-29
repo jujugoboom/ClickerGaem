@@ -26,12 +26,6 @@ final class GameState: Saveable {
     var storedState: StoredGameState?
     var updateInterval: Double = 0.05
     
-    var autobuyers: [Autobuyer] = []
-    
-    var unlockedAutobuyers: [Autobuyer] {
-        autobuyers.filter({$0.state.unlocked})
-    }
-    
     var firstInfinity = false
     
     @MainActor
@@ -69,14 +63,7 @@ final class GameState: Saveable {
     }
     
     /// Generate initial game state with expected defaults. 
-    init(updateInterval: Double = 0.05, autobuyers: [Autobuyer] = []) {
-        var initAutoBuyers = autobuyers
-        if initAutoBuyers.count == 0 {
-            for i in 1...8 {
-                initAutoBuyers.append(AMDimensionAutobuyer(tier: i, purchaseAmount: 10))
-            }
-        }
-        self.autobuyers = initAutoBuyers
+    init(updateInterval: Double = 0.05) {
         self.updateInterval = updateInterval
         self.load()
     }

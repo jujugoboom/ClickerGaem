@@ -45,7 +45,7 @@ struct ContentView: View {
                 SimulatingView()
             } else {
                 TabView(selection: $currentTab) {
-                    AntimatterView().tabItem {
+                    AntimatterTab().tabItem {
                         Label("Antimatter Dimensions", systemImage: "circle.and.line.horizontal")
                     }.tag(1)
                     if Achievements.shared.unlockedAchievements.count > 0 {
@@ -53,13 +53,9 @@ struct ContentView: View {
                             Label("Achievements", systemImage: "medal.fill")
                         }.tag(2)
                     }
-                    if Antimatter.shared.state.totalAntimatter.gte(other: Decimals.e40) { AutobuyerView().tabItem {
-                        Label("Autobuyers", systemImage: "autostartstop")
-                    }.tag(3)
-                    }
                     SettingsView().environment(\.managedObjectContext, viewContext).tabItem {
                         Label("Settings", systemImage: "gear")
-                    }.tag(4)
+                    }.tag(3)
                 }
                 .toast(isPresenting: newAchievementUnlocked) {
                     AlertToast(displayMode: .hud, type: .regular, title: Achievements.shared.newAchievementName, subTitle: "Achievement unlocked")

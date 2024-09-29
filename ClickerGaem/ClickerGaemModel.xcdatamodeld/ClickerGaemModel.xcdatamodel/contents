@@ -12,6 +12,13 @@
         <attribute name="tickSpeedUpgrades" optional="YES" attributeType="Transformable" valueTransformerName="InfiniteDecimalTransformer"/>
         <attribute name="totalAntimatter" optional="YES" attributeType="Transformable" valueTransformerName="InfiniteDecimalTransformer"/>
     </entity>
+    <entity name="StoredAutobuyerState" representedClassName="StoredAutobuyerState" syncable="YES">
+        <attribute name="autobuyCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="enabled" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="purchased" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="unlocked" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+    </entity>
     <entity name="StoredDimensionState" representedClassName="StoredDimensionState" syncable="YES">
         <attribute name="currCount" optional="YES" attributeType="Transformable" valueTransformerName="InfiniteDecimalTransformer"/>
         <attribute name="purchaseCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>

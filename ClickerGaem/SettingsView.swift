@@ -36,12 +36,15 @@ struct SettingsView: View {
         let gameDeleteReq = NSBatchDeleteRequest(fetchRequest: gameReq)
         let antimatterReq = NSFetchRequest<NSFetchRequestResult>(entityName: "StoredAntimatterState")
         let antimatterDeleteReq = NSBatchDeleteRequest(fetchRequest: antimatterReq)
+        let autobuyerReq = NSFetchRequest<NSFetchRequestResult>(entityName: "StoredAutobuyerState")
+        let autobuyerDeleteReq = NSBatchDeleteRequest(fetchRequest: autobuyerReq)
         
         do {
             try viewContext.execute(dimensionDeleteReq)
             try viewContext.execute(achievementDeleteReq)
             try viewContext.execute(gameDeleteReq)
             try viewContext.execute(antimatterDeleteReq)
+            try viewContext.execute(autobuyerDeleteReq)
             
             try viewContext.save()
             
@@ -49,6 +52,7 @@ struct SettingsView: View {
             GameInstance.reset()
             Antimatter.reset()
             Dimensions.reset()
+            Autobuyers.reset()
             // Always do achievements last so they can reset themselves properly
             Achievements.reset()
             
