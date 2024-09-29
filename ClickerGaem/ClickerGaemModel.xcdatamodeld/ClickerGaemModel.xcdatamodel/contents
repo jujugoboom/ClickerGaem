@@ -10,6 +10,7 @@
         <attribute name="galaxies" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="sacrificedDimensions" optional="YES" attributeType="Transformable" valueTransformerName="InfiniteDecimalTransformer"/>
         <attribute name="tickSpeedUpgrades" optional="YES" attributeType="Transformable" valueTransformerName="InfiniteDecimalTransformer"/>
+        <attribute name="totalAntimatter" optional="YES" attributeType="Transformable" valueTransformerName="InfiniteDecimalTransformer"/>
     </entity>
     <entity name="StoredDimensionState" representedClassName="StoredDimensionState" syncable="YES">
         <attribute name="currCount" optional="YES" attributeType="Transformable" valueTransformerName="InfiniteDecimalTransformer"/>

@@ -20,7 +20,7 @@ struct AchievementView: View {
                     }
                     Spacer()
                     Label(achievement.unlocked ? "Unlocked" : "Locked", systemImage: achievement.unlocked ? "checkmark.circle.fill" : "lock.circle.fill").labelStyle(.iconOnly).foregroundStyle(achievement.unlocked ? .green : .red)
-                }.saveOnExit(saveable: achievement)
+                }
             }
         }
     }

@@ -40,24 +40,34 @@ struct ContentView: View {
     @State private var currentTab = 1
     
     var body: some View {
-        TabView(selection: $currentTab) {
-            AntimatterView().tabItem {
-                Label("Antimatter Dimensions", systemImage: "circle.and.line.horizontal")
-            }.tag(1)
-            if Achievements.shared.unlockedAchievements.count > 0 {
-                AchievementView().tabItem {
-                    Label("Achievements", systemImage: "medal.fill")
-                }.tag(2)
+        Group {
+            if isSimulating.wrappedValue {
+                SimulatingView()
+            } else {
+                TabView(selection: $currentTab) {
+                    AntimatterView().tabItem {
+                        Label("Antimatter Dimensions", systemImage: "circle.and.line.horizontal")
+                    }.tag(1)
+                    if Achievements.shared.unlockedAchievements.count > 0 {
+                        AchievementView().tabItem {
+                            Label("Achievements", systemImage: "medal.fill")
+                        }.tag(2)
+                    }
+                    if Antimatter.shared.state.totalAntimatter.gte(other: Decimals.e40) { AutobuyerView().tabItem {
+                        Label("Autobuyers", systemImage: "autostartstop")
+                    }.tag(3)
+                    }
+                    SettingsView().environment(\.managedObjectContext, viewContext).tabItem {
+                        Label("Settings", systemImage: "gear")
+                    }.tag(4)
+                }
+                .toast(isPresenting: newAchievementUnlocked) {
+                    AlertToast(displayMode: .hud, type: .regular, title: Achievements.shared.newAchievementName, subTitle: "Achievement unlocked")
+                } onTap: {
+                    currentTab = 2
+                }.saveOnExit()
             }
-            if gameState.unlockedAutobuyers.count > 0 { AutobuyerView().tabItem {
-                    Label("Autobuyers", systemImage: "autostartstop")
-                }.tag(3)
-            }
-            SettingsView().environment(\.managedObjectContext, viewContext).tabItem {
-                Label("Settings", systemImage: "gear")
-            }.tag(4)
-        }
-        .onChange(of: scenePhase, initial: true) {
+        }.onChange(of: scenePhase, initial: true) {
             if scenePhase == .active {
                 GameInstance.shared.saveTicker?.startTimer()
                 Task.detached {
@@ -68,33 +78,24 @@ struct ContentView: View {
                 GameInstance.shared.saveTicker?.stopTimer()
             }
         }
-        .sheet(isPresented: isSimulating) {
-            SimulatingView()
-        }
-        .toast(isPresenting: newAchievementUnlocked) {
-            AlertToast(displayMode: .hud, type: .regular, title: Achievements.shared.newAchievementName, subTitle: "Achievement unlocked")
-        } onTap: {
-            currentTab = 2
-        }.saveOnExit(saveable: GameInstance.shared.state)
     }
 }
 
 struct SaveOnExit: ViewModifier {
     @Environment(\.managedObjectContext) private var viewContext
-    let saveable: Saveable
     
     func body(content: Content) -> some View {
-        content.onReceive(NotificationCenter.default.publisher(for: UIScene.willDeactivateNotification), perform: { notification in
-            saveable.save(objectContext: viewContext, notification: notification)
-        }).onReceive(NotificationCenter.default.publisher(for: UIApplication.willTerminateNotification), perform: { notification in
-            saveable.save(objectContext: viewContext, notification: notification)
+        content.onReceive(NotificationCenter.default.publisher(for: UIScene.willDeactivateNotification), perform: { _ in
+            GameInstance.shared.saveGame()
+        }).onReceive(NotificationCenter.default.publisher(for: UIApplication.willTerminateNotification), perform: { _ in
+            GameInstance.shared.saveGame()
         })
     }
 }
 
 extension View {
-    func saveOnExit(saveable: Saveable) -> some View {
-        modifier(SaveOnExit(saveable: saveable))
+    func saveOnExit() -> some View {
+        modifier(SaveOnExit())
     }
 }
 

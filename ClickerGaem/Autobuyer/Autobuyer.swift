@@ -14,16 +14,24 @@ enum AutobuyerType {
 
 @Observable class Autobuyer: Identifiable, Tickable {
     var type: AutobuyerType = .none
-    var enabled: Bool = false
-    var unlocked: Bool = false
+    var state: AutobuyerState = AutobuyerState()
     
     func tick(diff: TimeInterval) {}
     
     func unlock() {
-        unlocked = true
+        state.unlocked = true
     }
     
     func toggleEnabled() {
-        enabled = !enabled
+        state.enabled = !state.enabled
+    }
+}
+
+class Autobuyers: Tickable {
+    static let shared = Autobuyers()
+    let autobuyers: [Autobuyer] = []
+    
+    func tick(diff: TimeInterval) {
+        autobuyers.forEach({$0.tick(diff: diff)})
     }
 }

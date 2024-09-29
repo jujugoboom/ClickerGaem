@@ -25,7 +25,9 @@ class Ticker {
             return
         }
         self.timer = Timer.scheduledTimer(timeInterval: updateInterval, target: self, selector: #selector(timerFunc), userInfo: nil, repeats: true)
-        RunLoop.current.add(self.timer!, forMode: .common)
+        DispatchQueue.global(qos: .background).async {
+            RunLoop.current.add(self.timer!, forMode: .common)
+        }
     }
     
     func stopTimer() {
@@ -44,7 +46,7 @@ class Ticker {
     
     @objc private func timerFunc(timer: Timer) {
         self.tick(self.lastRun.distance(to: timer.fireDate))
-        self.lastRun = Date()
+        self.lastRun = timer.fireDate
     }
 }
 

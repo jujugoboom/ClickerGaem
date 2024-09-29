@@ -37,7 +37,8 @@ struct PowersOf10 {
 
 /// A conversion of break\_infinity.js to swift. I have no idea if the performance is good, but it seems to work fine when not listening for breakpoints
 /// A very basic representation of float values with a Double mantissa and Integer exponent. There are minimal checks for overflows or other unwanted behavior, but generally holds up
-@Observable class InfiniteDecimal: NSObject, ExpressibleByIntegerLiteral, ExpressibleByFloatLiteral, Codable, ObservableObject {
+@Observable
+class InfiniteDecimal: NSObject, ExpressibleByIntegerLiteral, ExpressibleByFloatLiteral, Codable, ObservableObject {
     var m: Double
     var e: Int
     

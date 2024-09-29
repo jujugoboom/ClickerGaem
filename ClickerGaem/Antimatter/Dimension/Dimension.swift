@@ -66,7 +66,7 @@ class Dimension: Identifiable, Tickable {
         guard tier != 8 else {
             return 0
         }
-        return Dimensions.shared.dimensions[tier + 1]?.perSecond.div(value: state.currCount.max(other: 1)).mul(value: 100) ?? 0
+        return Dimensions.shared.dimensions[tier + 1]?.perSecond.div(value: state.currCount.max(other: 1)).mul(value: 100).mul(value: 0.1) ?? 0
     }
     
     var canBuy: Bool {
@@ -100,7 +100,7 @@ class Dimension: Identifiable, Tickable {
             return
         }
         if tier == 1 {
-            antimatterState.antimatter = antimatterState.antimatter.add(value: perSecond.mul(value: InfiniteDecimal(source: diff)))
+            Antimatter.shared.add(amount: perSecond.mul(value: InfiniteDecimal(source: diff)))
         } else {
             // Get dimension the tier below this one
             let lowerDimension = Dimensions.shared.dimensions[tier - 1]!
