@@ -12,10 +12,15 @@ enum AutobuyerType {
     case none
 }
 
-@Observable class Autobuyer: Identifiable, Tickable {
-    var type: AutobuyerType = .none
-    var state: AutobuyerState = AutobuyerState()
+protocol Autobuyer: Identifiable, Tickable {
+    var type: AutobuyerType { get set }
+    var state: AutobuyerState { get set }
     
+    func unlock()
+    func toggleEnabled()
+}
+
+extension Autobuyer {
     func tick(diff: TimeInterval) {}
     
     func unlock() {
@@ -27,9 +32,35 @@ enum AutobuyerType {
     }
 }
 
+protocol BuyableAutobuyer: Autobuyer {
+    var buyableState: BuyableAutobuyerState { get }
+    
+    var canBuy: Bool { get }
+    
+    func purchase()
+}
+
+extension BuyableAutobuyer {
+   func purchase() {
+       guard canBuy else { return }
+       buyableState.purchased = true
+   }
+}
+
 class Autobuyers: Tickable {
     static let shared = Autobuyers()
-    let autobuyers: [Autobuyer] = []
+    let dimensionAutobuyers: [AMDimensionAutobuyer] = (1...8).map({AMDimensionAutobuyer(tier: $0)})
+    var autobuyers: [any Autobuyer] = []
+    var unlockedAutobuyers: [any Autobuyer] {
+        autobuyers.filter({$0.state.unlocked})
+    }
+    var enabledAutobuyers: [any Autobuyer] {
+        autobuyers.filter({$0.state.unlocked && $0.state.enabled})
+    }
+    
+    init () {
+        autobuyers.append(contentsOf: dimensionAutobuyers)
+    }
     
     func tick(diff: TimeInterval) {
         autobuyers.forEach({$0.tick(diff: diff)})

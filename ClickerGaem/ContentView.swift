@@ -53,7 +53,7 @@ struct ContentView: View {
                             Label("Achievements", systemImage: "medal.fill")
                         }.tag(2)
                     }
-                    if Antimatter.shared.state.totalAntimatter.gte(other: Decimals.e40) { AutobuyerView().tabItem {
+                    if Antimatter.shared.state.totalAntimatter.gte(other: Decimals.e40) { AMAutobuyerView().tabItem {
                         Label("Autobuyers", systemImage: "autostartstop")
                     }.tag(3)
                     }

@@ -6,11 +6,7 @@
 //
 
 class Antimatter: Resettable {
-    private static var _shared: Antimatter?
-    static var shared: Antimatter {
-        if _shared == nil { _shared = Antimatter() }
-        return _shared!
-    }
+    static var shared = Antimatter()
     let state: AntimatterState
     
     var dimensionBoostCost: [Int: Dimension] {
@@ -81,7 +77,7 @@ class Antimatter: Resettable {
     }
     
     static func reset() {
-        Antimatter._shared?.state.reset()
-        Antimatter._shared?.state.load()
+        Antimatter.shared.state.reset()
+        Antimatter.shared.state.load()
     }
 }

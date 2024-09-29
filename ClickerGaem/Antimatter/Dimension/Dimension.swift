@@ -15,7 +15,6 @@ class Dimension: Identifiable, Tickable {
     let basePriceIncreases: [Int: InfiniteDecimal] = [1: 1e3, 2: 1e4, 3: 1e5, 4: 1e6, 5: 1e8, 6: 1e10, 7: 1e12, 8: 1e15]
     
     var state: DimensionState
-    var storedState: StoredDimensionState?
     var antimatterState: AntimatterState { Antimatter.shared.state }
     
     var tier: Int {
@@ -121,12 +120,7 @@ class Dimension: Identifiable, Tickable {
 
 @Observable
 class Dimensions: Resettable {
-    
-    private static var _shared: Dimensions?
-    static var shared: Dimensions {
-        if _shared == nil { _shared = Dimensions() }
-        return _shared!
-    }
+    static var shared = Dimensions()
     
     let dimensions: OrderedDictionary<Int, Dimension> = [1: Dimension(tier: 1), 2: Dimension(tier: 2), 3: Dimension(tier: 3), 4: Dimension(tier: 4), 5: Dimension(tier: 5), 6: Dimension(tier: 6), 7: Dimension(tier: 7), 8: Dimension(tier: 8)]
     
@@ -137,11 +131,11 @@ class Dimensions: Resettable {
     }
     
     static func reset() {
-        Dimensions._shared?.dimensions.values.forEach({$0.state.reset(keepUnlocked: false)})
-        Dimensions._shared?.dimensions.values.forEach({$0.state.load()})
-        Dimensions._shared?.dimensions[1]?.state.unlocked = true
-        Dimensions._shared?.dimensions[2]?.state.unlocked = true
-        Dimensions._shared?.dimensions[3]?.state.unlocked = true
-        Dimensions._shared?.dimensions[4]?.state.unlocked = true
+        Dimensions.shared.dimensions.values.forEach({$0.state.reset(keepUnlocked: false)})
+        Dimensions.shared.dimensions.values.forEach({$0.state.load()})
+        Dimensions.shared.dimensions[1]?.state.unlocked = true
+        Dimensions.shared.dimensions[2]?.state.unlocked = true
+        Dimensions.shared.dimensions[3]?.state.unlocked = true
+        Dimensions.shared.dimensions[4]?.state.unlocked = true
     }
 }

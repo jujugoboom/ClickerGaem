@@ -13,11 +13,7 @@ protocol Resettable {
 
 /// Right now just exists to setup the main game loop, but may handle more in the future
 class GameInstance: Resettable {
-    private static var _shared: GameInstance?
-    static var shared: GameInstance {
-        if _shared == nil { _shared = GameInstance() }
-        return _shared!
-    }
+    static let shared = GameInstance()
     var state: GameState
     var ticker: Ticker? = nil
     var saveTicker: Ticker? = nil
@@ -77,14 +73,14 @@ class GameInstance: Resettable {
         for dimension in Dimensions.shared.dimensions.values.reversed() {
             dimension.tick(diff: diff)
         }
-//        for autobuyer in state.autobuyers {
-//            autobuyer.tick(diff: diff)
-//        }
+        for autobuyer in Autobuyers.shared.enabledAutobuyers {
+            autobuyer.tick(diff: diff)
+        }
     }
     
     static func reset() {
-        _shared?.state.reset()
-        _shared?.state.load()
+        shared.state.reset()
+        shared.state.load()
     }
     
     func saveTick(diff: TimeInterval) {
@@ -97,6 +93,7 @@ class GameInstance: Resettable {
             Antimatter.shared.state.save(objectContext: context)
             Dimensions.shared.dimensions.values.forEach({$0.state.save(objectContext: context)})
             Achievements.shared.achievements.forEach({$0.save(objectContext: context)})
+            Autobuyers.shared.autobuyers.forEach({$0.state.save(objectContext: context)})
             GameInstance.shared.state.save(objectContext: context)
         }
     }

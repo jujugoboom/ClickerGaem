@@ -90,11 +90,7 @@ class Achievement: Saveable, Identifiable {
 
 @Observable
 class Achievements: Resettable {
-    private static var _shared: Achievements?
-    static var shared: Achievements {
-        if _shared == nil { _shared = Achievements() }
-        return _shared!
-    }
+    static var shared: Achievements = Achievements()
     var unlockedNewAchievement = false
     var newAchievementName = ""
     let eleventh = Achievement(id: 11, name: "You gotta start somewhere", description: "Buy first antimatter dimension", of: Dimensions.shared.dimensions[1]!.state.purchaseCount) { purchaseCount, achievement in
@@ -156,7 +152,7 @@ class Achievements: Resettable {
     }
     
     static func reset() {
-        _shared?.achievements.forEach({$0.reset()})
-        _shared?.achievements.forEach({$0.load()})
+        shared.achievements.forEach({$0.reset()})
+        shared.achievements.forEach({$0.load()})
     }
 }
