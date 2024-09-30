@@ -25,9 +25,8 @@ class Ticker {
             return
         }
         self.timer = Timer.scheduledTimer(timeInterval: updateInterval, target: self, selector: #selector(timerFunc), userInfo: nil, repeats: true)
-        DispatchQueue.global(qos: .background).async {
-            RunLoop.current.add(self.timer!, forMode: .common)
-        }
+        RunLoop.current.add(self.timer!, forMode: .common)
+        
     }
     
     func stopTimer() {
