@@ -41,9 +41,8 @@ class Dimension: Identifiable, Tickable {
     }
     
     var cost: InfiniteDecimal {
-        let priceIncrease = basePriceIncreases[tier]?.pow(value: timesBought).log10()
-        let logBase = tierPrices[tier]?.log10()
-        return Decimals.e1.pow(value: InfiniteDecimal(source: logBase! + priceIncrease!))
+        let priceIncrease = basePriceIncreases[tier]?.pow(value: timesBought)
+        return tierPrices[tier]?.mul(value: priceIncrease ?? InfiniteDecimal.nanDecimal) ?? InfiniteDecimal.nanDecimal
     }
     
     var boughtBefore10: Int {
