@@ -5,7 +5,11 @@
 //  Created by Justin Covell on 9/22/24.
 //
 
+import SwiftUI
+
 class BigCrunch {
+    static var shared = BigCrunch()
+    
     var state: GameState {
         GameInstance.shared.state
     }
@@ -29,5 +33,28 @@ class BigCrunch {
         antimatterState.tickSpeedUpgrades = 0
         state.firstInfinity = true
         Dimensions.shared.dimensions.forEach({$1.reset()})
+    }
+}
+
+struct FirstBigCrunch: ViewModifier {
+    var bigCrunch: BigCrunch {
+        BigCrunch.shared
+    }
+    
+    func body(content: Content) -> some View {
+        if bigCrunch.canBigCrunch && !Statistics.shared.firstInfinity {
+            Button(action: bigCrunch.crunch) {
+                Text("BIG CRUNCH").padding()
+            }.padding().background().clipShape(RoundedRectangle(cornerRadius: 10)).shadow(radius: 5)
+        } else {
+            content
+        }
+    }
+    
+}
+
+extension View {
+    func firstBigCrunch() -> some View {
+        modifier(FirstBigCrunch())
     }
 }

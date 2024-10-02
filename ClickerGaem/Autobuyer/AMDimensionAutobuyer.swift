@@ -23,7 +23,7 @@ import Foundation
         Dimensions.shared.dimensions[tier]?.howManyCanBuy ?? InfiniteDecimal.zeroDecimal
     }
     var buyRate: Double {
-        [500, 600, 700, 800, 900, 1000, 1100, 1200][tier] / 1000
+        [0, 500, 600, 700, 800, 900, 1000, 1100, 1200][tier] / 1000
     }
     
     var canBuy: Bool {

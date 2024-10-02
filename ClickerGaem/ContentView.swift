@@ -61,7 +61,9 @@ struct ContentView: View {
                     AlertToast(displayMode: .hud, type: .regular, title: Achievements.shared.newAchievementName, subTitle: "Achievement unlocked")
                 } onTap: {
                     currentTab = 2
-                }.saveOnExit()
+                }
+                .saveOnExit()
+                .firstBigCrunch()
             }
         }.onChange(of: scenePhase, initial: true) {
             if scenePhase == .active {

@@ -12,7 +12,6 @@ struct AntimatterView: View {
     var state: AntimatterState {
         Antimatter.shared.state
     }
-    var bigCrunch: BigCrunch = BigCrunch()
     
     var dimensions: [Dimension] {
         Array(Dimensions.shared.dimensions.values)
@@ -20,21 +19,6 @@ struct AntimatterView: View {
     
     var currSacrificeMultiplier: InfiniteDecimal{
         Antimatter.dimensionSacrificeMultiplier(sacrificed: state.sacrificedDimensions.add(value: dimensions.first?.state.currCount ?? 0)).div(value: state.dimensionSacrificeMul)
-    }
-    
-    struct FirstBigCrunch: ViewModifier {
-        var bigCrunch: BigCrunch
-        
-        func body(content: Content) -> some View {
-            if bigCrunch.canBigCrunch && !GameInstance.shared.state.firstInfinity {
-                Button(action: bigCrunch.crunch) {
-                    Text("BIG CRUNCH").padding()
-                }.padding().background().clipShape(RoundedRectangle(cornerRadius: 10)).shadow(radius: 5)
-            } else {
-                content
-            }
-        }
-        
     }
     
     var body: some View {
@@ -69,7 +53,7 @@ struct AntimatterView: View {
             Spacer()
             DimensionBoostView()
             AntimatterGalaxy()
-        }.modifier(FirstBigCrunch(bigCrunch: bigCrunch)).padding()
+        }.padding()
     }
     
     private func buyTickspeedUpgrade() {

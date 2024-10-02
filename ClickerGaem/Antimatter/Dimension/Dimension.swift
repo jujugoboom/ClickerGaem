@@ -33,7 +33,11 @@ class Dimension: Identifiable, Tickable {
     }
     
     var multiplier: InfiniteDecimal {
-        var val = timesBought.mul(value: 2).max(other: 1).mul(value: dimensionBoostMultiplier)
+        var val = InfiniteDecimal(source: 2).pow(value: timesBought).max(other: 1)
+        val = val.mul(value: dimensionBoostMultiplier)
+        if infinityMultiplier.bought {
+            val = val.mul(value: infinityMultiplier.effect())
+        }
         if tier == 8 {
             val = val.mul(value: antimatterState.dimensionSacrificeMul)
         }
@@ -72,8 +76,22 @@ class Dimension: Identifiable, Tickable {
         state.unlocked && howManyCanBuy.gt(other: 0)
     }
     
+    var infinityMultiplier: InfinityUpgrade
+    
     init(tier: Int) {
         self.state = DimensionState(tier: tier)
+        infinityMultiplier = switch tier {
+            case 1, 8:
+                InfinityUpgrades.shared.dim18Mult
+            case 2, 7:
+                InfinityUpgrades.shared.dim27Mult
+            case 3, 6:
+                InfinityUpgrades.shared.dim36Mult
+            case 4, 5:
+                InfinityUpgrades.shared.dim45Mult
+            default:
+                fatalError("no other dimension multiplier for \(tier)")
+        }
     }
     
     /// Tries to buy a count of this dimension, returns no information about the success of such an attempt
@@ -98,8 +116,13 @@ class Dimension: Identifiable, Tickable {
         guard state.purchaseCount > 0 else {
             return
         }
+        guard !Antimatter.shared.state.antimatter.gte(other: Decimals.infinity) else {
+            return
+        }
         if tier == 1 {
-            Antimatter.shared.add(amount: perSecond.mul(value: InfiniteDecimal(source: diff)))
+            let generatedAntimatter = perSecond.mul(value: InfiniteDecimal(source: diff))
+            Antimatter.shared.add(amount: generatedAntimatter)
+            Statistics.shared.addAntimatter(amount: generatedAntimatter, diff: diff)
         } else {
             // Get dimension the tier below this one
             let lowerDimension = Dimensions.shared.dimensions[tier - 1]!

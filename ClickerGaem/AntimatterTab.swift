@@ -26,14 +26,16 @@ struct AntimatterTab: View {
                 }
             }
         } detail: {
-            if let selectedView {
-                switch selectedView {
-                case "dimensions":
-                    AntimatterView().navigationBarBackButtonHidden(unlockedViews.keys.count == 1)
-                case "autobuyers":
-                    AMAutobuyerView()
-                default:
-                    AntimatterView()
+            ZStack {
+                if let selectedView {
+                    switch selectedView {
+                    case "dimensions":
+                        AntimatterView().navigationBarBackButtonHidden(unlockedViews.keys.count == 1)
+                    case "autobuyers":
+                        AMAutobuyerView()
+                    default:
+                        EmptyView()
+                    }
                 }
             }
         }
