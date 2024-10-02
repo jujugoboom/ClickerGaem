@@ -29,7 +29,7 @@ class Dimension: Identifiable, Tickable {
         guard tier <= antimatterState.dimensionBoosts else {
             return 1
         }
-        return InfiniteDecimal(integerLiteral: 2).pow(value: InfiniteDecimal(integerLiteral: antimatterState.dimensionBoosts))
+        return InfiniteDecimal(integerLiteral: 2).pow(value: InfiniteDecimal(integerLiteral: max(antimatterState.dimensionBoosts - (tier - 1), 1)))
     }
     
     var multiplier: InfiniteDecimal {
