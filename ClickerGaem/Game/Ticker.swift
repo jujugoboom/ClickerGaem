@@ -24,8 +24,10 @@ class Ticker {
         guard self.timer == nil else {
             return
         }
-        self.timer = Timer.scheduledTimer(timeInterval: updateInterval, target: self, selector: #selector(timerFunc), userInfo: nil, repeats: true)
-        RunLoop.current.add(self.timer!, forMode: .common)
+        DispatchQueue.main.async(qos: .background) { [self] in
+            self.timer = Timer.scheduledTimer(timeInterval: updateInterval, target: self, selector: #selector(self.timerFunc), userInfo: nil, repeats: true)
+            RunLoop.current.add(self.timer!, forMode: .common)
+        }
         
     }
     

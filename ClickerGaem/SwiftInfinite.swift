@@ -37,7 +37,6 @@ struct PowersOf10 {
 
 /// A conversion of break\_infinity.js to swift. I have no idea if the performance is good, but it seems to work fine when not listening for breakpoints
 /// A very basic representation of float values with a Double mantissa and Integer exponent. There are minimal checks for overflows or other unwanted behavior, but generally holds up
-@Observable
 class InfiniteDecimal: NSObject, ExpressibleByIntegerLiteral, ExpressibleByFloatLiteral, Codable, ObservableObject {
     var m: Double
     var e: Int
@@ -48,25 +47,6 @@ class InfiniteDecimal: NSObject, ExpressibleByIntegerLiteral, ExpressibleByFloat
     static let infiniteDecimal = InfiniteDecimal(source: Double.infinity)
     static let standardAbbreviations = ["K", "M", "B", "T", "Qa", "Qt", "Sx", "Sp", "Oc", "No"]
     static let ln10 = Darwin.log(10.0)
-    
-    /// This is an awful recreation of the mixed-scientific format in AD. Works \shrug
-    override var description: String {
-        guard isFinite() else {
-            return m.formatted()
-        }
-        guard e > -expMax && !m.isZero else {
-            return "0"
-        }
-        guard e >= 33 || e <= -7 else {
-            let exponent = Swift.max(Darwin.floor(self.log(base: 1000)), 0)
-            let mantissa = self.div(value: InfiniteDecimal(source: Darwin.pow(1000, exponent))).toDouble()
-            guard exponent > 0 else {
-                return mantissa.formatted(.number.precision(.fractionLength(2)))
-            }
-            return "\(mantissa.formatted(.number.precision(.fractionLength(2))))\(InfiniteDecimal.standardAbbreviations[Int(exponent - 1)])"
-        }
-        return "\(m.formatted(.number.precision(.fractionLength(2))))e\(e)"
-    }
     
     /// Again, my first swift project. Default init that generally should not be used
     override init() {
@@ -423,6 +403,31 @@ class InfiniteDecimal: NSObject, ExpressibleByIntegerLiteral, ExpressibleByFloat
 extension InfiniteDecimal: NSSecureCoding {
     static var supportsSecureCoding: Bool {
         true
+    }
+}
+
+extension InfiniteDecimal {
+    /// This is an awful recreation of the mixed-scientific format in AD. Works \shrug
+    override var description: String {
+        toString()
+    }
+    
+    func toString() -> String {
+        guard isFinite() else {
+            return m.formatted()
+        }
+        guard e > -expMax && !m.isZero else {
+            return "0"
+        }
+        guard e >= 33 || e <= -7 else {
+            let exponent = Swift.max(Darwin.floor(self.log(base: 1000)), 0)
+            let mantissa = self.div(value: InfiniteDecimal(source: Darwin.pow(1000, exponent))).toDouble()
+            guard exponent > 0 else {
+                return mantissa.formatted(.number.precision(.fractionLength(2)))
+            }
+            return "\(mantissa.formatted(.number.precision(.fractionLength(2))))\(InfiniteDecimal.standardAbbreviations[Int(exponent - 1)])"
+        }
+        return "\(m.formatted(.number.precision(.fractionLength(2))))e\(e)"
     }
 }
 

@@ -141,7 +141,6 @@ class Dimension: Identifiable, Tickable {
     }
 }
 
-@Observable
 class Dimensions: Resettable {
     static var shared = Dimensions()
     

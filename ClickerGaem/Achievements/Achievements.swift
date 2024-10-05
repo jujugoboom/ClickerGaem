@@ -78,11 +78,11 @@ class Achievement: Saveable, Identifiable {
         guard !self.unlocked else {
             return
         }
-        withObservationTracking {
-            execute(value(), self)
+        withObservationTracking { [weak self] in
+            execute(value(), self!)
         } onChange: {
-            Task { @MainActor in
-                self.withContinousObservation(of: value(), execute: execute)
+            Task { @MainActor [weak self] in
+                self!.withContinousObservation(of: value(), execute: execute)
             }
         }
     }

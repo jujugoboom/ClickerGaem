@@ -74,6 +74,7 @@ struct ContentView: View {
             }
             if scenePhase == .inactive || scenePhase == .background {
                 GameInstance.shared.saveTicker?.stopTimer()
+                GameInstance.shared.ticker?.stopTimer()
             }
         }
     }
