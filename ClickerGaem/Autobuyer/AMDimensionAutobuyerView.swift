@@ -29,14 +29,14 @@ struct AMDimensionAutobuyerView: View {
             else  {
                 Text("\(tierFormatter.string(from: autobuyer.tier as NSNumber) ?? "0th") Dimension")
                 Text("Current interval \(autobuyer.buyRate.formatted())s").font(.system(size: 10))
-                HStack {
+                HStack(spacing: 30) {
                     Button(action: {autobuyer.toggleEnabled()}) {
                         autobuyer.state.enabled ? Label("Enabled", systemImage: "checkmark.circle.fill").labelStyle(.iconOnly) : Label("Disabled", systemImage: "checkmark.circle").labelStyle(.iconOnly)
-                    }.padding()
+                    }
                     Button(action: {autobuyer.state.autobuyCount = autobuyer.state.autobuyCount == 10 ? 1 : 10}) {
                         autobuyer.state.autobuyCount == 10 ? Label("Buys 10", systemImage: "10.square.fill").labelStyle(.iconOnly) : Label("Buys 1", systemImage: "01.square.fill").labelStyle(.iconOnly)
-                    }.padding()
-                }.padding()
+                    }
+                }.padding(.top)
             }
         }.padding().background().clipShape(RoundedRectangle(cornerRadius: 10)).shadow(radius: 5)
     }

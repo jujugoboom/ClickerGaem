@@ -29,7 +29,8 @@ class InfinityUpgrade: Saveable {
             let req = StoredInfinityUpgrade.fetchRequest()
             req.fetchLimit = 1
             req.predicate = NSPredicate(format: "id == %@", self.id)
-            guard let maybeStored = try? ClickerGaemData.shared.persistentContainer.viewContext.fetch(req).first else { self.storedInfinityUpgradeState = StoredInfinityUpgrade(context: ClickerGaemData.shared.persistentContainer.viewContext)
+            guard let maybeStored = try? ClickerGaemData.shared.persistentContainer.viewContext.fetch(req).first else {
+                self.storedInfinityUpgradeState = StoredInfinityUpgrade(context: ClickerGaemData.shared.persistentContainer.viewContext)
                 self.storedInfinityUpgradeState!.id = self.id
                 self.storedInfinityUpgradeState!.bought = self.bought
                 return

@@ -17,15 +17,17 @@ struct AMAutobuyerView: View {
     ]
     
     var body: some View {
-        LazyVGrid(columns: columns) {
-            ForEach(autobuyers) {autobuyer in
-                AMDimensionAutobuyerView(autobuyer: autobuyer)
-            }.padding()
+        ScrollView {
+            LazyVGrid(columns: columns) {
+                ForEach(autobuyers) {autobuyer in
+                    AMDimensionAutobuyerView(autobuyer: autobuyer)
+                }.padding()
+            }
         }
     }
 }
 
 #Preview {
-    Statistics.shared.totalAntimatter = InfiniteDecimal(mantissa: 1, exponent: 70)
+    Statistics.shared.totalAntimatter = InfiniteDecimal(mantissa: 1, exponent: 200)
     return AMAutobuyerView()
 }

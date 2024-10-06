@@ -17,7 +17,7 @@ struct DimensionBoostView: View {
     }
     var body: some View {
         HStack{
-            Text("You have \(Antimatter.shared.state.dimensionBoosts) dimension boosts")
+            Text("\(Antimatter.shared.state.dimensionBoosts) dimension boosts")
             Button(action: Antimatter.shared.buyDimensionBoost) {
                 Text(strCost).contentShape(.rect)
             }.disabled(!Antimatter.shared.canBuyDimensionBoost)

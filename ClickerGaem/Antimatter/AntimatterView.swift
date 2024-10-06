@@ -21,34 +21,40 @@ struct AntimatterView: View {
         Antimatter.dimensionSacrificeMultiplier(sacrificed: state.sacrificedDimensions.add(value: dimensions.first?.state.currCount ?? 0)).div(value: state.dimensionSacrificeMul)
     }
     
+    private let columns = [GridItem(.adaptive(minimum: 150))]
+    
     var body: some View {
         VStack {
-            Text("You have \(state.antimatter) antimatter")
-            Text("You are getting \(state.amPerSecond) AM/s")
-            Text("Total tickspeed: \(state.ticksPerSecond)/s")
+            Text("You have \(state.antimatter) antimatter").font(.headline).foregroundStyle(.red)
+            Text("You are getting \(state.amPerSecond) AM/s").font(.subheadline)
             HStack {
                 Button(action: buyTickspeedUpgrade) {
-                    Text("Buy tickspeed upgrade for \(state.tickspeedUpgradeCost)").contentShape(.rect)
-                }.disabled(state.tickspeedUpgradeCost.gt(other: state.antimatter))
+                    VStack {
+                        Text("\(state.ticksPerSecond) ticks/s").font(.subheadline)
+                        Text("Buy for \(state.tickspeedUpgradeCost)").font(.caption)
+                    }
+                }.disabled(state.tickspeedUpgradeCost.gt(other: state.antimatter)).buttonStyle(.bordered)
                 Button(action: maxTickspeedUpgrade) {
-                    Text("Max tickspeed").disabled(state.tickspeedUpgradeCost.gt(other: state.antimatter))
-                }
+                    Text("Max").disabled(state.tickspeedUpgradeCost.gt(other: state.antimatter)).font(.subheadline).padding(.vertical, 8)
+                }.buttonStyle(.bordered)
             }
             if (state.dimensionBoosts >= 5) {
-                Button(action: buyDimensionSacrifice) {
-                    Text("Buy dimension sacrifice: \(currSacrificeMultiplier)x")
-                }
-                Text("Current dimension sacrifice multiplier: \(state.dimensionSacrificeMul)x")
+                    VStack {
+                        Text("Dimension sacrifice multiplier: \(state.dimensionSacrificeMul)x")
+                        
+                            Button(action: buyDimensionSacrifice) {
+                                Text("Buy: \(currSacrificeMultiplier)x").font(.subheadline)
+                            }.disabled(Dimensions.shared.dimensions[8]!.state.purchaseCount == 0)
+                    }
+                
             }
             Button(action: buyMaxDimensions) {
                 Text("Max all dimensions").disabled((dimensions.first(where: {dimension in dimension.canBuy}) == nil))
-            }
-            ScrollView {
-                VStack(spacing: 25) {
-                    ForEach(Dimensions.shared.unlockedDimensions) { dimension in
-                        DimensionView(tier: dimension.tier)
-                    }
-                }.padding()
+            }.font(.subheadline).buttonStyle(.borderedProminent)
+            LazyVGrid(columns: columns) {
+                ForEach(Dimensions.shared.dimensions.values) { dimension in
+                    DimensionView(tier: dimension.tier)
+                }
             }
             Spacer()
             DimensionBoostView()
@@ -98,6 +104,8 @@ struct AntimatterView: View {
 }
 
 #Preview {
-    ContentView()
+    Statistics.shared.totalAntimatter = InfiniteDecimal(mantissa: 1, exponent: 200)
+    Antimatter.shared.state.dimensionBoosts = 6
+    return ContentView()
         .environment(\.managedObjectContext, ClickerGaemData.preview.viewContext)
 }

@@ -11,7 +11,7 @@ import SwiftUI
 struct AntimatterGalaxy: View {
     var body: some View {
         HStack{
-            Text("You have \(Antimatter.shared.state.amGalaxies) galaxies")
+            Text("\(Antimatter.shared.state.amGalaxies) galaxies")
             Button(action: Antimatter.shared.buyGalaxy) {
                 Text("\(Antimatter.shared.galaxyCost) 8th dimensions").contentShape(.rect)
             }.disabled(!Antimatter.shared.canBuyGalaxy)

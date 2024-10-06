@@ -183,7 +183,11 @@ class InfiniteDecimal: NSObject, ExpressibleByIntegerLiteral, ExpressibleByFloat
     
     /// Convert to int. does not handle infinity, you do
     func toInt() -> Int {
-        return Int(self.toDouble())
+        let double = self.toDouble()
+        guard double > Double(Int.min) && double < Double(Int.max) else {
+            return 0
+        }
+        return Int(double)
     }
     
     func abs() -> InfiniteDecimal {

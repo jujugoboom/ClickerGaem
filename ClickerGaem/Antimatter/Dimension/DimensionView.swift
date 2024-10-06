@@ -23,25 +23,25 @@ struct DimensionView: View {
     }
     
     var body: some View {
-        HStack(spacing: 20) {
+        Button(action: buy) {
             VStack {
-                Text("\(tierFormatter.string(from: dimensionState.tier as NSNumber) ?? "0th") dimension")
-                HStack{
-                    Text("Total: \(dimension.state.currCount.floor())").font(.system(size: 10))
-                    Text("+\(dimension.growthRate)%/s").font(.system(size: 10))
+                VStack {
+                    Text("\(tierFormatter.string(from: dimensionState.tier as NSNumber) ?? "0th") dimension")
+                    HStack{
+                        Text("Total: \(dimension.state.currCount.floor())").font(.system(size: 10))
+                        Text("Purchased: \(dimension.state.purchaseCount)").font(.system(size: 10))
+                    }
+                    HStack{
+                        Text("+\(dimension.growthRate)%/s").font(.system(size: 10))
+                        Text("Multiplier \(dimension.multiplier)x").font(.system(size: 10))
+                    }
                 }
-                HStack{
-                    Text("Purchased: \(dimension.state.purchaseCount)").font(.system(size: 10))
-                    Text("Multiplier \(dimension.multiplier)x").font(.system(size: 10))
-                }
-            }
-            Button(action: buy) {
                 VStack {
                     Text("Buy \(dimension.howManyCanBuy.toInt())")
                     Text("\(dimension.cost.mul(value: dimension.howManyCanBuy.max(other: 1)))").font(.system(size: 10))
                 }.contentShape(.rect)
-            }.disabled(!dimension.canBuy).buttonStyle(.bordered).animation(.spring, value: dimension.canBuy)
-        }
+            }.frame(maxWidth: .infinity)
+        }.disabled(!dimension.canBuy).animation(.spring, value: dimension.howManyCanBuy).buttonStyle(.bordered)
     }
                 
     private func buy() {
