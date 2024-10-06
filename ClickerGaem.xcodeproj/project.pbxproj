@@ -38,7 +38,14 @@
 		1C0A28B32CA647A500FDB204 /* Ticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF9126E2C97D1F800A92158 /* Ticker.swift */; };
 		1C0A28B52CA647A500FDB204 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FE42CA39DAF00A6A3B8 /* SettingsView.swift */; };
 		1C0A28B62CA647A500FDB204 /* SwiftInfinite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912662C95415800A92158 /* SwiftInfinite.swift */; };
+		1C1E67252CB22E8500740B0F /* Infinity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1E67242CB22E8200740B0F /* Infinity.swift */; };
 		1C30A52C2CA26C4400FBB096 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = 1C30A52B2CA26C4400FBB096 /* AlertToast */; };
+		1C893AA22CB334F100529C3F /* StoredInfinityUpgrade+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C893AA12CB334F100529C3F /* StoredInfinityUpgrade+CoreDataProperties.swift */; };
+		1C893AA32CB334F100529C3F /* StoredInfinityState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C893A9F2CB334F100529C3F /* StoredInfinityState+CoreDataProperties.swift */; };
+		1C893AA42CB334F100529C3F /* StoredInfinityUpgrade+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C893AA02CB334F100529C3F /* StoredInfinityUpgrade+CoreDataClass.swift */; };
+		1C893AA52CB334F100529C3F /* StoredInfinityState+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C893A9E2CB334F100529C3F /* StoredInfinityState+CoreDataClass.swift */; };
+		1C893AA92CB33A5400529C3F /* StoredStatistics+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C893AA72CB33A5400529C3F /* StoredStatistics+CoreDataClass.swift */; };
+		1C893AAA2CB33A5400529C3F /* StoredStatistics+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C893AA82CB33A5400529C3F /* StoredStatistics+CoreDataProperties.swift */; };
 		1CB1DB062CA7E503005E5AC5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB1DB052CA7E501005E5AC5 /* Constants.swift */; };
 		1CB1DB0A2CA7E7BD005E5AC5 /* AutobuyerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB1DB092CA7E7B9005E5AC5 /* AutobuyerState.swift */; };
 		1CB1DB0C2CA9D7FB005E5AC5 /* AMDimensionAutobuyerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB1DB0B2CA9D7F5005E5AC5 /* AMDimensionAutobuyerView.swift */; };
@@ -77,10 +84,17 @@
 /* Begin PBXFileReference section */
 		1C0A284E2CA5188600FDB204 /* ClickerGaemModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ClickerGaemModel.xcdatamodel; sourceTree = "<group>"; };
 		1C0A28512CA51F2600FDB204 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		1C1E67242CB22E8200740B0F /* Infinity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Infinity.swift; sourceTree = "<group>"; };
 		1C30A4EC2C9FB77F00FBB096 /* AMDimensionAutobuyer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMDimensionAutobuyer.swift; sourceTree = "<group>"; };
 		1C30A4ED2C9FB77F00FBB096 /* Autobuyer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Autobuyer.swift; sourceTree = "<group>"; };
 		1C30A4EF2C9FB77F00FBB096 /* AMAutobuyerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMAutobuyerView.swift; sourceTree = "<group>"; };
 		1C30A5262CA0F72200FBB096 /* BigCrunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigCrunch.swift; sourceTree = "<group>"; };
+		1C893A9E2CB334F100529C3F /* StoredInfinityState+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredInfinityState+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1C893A9F2CB334F100529C3F /* StoredInfinityState+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredInfinityState+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1C893AA02CB334F100529C3F /* StoredInfinityUpgrade+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredInfinityUpgrade+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1C893AA12CB334F100529C3F /* StoredInfinityUpgrade+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredInfinityUpgrade+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1C893AA72CB33A5400529C3F /* StoredStatistics+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredStatistics+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1C893AA82CB33A5400529C3F /* StoredStatistics+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredStatistics+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1C9161AD2C9D4E9D00D1555A /* AntimatterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntimatterView.swift; sourceTree = "<group>"; };
 		1C9B5FC92CA27D7100A6A3B8 /* Achievements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievements.swift; sourceTree = "<group>"; };
 		1C9B5FCA2CA27D7100A6A3B8 /* AchievementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementView.swift; sourceTree = "<group>"; };
@@ -167,6 +181,16 @@
 			path = Autobuyer;
 			sourceTree = "<group>";
 		};
+		1C893AA62CB33A3B00529C3F /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				1C893AA72CB33A5400529C3F /* StoredStatistics+CoreDataClass.swift */,
+				1C893AA82CB33A5400529C3F /* StoredStatistics+CoreDataProperties.swift */,
+				1CB1DB192CACF100005E5AC5 /* Statistics.swift */,
+			);
+			path = Statistics;
+			sourceTree = "<group>";
+		};
 		1C9B5FD92CA29C4E00A6A3B8 /* Achievements */ = {
 			isa = PBXGroup;
 			children = (
@@ -196,6 +220,11 @@
 		1CB1DB132CACEC55005E5AC5 /* Infinity */ = {
 			isa = PBXGroup;
 			children = (
+				1C893A9E2CB334F100529C3F /* StoredInfinityState+CoreDataClass.swift */,
+				1C893A9F2CB334F100529C3F /* StoredInfinityState+CoreDataProperties.swift */,
+				1C893AA02CB334F100529C3F /* StoredInfinityUpgrade+CoreDataClass.swift */,
+				1C893AA12CB334F100529C3F /* StoredInfinityUpgrade+CoreDataProperties.swift */,
+				1C1E67242CB22E8200740B0F /* Infinity.swift */,
 				1CB1DB162CACED2D005E5AC5 /* InfinityUpgrades.swift */,
 				1C30A5262CA0F72200FBB096 /* BigCrunch.swift */,
 				1CB1DB142CACEC5F005E5AC5 /* InfinityState.swift */,
@@ -226,7 +255,7 @@
 		1CF912392C95414100A92158 /* ClickerGaem */ = {
 			isa = PBXGroup;
 			children = (
-				1CB1DB192CACF100005E5AC5 /* Statistics.swift */,
+				1C893AA62CB33A3B00529C3F /* Statistics */,
 				1CB1DB132CACEC55005E5AC5 /* Infinity */,
 				1CB1DB112CA9F7D6005E5AC5 /* AntimatterTab.swift */,
 				1C9B5FD92CA29C4E00A6A3B8 /* Achievements */,
@@ -452,6 +481,10 @@
 				1CB1DB172CACED30005E5AC5 /* InfinityUpgrades.swift in Sources */,
 				1C0A28A12CA647A500FDB204 /* Dimension.swift in Sources */,
 				1C0A28A22CA647A500FDB204 /* DimensionState.swift in Sources */,
+				1C893AA22CB334F100529C3F /* StoredInfinityUpgrade+CoreDataProperties.swift in Sources */,
+				1C893AA32CB334F100529C3F /* StoredInfinityState+CoreDataProperties.swift in Sources */,
+				1C893AA42CB334F100529C3F /* StoredInfinityUpgrade+CoreDataClass.swift in Sources */,
+				1C893AA52CB334F100529C3F /* StoredInfinityState+CoreDataClass.swift in Sources */,
 				1C0A28A32CA647A500FDB204 /* DimensionView.swift in Sources */,
 				1C0A28A42CA647A500FDB204 /* StoredDimensionState+CoreDataClass.swift in Sources */,
 				1C0A28A52CA647A500FDB204 /* StoredDimensionState+CoreDataProperties.swift in Sources */,
@@ -462,6 +495,7 @@
 				1CB1DB0F2CA9E87A005E5AC5 /* StoredAutobuyerState+CoreDataClass.swift in Sources */,
 				1CB1DB102CA9E87A005E5AC5 /* StoredAutobuyerState+CoreDataProperties.swift in Sources */,
 				1C0A28AB2CA647A500FDB204 /* BigCrunch.swift in Sources */,
+				1C1E67252CB22E8500740B0F /* Infinity.swift in Sources */,
 				1C0A28AC2CA647A500FDB204 /* ClickerGaemApp.swift in Sources */,
 				1C0A28AD2CA647A500FDB204 /* ClickerGaemData.swift in Sources */,
 				1C0A28AE2CA647A500FDB204 /* ContentView.swift in Sources */,
@@ -475,6 +509,8 @@
 				1C0A28B62CA647A500FDB204 /* SwiftInfinite.swift in Sources */,
 				1CB1DB0C2CA9D7FB005E5AC5 /* AMDimensionAutobuyerView.swift in Sources */,
 				1CB1DB1A2CACF103005E5AC5 /* Statistics.swift in Sources */,
+				1C893AA92CB33A5400529C3F /* StoredStatistics+CoreDataClass.swift in Sources */,
+				1C893AAA2CB33A5400529C3F /* StoredStatistics+CoreDataProperties.swift in Sources */,
 				1CB1DB152CACEC62005E5AC5 /* InfinityState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

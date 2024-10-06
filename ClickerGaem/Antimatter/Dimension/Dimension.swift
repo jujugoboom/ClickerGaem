@@ -116,7 +116,7 @@ class Dimension: Identifiable, Tickable {
         guard state.purchaseCount > 0 else {
             return
         }
-        guard !Antimatter.shared.state.antimatter.gte(other: Decimals.infinity) else {
+        guard !Infinity.shared.state.infinityBroken && !Antimatter.shared.state.antimatter.gte(other: Decimals.infinity) else {
             return
         }
         if tier == 1 {

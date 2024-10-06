@@ -11,7 +11,7 @@ struct AntimatterTab: View {
     @State var selectedView: String? = "dimensions"
     var unlockedViews: OrderedDictionary<String, String> {
         var unlocked: OrderedDictionary<String, String> = ["dimensions": "Antimatter Dimensions"]
-        if Antimatter.shared.state.totalAntimatter.gte(other: Decimals.e40) {
+        if Statistics.shared.totalAntimatter.gte(other: Decimals.e40) {
             unlocked["autobuyers"] = "Autobuyers"
         }
         return unlocked

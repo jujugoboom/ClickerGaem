@@ -27,7 +27,7 @@ import Foundation
     }
     
     var canBuy: Bool {
-        return Antimatter.shared.state.totalAntimatter.gte(other: cost)
+        return Statistics.shared.totalAntimatter.gte(other: cost)
     }
     
     var elapsedSinceBuy: Double = 0

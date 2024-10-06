@@ -26,6 +26,6 @@ struct AMAutobuyerView: View {
 }
 
 #Preview {
-    Antimatter.shared.state.totalAntimatter = InfiniteDecimal(mantissa: 1, exponent: 70)
+    Statistics.shared.totalAntimatter = InfiniteDecimal(mantissa: 1, exponent: 70)
     return AMAutobuyerView()
 }

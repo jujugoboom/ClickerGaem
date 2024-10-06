@@ -43,6 +43,6 @@ struct AMDimensionAutobuyerView: View {
 }
 
 #Preview {
-    Antimatter.shared.state.totalAntimatter = InfiniteDecimal(mantissa: 1, exponent: 50)
+    Statistics.shared.totalAntimatter = InfiniteDecimal(mantissa: 1, exponent: 50)
     return AMDimensionAutobuyerView(autobuyer: AMDimensionAutobuyer(tier: 1))
 }

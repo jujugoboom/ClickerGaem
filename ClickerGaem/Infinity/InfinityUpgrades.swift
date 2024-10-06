@@ -8,7 +8,7 @@ import Foundation
 import CoreData
 
 class InfinityUpgrade: Saveable {
-//    var storedInfinityUpgradeState: StoredInfinityUpgradeState?
+    var storedInfinityUpgradeState: StoredInfinityUpgrade?
     var bought = false
     var id: String;
     var cost: InfiniteDecimal;
@@ -21,18 +21,35 @@ class InfinityUpgrade: Saveable {
         self.cost = cost
         self.effect = effect
         self.requirements = requirements
+        self.load()
     }
     
     func load() {
-        
+        ClickerGaemData.shared.persistentContainer.viewContext.performAndWait {
+            let req = StoredInfinityUpgrade.fetchRequest()
+            req.fetchLimit = 1
+            req.predicate = NSPredicate(format: "id == %@", self.id)
+            guard let maybeStored = try? ClickerGaemData.shared.persistentContainer.viewContext.fetch(req).first else { self.storedInfinityUpgradeState = StoredInfinityUpgrade(context: ClickerGaemData.shared.persistentContainer.viewContext)
+                self.storedInfinityUpgradeState!.id = self.id
+                self.storedInfinityUpgradeState!.bought = self.bought
+                return
+            }
+            self.storedInfinityUpgradeState = maybeStored
+        }
+        self.bought = self.storedInfinityUpgradeState!.bought
     }
     
     func save(objectContext: NSManagedObjectContext, notification: NotificationCenter.Publisher.Output?) {
-        
+        if storedInfinityUpgradeState == nil {
+            storedInfinityUpgradeState = StoredInfinityUpgrade(context: objectContext)
+        }
+        storedInfinityUpgradeState!.id = id
+        storedInfinityUpgradeState!.bought = bought
+        try? objectContext.save()
     }
 }
 
-class InfinityUpgrades {
+class InfinityUpgrades: Resettable {
     static var shared = InfinityUpgrades()
     
     let totalTimeMult = InfinityUpgrade(id: "timeMult", cost: 1) {
@@ -59,5 +76,9 @@ class InfinityUpgrades {
         InfinityUpgrades.dimInfinityMult()
     }
     
+    var upgrades: [InfinityUpgrade] { [totalTimeMult, dim18Mult, dim27Mult, dim36Mult, dim45Mult] }
     
+    static func reset() {
+        shared.upgrades.forEach({$0.bought = false})
+    }
 }

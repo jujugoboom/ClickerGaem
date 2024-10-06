@@ -19,6 +19,15 @@ struct ClickerGaemApp: App {
     }
     
     init() {
+        _ = GameInstance.shared
+        _ = Antimatter.shared
+        _ = Dimensions.shared
+        _ = Infinity.shared
+        _ = InfinityUpgrades.shared
+        _ = BigCrunch.shared
+        _ = Autobuyers.shared
+        _ = Achievements.shared
+        _ = Statistics.shared
         GameInstance.shared.ticker?.startTimer()
     }
 }

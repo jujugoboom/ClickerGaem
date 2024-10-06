@@ -26,8 +26,6 @@ final class GameState: Saveable {
     var storedState: StoredGameState?
     var updateInterval: Double = 0.05
     
-    var firstInfinity = false
-    
     @MainActor
     var simulating = false
     @MainActor

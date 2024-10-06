@@ -19,19 +19,17 @@ class BigCrunch {
     }
     
     var canBigCrunch: Bool {
-        Antimatter.shared.state.antimatter.gte(other: InfiniteDecimal(mantissa: 1.8, exponent: 308))
+        Antimatter.shared.state.antimatter.gte(other: Decimals.infinity)
     }
     
     func crunch() {
         guard canBigCrunch else {
             return
         }
+        antimatterState.reset()
+        // Start with 100 instead of 10
         antimatterState.antimatter = 100
-        antimatterState.dimensionBoosts = 0
-        antimatterState.sacrificedDimensions = 0
-        antimatterState.amGalaxies = 0
-        antimatterState.tickSpeedUpgrades = 0
-        state.firstInfinity = true
+        Infinity.shared.add(infinities: 1)
         Dimensions.shared.dimensions.forEach({$1.reset()})
     }
 }
@@ -42,7 +40,7 @@ struct FirstBigCrunch: ViewModifier {
     }
     
     func body(content: Content) -> some View {
-        if bigCrunch.canBigCrunch && !Statistics.shared.firstInfinity {
+        if bigCrunch.canBigCrunch && !Infinity.shared.state.infinityBroken {
             Button(action: bigCrunch.crunch) {
                 Text("BIG CRUNCH").padding()
             }.padding().background().clipShape(RoundedRectangle(cornerRadius: 10)).shadow(radius: 5)

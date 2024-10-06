@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23231" systemVersion="24A335" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23231" systemVersion="24A348" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="StoredAchievementState" representedClassName="StoredAchievementState" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="unlocked" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -10,7 +10,6 @@
         <attribute name="galaxies" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="sacrificedDimensions" optional="YES" attributeType="Transformable" valueTransformerName="InfiniteDecimalTransformer"/>
         <attribute name="tickSpeedUpgrades" optional="YES" attributeType="Transformable" valueTransformerName="InfiniteDecimalTransformer"/>
-        <attribute name="totalAntimatter" optional="YES" attributeType="Transformable" valueTransformerName="InfiniteDecimalTransformer"/>
     </entity>
     <entity name="StoredAutobuyerState" representedClassName="StoredAutobuyerState" syncable="YES">
         <attribute name="autobuyCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -28,5 +27,22 @@
     <entity name="StoredGameState" representedClassName="StoredGameState" syncable="YES">
         <attribute name="lastSaveTime" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="updateInterval" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="StoredInfinityState" representedClassName="StoredInfinityState" syncable="YES">
+        <attribute name="infinities" optional="YES" attributeType="Transformable" valueTransformerName="InfiniteDecimalTransformer"/>
+        <attribute name="infinitiesThisCrunch" optional="YES" attributeType="Transformable" valueTransformerName="InfiniteDecimalTransformer"/>
+        <attribute name="infinityBroken" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="infinityPower" optional="YES" attributeType="Transformable" valueTransformerName="InfiniteDecimalTransformer"/>
+    </entity>
+    <entity name="StoredInfinityUpgrade" representedClassName="StoredInfinityUpgrade" syncable="YES">
+        <attribute name="bought" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="StoredStatistics" representedClassName="StoredStatistics" syncable="YES">
+        <attribute name="bestAMs" optional="YES" attributeType="Transformable" valueTransformerName="InfiniteDecimalTransformer"/>
+        <attribute name="bestInfinitiesS" optional="YES" attributeType="Transformable" valueTransformerName="InfiniteDecimalTransformer"/>
+        <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="totalAntimatter" optional="YES" attributeType="Transformable" valueTransformerName="InfiniteDecimalTransformer"/>
+        <attribute name="totalInfinities" optional="YES" attributeType="Transformable" valueTransformerName="InfiniteDecimalTransformer"/>
     </entity>
 </model>

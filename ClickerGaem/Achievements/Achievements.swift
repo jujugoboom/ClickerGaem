@@ -154,5 +154,6 @@ class Achievements: Resettable {
     static func reset() {
         shared.achievements.forEach({$0.reset()})
         shared.achievements.forEach({$0.load()})
+        shared.achievements.forEach({$0.withContinousObservation(of: $0.value, execute: $0.execute)})
     }
 }

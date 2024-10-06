@@ -44,8 +44,8 @@ class Antimatter: Resettable {
     }
     
     func add(amount: InfiniteDecimal) {
-        self.state.antimatter = self.state.antimatter.add(value: amount)
-        self.state.totalAntimatter = self.state.totalAntimatter.add(value: amount)
+        self.state.antimatter = self.state.antimatter.add(value: amount).min(other: Decimals.infinity)
+        Statistics.shared.totalAntimatter = Statistics.shared.totalAntimatter.add(value: amount)
     }
     
     func buyDimensionBoost() {
