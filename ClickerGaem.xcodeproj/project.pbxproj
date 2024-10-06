@@ -184,9 +184,9 @@
 		1C893AA62CB33A3B00529C3F /* Statistics */ = {
 			isa = PBXGroup;
 			children = (
+				1CB1DB192CACF100005E5AC5 /* Statistics.swift */,
 				1C893AA72CB33A5400529C3F /* StoredStatistics+CoreDataClass.swift */,
 				1C893AA82CB33A5400529C3F /* StoredStatistics+CoreDataProperties.swift */,
-				1CB1DB192CACF100005E5AC5 /* Statistics.swift */,
 			);
 			path = Statistics;
 			sourceTree = "<group>";
@@ -220,14 +220,14 @@
 		1CB1DB132CACEC55005E5AC5 /* Infinity */ = {
 			isa = PBXGroup;
 			children = (
+				1C30A5262CA0F72200FBB096 /* BigCrunch.swift */,
+				1C1E67242CB22E8200740B0F /* Infinity.swift */,
+				1CB1DB142CACEC5F005E5AC5 /* InfinityState.swift */,
+				1CB1DB162CACED2D005E5AC5 /* InfinityUpgrades.swift */,
 				1C893A9E2CB334F100529C3F /* StoredInfinityState+CoreDataClass.swift */,
 				1C893A9F2CB334F100529C3F /* StoredInfinityState+CoreDataProperties.swift */,
 				1C893AA02CB334F100529C3F /* StoredInfinityUpgrade+CoreDataClass.swift */,
 				1C893AA12CB334F100529C3F /* StoredInfinityUpgrade+CoreDataProperties.swift */,
-				1C1E67242CB22E8200740B0F /* Infinity.swift */,
-				1CB1DB162CACED2D005E5AC5 /* InfinityUpgrades.swift */,
-				1C30A5262CA0F72200FBB096 /* BigCrunch.swift */,
-				1CB1DB142CACEC5F005E5AC5 /* InfinityState.swift */,
 			);
 			path = Infinity;
 			sourceTree = "<group>";
@@ -255,23 +255,23 @@
 		1CF912392C95414100A92158 /* ClickerGaem */ = {
 			isa = PBXGroup;
 			children = (
-				1C893AA62CB33A3B00529C3F /* Statistics */,
-				1CB1DB132CACEC55005E5AC5 /* Infinity */,
-				1CB1DB112CA9F7D6005E5AC5 /* AntimatterTab.swift */,
 				1C9B5FD92CA29C4E00A6A3B8 /* Achievements */,
+				1C30A4EF2C9FB77F00FBB096 /* AMAutobuyerView.swift */,
 				1C9B5FE72CA3B72100A6A3B8 /* Antimatter */,
+				1CB1DB112CA9F7D6005E5AC5 /* AntimatterTab.swift */,
 				1CF912402C95414200A92158 /* Assets.xcassets */,
 				1C30A4EE2C9FB77F00FBB096 /* Autobuyer */,
-				1C30A4EF2C9FB77F00FBB096 /* AMAutobuyerView.swift */,
 				1CF9123A2C95414100A92158 /* ClickerGaemApp.swift */,
 				1CF9127A2C9BB24900A92158 /* ClickerGaemData.swift */,
 				1C0A284D2CA5188600FDB204 /* ClickerGaemModel.xcdatamodeld */,
 				1CB1DB052CA7E501005E5AC5 /* Constants.swift */,
 				1CF9123C2C95414100A92158 /* ContentView.swift */,
 				1CF912732C9811AB00A92158 /* Game */,
+				1CB1DB132CACEC55005E5AC5 /* Infinity */,
 				1C0A28512CA51F2600FDB204 /* Info.plist */,
 				1CF912422C95414200A92158 /* Preview Content */,
 				1C9B5FE42CA39DAF00A6A3B8 /* SettingsView.swift */,
+				1C893AA62CB33A3B00529C3F /* Statistics */,
 				1CF912662C95415800A92158 /* SwiftInfinite.swift */,
 			);
 			path = ClickerGaem;
