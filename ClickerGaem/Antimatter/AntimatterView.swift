@@ -48,14 +48,15 @@ struct AntimatterView: View {
                     }
                 
             }
-            Button(action: buyMaxDimensions) {
-                Text("Max all dimensions").disabled((dimensions.first(where: {dimension in dimension.canBuy}) == nil))
-            }.font(.subheadline).buttonStyle(.borderedProminent)
             LazyVGrid(columns: columns) {
-                ForEach(Dimensions.shared.dimensions.values) { dimension in
+                ForEach(Dimensions.shared.unlockedDimensions) { dimension in
                     DimensionView(tier: dimension.tier)
                 }
             }
+            Button(action: buyMaxDimensions) {
+                Text("Max all dimensions").font(.subheadline)
+            }.buttonStyle(.borderedProminent).disabled((dimensions.first(where: {dimension in dimension.canBuy}) == nil))
+
             Spacer()
             DimensionBoostView()
             AntimatterGalaxy()
