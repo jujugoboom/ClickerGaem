@@ -30,7 +30,7 @@ struct DimensionView: View {
                 Text("\(tierFormatter.string(from: dimensionState.tier as NSNumber) ?? "0th") dimension")
                 HStack{
                     Text("Total: \(dimension.state.currCount.floor())").font(.system(size: 10))
-                    Text("+\(dimension.growthRate)%/s").font(.system(size: 10))
+                    Text("x\(dimension.multiplier)").font(.system(size: 10))
                 }
                 Text("Buy \(dimension.howManyCanBuy.toInt())")
                 Text("\(dimension.cost.mul(value: dimension.howManyCanBuy.max(other: 1)))").font(.system(size: 10))
@@ -74,7 +74,7 @@ struct DimensionDetails: View {
             }
             HStack{
                 Text("+\(dimension.growthRate)%/s")
-                Text("Multiplier \(dimension.multiplier)x")
+                Text("Multiplier x\(dimension.multiplier)")
             }
         }
 
