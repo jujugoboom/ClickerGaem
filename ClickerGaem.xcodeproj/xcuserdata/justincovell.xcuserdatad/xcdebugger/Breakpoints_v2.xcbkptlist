@@ -70,7 +70,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "42CD9D97-A29D-4CC4-8104-042CDD1CF683"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             condition = "tier == 8"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -81,6 +81,22 @@
             endingLineNumber = "76"
             landmarkName = "canBuy"
             landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7861B86D-432A-435E-91D5-AFB7788430F6"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ClickerGaem/Antimatter/Antimatter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "add(amount:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

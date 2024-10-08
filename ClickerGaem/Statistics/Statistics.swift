@@ -105,7 +105,7 @@ class Statistics: Saveable, Resettable {
         totalInfinities = storedStatistics!.totalInfinities as! InfiniteDecimal
         bestAMs = storedStatistics!.bestAMs as! InfiniteDecimal
         bestInfinitiesS = storedStatistics!.bestInfinitiesS as! InfiniteDecimal
-        fastestInfinity = storedStatistics!.fastestInfinity
+        fastestInfinity = storedStatistics!.fas
     }
     
     static func reset() {

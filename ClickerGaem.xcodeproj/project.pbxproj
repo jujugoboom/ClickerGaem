@@ -39,6 +39,7 @@
 		1C0A28B52CA647A500FDB204 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9B5FE42CA39DAF00A6A3B8 /* SettingsView.swift */; };
 		1C0A28B62CA647A500FDB204 /* SwiftInfinite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF912662C95415800A92158 /* SwiftInfinite.swift */; };
 		1C16FEBF2CB4EF840041CF9B /* InfinityTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C16FEBE2CB4EF820041CF9B /* InfinityTab.swift */; };
+		1C16FEC12CB5135A0041CF9B /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C16FEC02CB513570041CF9B /* StatisticsView.swift */; };
 		1C1E67252CB22E8500740B0F /* Infinity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1E67242CB22E8200740B0F /* Infinity.swift */; };
 		1C30A52C2CA26C4400FBB096 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = 1C30A52B2CA26C4400FBB096 /* AlertToast */; };
 		1C893AA22CB334F100529C3F /* StoredInfinityUpgrade+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C893AA12CB334F100529C3F /* StoredInfinityUpgrade+CoreDataProperties.swift */; };
@@ -88,6 +89,7 @@
 		1C0A28512CA51F2600FDB204 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		1C16FEBD2CB4BEE40041CF9B /* ClickerGaemModel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ClickerGaemModel 2.xcdatamodel"; sourceTree = "<group>"; };
 		1C16FEBE2CB4EF820041CF9B /* InfinityTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfinityTab.swift; sourceTree = "<group>"; };
+		1C16FEC02CB513570041CF9B /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		1C1E67242CB22E8200740B0F /* Infinity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Infinity.swift; sourceTree = "<group>"; };
 		1C30A4EC2C9FB77F00FBB096 /* AMDimensionAutobuyer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMDimensionAutobuyer.swift; sourceTree = "<group>"; };
 		1C30A4ED2C9FB77F00FBB096 /* Autobuyer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Autobuyer.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 		1C893AA62CB33A3B00529C3F /* Statistics */ = {
 			isa = PBXGroup;
 			children = (
+				1C16FEC02CB513570041CF9B /* StatisticsView.swift */,
 				1CB1DB192CACF100005E5AC5 /* Statistics.swift */,
 				1C893AA72CB33A5400529C3F /* StoredStatistics+CoreDataClass.swift */,
 				1C893AA82CB33A5400529C3F /* StoredStatistics+CoreDataProperties.swift */,
@@ -473,6 +476,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C0A28962CA647A500FDB204 /* ClickerGaemModel.xcdatamodeld in Sources */,
+				1C16FEC12CB5135A0041CF9B /* StatisticsView.swift in Sources */,
 				1C16FEBF2CB4EF840041CF9B /* InfinityTab.swift in Sources */,
 				1C0A28972CA647A500FDB204 /* Achievements.swift in Sources */,
 				1C0A28982CA647A500FDB204 /* StoredAchievementState+CoreDataClass.swift in Sources */,

@@ -20,12 +20,12 @@ struct MainNavigation: View {
     @Binding var currentView: String?
     
     private var views: [String] {
-        var views = ["Antimatter", "Settings"]
+        var views = ["Antimatter", "Statistics", "Settings"]
         if Achievements.shared.unlockedAchievements.count > 0 {
-            views.append("Achievements")
+            views.insert("Achievements", at: 1)
         }
         if Infinity.shared.state.firstInfinity {
-            views.append("Infinity")
+            views.insert("Infinity", at: 1)
         }
         return views
     }
@@ -45,6 +45,8 @@ struct MainNavigation: View {
                 AchievementView()
             case "Infinity":
                 InfinityTab()
+            case "Statistics":
+                StatisticsView()
             default:
                 Section {
                     EmptyView()
@@ -95,6 +97,10 @@ struct ContentView: View {
                 GameInstance.shared.saveTicker?.stopTimer()
                 GameInstance.shared.ticker?.stopTimer()
             }
+        }.toast(isPresenting: newAchievementUnlocked) {
+            AlertToast(displayMode: .hud, type: .regular, title: Achievements.shared.newAchievementName, subTitle: "Achievement unlocked")
+        } onTap: {
+            currentView = "Achievements"
         }
     }
 }

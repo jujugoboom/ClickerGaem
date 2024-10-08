@@ -220,16 +220,16 @@ class InfiniteDecimal: NSObject, ExpressibleByIntegerLiteral, ExpressibleByFloat
     
     func add(value: InfiniteDecimal) -> InfiniteDecimal {
         guard isFinite() else {
-            return self
+            return InfiniteDecimal(copyFrom: self)
         }
         guard value.isFinite() else {
-            return value
+            return InfiniteDecimal(copyFrom: value)
         }
         guard m != 0 else {
-            return value
+            return InfiniteDecimal(copyFrom: value)
         }
         guard value.m != 0 else {
-            return self
+            return InfiniteDecimal(copyFrom: self)
         }
         var bigger: InfiniteDecimal
         var smaller: InfiniteDecimal
@@ -244,7 +244,7 @@ class InfiniteDecimal: NSObject, ExpressibleByIntegerLiteral, ExpressibleByFloat
         
         if bigger.e - smaller.e > maxSignificantDigits {
             // Don't bother adding if they are far enough apart
-            return bigger
+            return InfiniteDecimal(copyFrom: bigger)
         }
         
         let mantissa = Darwin.round(1e14 * bigger.m + 1e14 * smaller.m * PowersOf10.getPower(power: smaller.e - bigger.e));
