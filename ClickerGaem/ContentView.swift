@@ -16,6 +16,45 @@ struct SimulatingView: View {
     }
 }
 
+struct MainNavigation: View {
+    @Binding var currentView: String?
+    
+    private var views: [String] {
+        var views = ["Antimatter", "Settings"]
+        if Achievements.shared.unlockedAchievements.count > 0 {
+            views.append("Achievements")
+        }
+        return views
+    }
+    
+    var body: some View {
+        NavigationSplitView {
+            List(views, id: \.self, selection: $currentView) { view in
+                NavigationLink(view, value: view)
+            }
+        } detail: {
+            switch currentView {
+            case "Antimatter":
+                Section {
+                    AntimatterTab()
+                }
+            case "Settings":
+                Section {
+                    SettingsView()
+                }
+            case "Achievements":
+                Section {
+                    AchievementView()
+                }
+            default:
+                Section {
+                    EmptyView()
+                }
+            }
+        }
+    }
+}
+
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.scenePhase) var scenePhase
@@ -37,42 +76,14 @@ struct ContentView: View {
     
     @State var modal = true
     
-    @State private var currentTab = 1
+    @State var currentView: String?
     
     var body: some View {
         Group {
             if isSimulating.wrappedValue {
                 SimulatingView()
             } else {
-                NavigationStack {
-                    List {
-                        NavigationLink("Antimatter", destination: AntimatterTab())
-                        if Achievements.shared.unlockedAchievements.count > 0 {
-                            NavigationLink("Achievements", destination: AchievementView())
-                        }
-                        NavigationLink("Settings", destination: SettingsView())
-                    }
-                }
-//                TabView(selection: $currentTab) {
-//                    AntimatterTab().tabItem {
-//                        Label("Antimatter Dimensions", systemImage: "circle.and.line.horizontal")
-//                    }.tag(1)
-//                    if Achievements.shared.unlockedAchievements.count > 0 {
-//                        AchievementView().tabItem {
-//                            Label("Achievements", systemImage: "medal.fill")
-//                        }.tag(2)
-//                    }
-//                    SettingsView().environment(\.managedObjectContext, viewContext).tabItem {
-//                        Label("Settings", systemImage: "gear")
-//                    }.tag(3)
-//                }
-//                .toast(isPresenting: newAchievementUnlocked) {
-//                    AlertToast(displayMode: .hud, type: .regular, title: Achievements.shared.newAchievementName, subTitle: "Achievement unlocked")
-//                } onTap: {
-//                    currentTab = 2
-//                }
-//                .saveOnExit()
-//                .firstBigCrunch()
+                MainNavigation(currentView: $currentView)
             }
         }.onChange(of: scenePhase, initial: true) {
             if scenePhase == .active {

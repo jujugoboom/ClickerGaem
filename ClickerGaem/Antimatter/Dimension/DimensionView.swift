@@ -22,30 +22,62 @@ struct DimensionView: View {
         return formatter
     }
     
+    @State var viewingDetails = false
+    
     var body: some View {
-        Button(action: buy) {
+        Button(action: {}) {
             VStack {
-                VStack {
-                    Text("\(tierFormatter.string(from: dimensionState.tier as NSNumber) ?? "0th") dimension")
-                    HStack{
-                        Text("Total: \(dimension.state.currCount.floor())").font(.system(size: 10))
-                        Text("Purchased: \(dimension.state.purchaseCount)").font(.system(size: 10))
-                    }
-                    HStack{
-                        Text("+\(dimension.growthRate)%/s").font(.system(size: 10))
-                        Text("Multiplier \(dimension.multiplier)x").font(.system(size: 10))
-                    }
+                Text("\(tierFormatter.string(from: dimensionState.tier as NSNumber) ?? "0th") dimension")
+                HStack{
+                    Text("Total: \(dimension.state.currCount.floor())").font(.system(size: 10))
+                    Text("+\(dimension.growthRate)%/s").font(.system(size: 10))
                 }
-                VStack {
-                    Text("Buy \(dimension.howManyCanBuy.toInt())")
-                    Text("\(dimension.cost.mul(value: dimension.howManyCanBuy.max(other: 1)))").font(.system(size: 10))
-                }.contentShape(.rect)
+                Text("Buy \(dimension.howManyCanBuy.toInt())")
+                Text("\(dimension.cost.mul(value: dimension.howManyCanBuy.max(other: 1)))").font(.system(size: 10))
             }.frame(maxWidth: .infinity, maxHeight: 100)
-        }.disabled(!dimension.canBuy).animation(.spring, value: dimension.howManyCanBuy).buttonStyle(.bordered)
+        }.disabled(!dimension.canBuy).animation(.spring, value: dimension.howManyCanBuy).buttonStyle(.bordered).simultaneousGesture(LongPressGesture().onEnded {_ in 
+            viewingDetails.toggle()
+        }).simultaneousGesture(TapGesture().onEnded {_ in
+            buy()
+        }).popover(isPresented: $viewingDetails) {
+            DimensionDetails(tier: tier)
+        }
     }
                 
     private func buy() {
         dimension.buy(count: dimension.howManyCanBuy)
+    }
+}
+
+struct DimensionDetails: View {
+    var tier: Int
+    var dimension: Dimension {
+        Dimensions.shared.dimensions[tier]!
+    }
+    
+    var dimensionState: DimensionState {
+        self.dimension.state
+    }
+    
+    var tierFormatter: NumberFormatter {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .ordinal
+        return formatter
+    }
+    
+    var body: some View {
+        VStack {
+            Text("\(tierFormatter.string(from: dimensionState.tier as NSNumber) ?? "0th") dimension").font(.title)
+            HStack{
+                Text("Total: \(dimension.state.currCount.floor())")
+                Text("Purchased: \(dimension.state.purchaseCount)")
+            }
+            HStack{
+                Text("+\(dimension.growthRate)%/s")
+                Text("Multiplier \(dimension.multiplier)x")
+            }
+        }
+
     }
 }
 
