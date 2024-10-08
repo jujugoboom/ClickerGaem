@@ -33,6 +33,7 @@
         <attribute name="infinitiesThisCrunch" optional="YES" attributeType="Transformable" valueTransformerName="InfiniteDecimalTransformer"/>
         <attribute name="infinityBroken" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="infinityPower" optional="YES" attributeType="Transformable" valueTransformerName="InfiniteDecimalTransformer"/>
+        <attribute name="infinityStartTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
     <entity name="StoredInfinityUpgrade" representedClassName="StoredInfinityUpgrade" syncable="YES">
         <attribute name="bought" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>

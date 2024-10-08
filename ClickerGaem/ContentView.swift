@@ -44,26 +44,35 @@ struct ContentView: View {
             if isSimulating.wrappedValue {
                 SimulatingView()
             } else {
-                TabView(selection: $currentTab) {
-                    AntimatterTab().tabItem {
-                        Label("Antimatter Dimensions", systemImage: "circle.and.line.horizontal")
-                    }.tag(1)
-                    if Achievements.shared.unlockedAchievements.count > 0 {
-                        AchievementView().tabItem {
-                            Label("Achievements", systemImage: "medal.fill")
-                        }.tag(2)
+                NavigationStack {
+                    List {
+                        NavigationLink("Antimatter", destination: AntimatterTab())
+                        if Achievements.shared.unlockedAchievements.count > 0 {
+                            NavigationLink("Achievements", destination: AchievementView())
+                        }
+                        NavigationLink("Settings", destination: SettingsView())
                     }
-                    SettingsView().environment(\.managedObjectContext, viewContext).tabItem {
-                        Label("Settings", systemImage: "gear")
-                    }.tag(3)
                 }
-                .toast(isPresenting: newAchievementUnlocked) {
-                    AlertToast(displayMode: .hud, type: .regular, title: Achievements.shared.newAchievementName, subTitle: "Achievement unlocked")
-                } onTap: {
-                    currentTab = 2
-                }
-                .saveOnExit()
-                .firstBigCrunch()
+//                TabView(selection: $currentTab) {
+//                    AntimatterTab().tabItem {
+//                        Label("Antimatter Dimensions", systemImage: "circle.and.line.horizontal")
+//                    }.tag(1)
+//                    if Achievements.shared.unlockedAchievements.count > 0 {
+//                        AchievementView().tabItem {
+//                            Label("Achievements", systemImage: "medal.fill")
+//                        }.tag(2)
+//                    }
+//                    SettingsView().environment(\.managedObjectContext, viewContext).tabItem {
+//                        Label("Settings", systemImage: "gear")
+//                    }.tag(3)
+//                }
+//                .toast(isPresenting: newAchievementUnlocked) {
+//                    AlertToast(displayMode: .hud, type: .regular, title: Achievements.shared.newAchievementName, subTitle: "Achievement unlocked")
+//                } onTap: {
+//                    currentTab = 2
+//                }
+//                .saveOnExit()
+//                .firstBigCrunch()
             }
         }.onChange(of: scenePhase, initial: true) {
             if scenePhase == .active {

@@ -24,7 +24,6 @@ struct ClickerGaemApp: App {
         _ = Dimensions.shared
         _ = Infinity.shared
         _ = InfinityUpgrades.shared
-        _ = BigCrunch.shared
         _ = Autobuyers.shared
         _ = Achievements.shared
         _ = Statistics.shared

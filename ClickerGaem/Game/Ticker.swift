@@ -6,10 +6,11 @@
 //
 
 import Foundation
+import QuartzCore
 
 /// Basic utility to call a function on a given interval and pass the time since the last call
 class Ticker {
-    var timer: Timer? = nil
+    private var timer: Timer? = nil
     let tick: (TimeInterval) -> Void
     var lastRun: Date
     var updateInterval: TimeInterval
@@ -24,10 +25,8 @@ class Ticker {
         guard self.timer == nil else {
             return
         }
-        DispatchQueue.main.async(qos: .background) { [self] in
-            self.timer = Timer.scheduledTimer(timeInterval: updateInterval, target: self, selector: #selector(self.timerFunc), userInfo: nil, repeats: true)
-            RunLoop.current.add(self.timer!, forMode: .common)
-        }
+        self.timer = Timer.scheduledTimer(timeInterval: updateInterval, target: self, selector: #selector(self.timerFunc), userInfo: nil, repeats: true)
+        RunLoop.current.add(self.timer!, forMode: .common)
         
     }
     
@@ -53,4 +52,30 @@ class Ticker {
 
 protocol Tickable: Identifiable {
     func tick(diff: TimeInterval)
+}
+
+extension Ticker {
+    class DisplayTicker: Ticker {
+        private var displayTimer: CADisplayLink? = nil
+        
+        override func startTimer() {
+            guard self.displayTimer == nil else {
+                return
+            }
+            displayTimer = CADisplayLink(target: self, selector: #selector(self.displayTick))
+            displayTimer?.add(to: .current, forMode: .common)
+        }
+        
+        override func stopTimer() {
+            guard displayTimer != nil else {
+                return
+            }
+            displayTimer?.invalidate()
+            displayTimer = nil
+        }
+        
+        @objc private func displayTick(timer: CADisplayLink) {
+            self.tick(timer.targetTimestamp - timer.timestamp)
+        }
+    }
 }

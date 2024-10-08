@@ -49,7 +49,7 @@ struct AntimatterView: View {
                 
             }
             LazyVGrid(columns: columns) {
-                ForEach(Dimensions.shared.unlockedDimensions) { dimension in
+                ForEach(Dimensions.shared.dimensions.values) { dimension in
                     DimensionView(tier: dimension.tier)
                 }
             }

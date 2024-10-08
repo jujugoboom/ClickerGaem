@@ -20,6 +20,7 @@ extension StoredInfinityState {
     @NSManaged public var infinitiesThisCrunch: NSObject?
     @NSManaged public var infinityBroken: Bool
     @NSManaged public var infinityPower: NSObject?
+    @NSManaged public var infinityStartTime: Date?
 
 }
 

@@ -16,6 +16,7 @@ class Statistics: Saveable, Resettable {
     var startDate: Date = Date()
     var bestAMs: InfiniteDecimal = 0
     var bestInfinitiesS: InfiniteDecimal = 0
+    var fastestInfinity: Double = Double.infinity
     
     private var _firstInfinity: Bool = false
     var firstInfinity: Bool {
@@ -51,6 +52,17 @@ class Statistics: Saveable, Resettable {
             }
             statistics.bestAMs = currAMs
         }
+        self.withContinousObservation(of: Infinity.shared.infinityTime) { maybeTime, statistics in
+            let infinityTime = maybeTime as! Date
+            guard infinityTime > Infinity.shared.state.infinityStartTime else {
+                return
+            }
+            let infinityInterval = infinityTime.timeIntervalSince(Infinity.shared.state.infinityStartTime)
+            guard infinityInterval > statistics.fastestInfinity else {
+                return
+            }
+            statistics.fastestInfinity = infinityInterval
+        }
     }
     
     func withContinousObservation(of value: @escaping @autoclosure () -> Any, execute: @escaping (Any, Statistics) -> Void) {
@@ -71,6 +83,7 @@ class Statistics: Saveable, Resettable {
         storedStatistics?.totalInfinities = totalInfinities
         storedStatistics?.bestAMs = bestAMs
         storedStatistics?.bestInfinitiesS = bestInfinitiesS
+        storedStatistics?.fastestInfinity = fastestInfinity
         try? objectContext.save()
     }
     func load() {
@@ -83,6 +96,7 @@ class Statistics: Saveable, Resettable {
                 storedStatistics?.totalInfinities = totalInfinities
                 storedStatistics?.bestAMs = bestAMs
                 storedStatistics?.bestInfinitiesS = bestInfinitiesS
+                storedStatistics?.fastestInfinity = fastestInfinity
                 return
             }
             storedStatistics = maybeStored
@@ -91,6 +105,7 @@ class Statistics: Saveable, Resettable {
         totalInfinities = storedStatistics!.totalInfinities as! InfiniteDecimal
         bestAMs = storedStatistics!.bestAMs as! InfiniteDecimal
         bestInfinitiesS = storedStatistics!.bestInfinitiesS as! InfiniteDecimal
+        fastestInfinity = storedStatistics!.fastestInfinity
     }
     
     static func reset() {

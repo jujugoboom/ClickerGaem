@@ -21,6 +21,7 @@ extension StoredStatistics {
     @NSManaged public var startDate: Date?
     @NSManaged public var bestAMs: NSObject?
     @NSManaged public var bestInfinitiesS: NSObject?
+    @NSManaged public var fastestInfinity: Double
 
 }
 

@@ -40,7 +40,7 @@ struct DimensionView: View {
                     Text("Buy \(dimension.howManyCanBuy.toInt())")
                     Text("\(dimension.cost.mul(value: dimension.howManyCanBuy.max(other: 1)))").font(.system(size: 10))
                 }.contentShape(.rect)
-            }.frame(maxWidth: .infinity)
+            }.frame(maxWidth: .infinity, maxHeight: 100)
         }.disabled(!dimension.canBuy).animation(.spring, value: dimension.howManyCanBuy).buttonStyle(.bordered)
     }
                 

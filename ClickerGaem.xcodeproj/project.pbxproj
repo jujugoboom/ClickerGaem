@@ -46,6 +46,7 @@
 		1C893AA52CB334F100529C3F /* StoredInfinityState+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C893A9E2CB334F100529C3F /* StoredInfinityState+CoreDataClass.swift */; };
 		1C893AA92CB33A5400529C3F /* StoredStatistics+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C893AA72CB33A5400529C3F /* StoredStatistics+CoreDataClass.swift */; };
 		1C893AAA2CB33A5400529C3F /* StoredStatistics+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C893AA82CB33A5400529C3F /* StoredStatistics+CoreDataProperties.swift */; };
+		1C893AAC2CB36C6C00529C3F /* InfinityUpgradesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C893AAB2CB36C6500529C3F /* InfinityUpgradesView.swift */; };
 		1CB1DB062CA7E503005E5AC5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB1DB052CA7E501005E5AC5 /* Constants.swift */; };
 		1CB1DB0A2CA7E7BD005E5AC5 /* AutobuyerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB1DB092CA7E7B9005E5AC5 /* AutobuyerState.swift */; };
 		1CB1DB0C2CA9D7FB005E5AC5 /* AMDimensionAutobuyerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB1DB0B2CA9D7F5005E5AC5 /* AMDimensionAutobuyerView.swift */; };
@@ -84,6 +85,7 @@
 /* Begin PBXFileReference section */
 		1C0A284E2CA5188600FDB204 /* ClickerGaemModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ClickerGaemModel.xcdatamodel; sourceTree = "<group>"; };
 		1C0A28512CA51F2600FDB204 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		1C16FEBD2CB4BEE40041CF9B /* ClickerGaemModel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ClickerGaemModel 2.xcdatamodel"; sourceTree = "<group>"; };
 		1C1E67242CB22E8200740B0F /* Infinity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Infinity.swift; sourceTree = "<group>"; };
 		1C30A4EC2C9FB77F00FBB096 /* AMDimensionAutobuyer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMDimensionAutobuyer.swift; sourceTree = "<group>"; };
 		1C30A4ED2C9FB77F00FBB096 /* Autobuyer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Autobuyer.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 		1C893AA12CB334F100529C3F /* StoredInfinityUpgrade+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredInfinityUpgrade+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1C893AA72CB33A5400529C3F /* StoredStatistics+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredStatistics+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1C893AA82CB33A5400529C3F /* StoredStatistics+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredStatistics+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1C893AAB2CB36C6500529C3F /* InfinityUpgradesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfinityUpgradesView.swift; sourceTree = "<group>"; };
 		1C9161AD2C9D4E9D00D1555A /* AntimatterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntimatterView.swift; sourceTree = "<group>"; };
 		1C9B5FC92CA27D7100A6A3B8 /* Achievements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievements.swift; sourceTree = "<group>"; };
 		1C9B5FCA2CA27D7100A6A3B8 /* AchievementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementView.swift; sourceTree = "<group>"; };
@@ -208,6 +211,7 @@
 				1C9B5FF62CA3C03E00A6A3B8 /* Antimatter.swift */,
 				1CF912882C9D466D00A92158 /* AntimatterGalaxy.swift */,
 				1C9B5FF02CA3BDD900A6A3B8 /* AntimatterState.swift */,
+				1CB1DB112CA9F7D6005E5AC5 /* AntimatterTab.swift */,
 				1C9161AD2C9D4E9D00D1555A /* AntimatterView.swift */,
 				1CF912722C98119B00A92158 /* Dimension */,
 				1CF912832C9CB6D400A92158 /* DimensionBoost.swift */,
@@ -220,6 +224,7 @@
 		1CB1DB132CACEC55005E5AC5 /* Infinity */ = {
 			isa = PBXGroup;
 			children = (
+				1C893AAB2CB36C6500529C3F /* InfinityUpgradesView.swift */,
 				1C30A5262CA0F72200FBB096 /* BigCrunch.swift */,
 				1C1E67242CB22E8200740B0F /* Infinity.swift */,
 				1CB1DB142CACEC5F005E5AC5 /* InfinityState.swift */,
@@ -258,7 +263,6 @@
 				1C9B5FD92CA29C4E00A6A3B8 /* Achievements */,
 				1C30A4EF2C9FB77F00FBB096 /* AMAutobuyerView.swift */,
 				1C9B5FE72CA3B72100A6A3B8 /* Antimatter */,
-				1CB1DB112CA9F7D6005E5AC5 /* AntimatterTab.swift */,
 				1CF912402C95414200A92158 /* Assets.xcassets */,
 				1C30A4EE2C9FB77F00FBB096 /* Autobuyer */,
 				1CF9123A2C95414100A92158 /* ClickerGaemApp.swift */,
@@ -486,6 +490,7 @@
 				1C893AA42CB334F100529C3F /* StoredInfinityUpgrade+CoreDataClass.swift in Sources */,
 				1C893AA52CB334F100529C3F /* StoredInfinityState+CoreDataClass.swift in Sources */,
 				1C0A28A32CA647A500FDB204 /* DimensionView.swift in Sources */,
+				1C893AAC2CB36C6C00529C3F /* InfinityUpgradesView.swift in Sources */,
 				1C0A28A42CA647A500FDB204 /* StoredDimensionState+CoreDataClass.swift in Sources */,
 				1C0A28A52CA647A500FDB204 /* StoredDimensionState+CoreDataProperties.swift in Sources */,
 				1C0A28A62CA647A500FDB204 /* DimensionBoost.swift in Sources */,
@@ -878,9 +883,10 @@
 		1C0A284D2CA5188600FDB204 /* ClickerGaemModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				1C16FEBD2CB4BEE40041CF9B /* ClickerGaemModel 2.xcdatamodel */,
 				1C0A284E2CA5188600FDB204 /* ClickerGaemModel.xcdatamodel */,
 			);
-			currentVersion = 1C0A284E2CA5188600FDB204 /* ClickerGaemModel.xcdatamodel */;
+			currentVersion = 1C16FEBD2CB4BEE40041CF9B /* ClickerGaemModel 2.xcdatamodel */;
 			path = ClickerGaemModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

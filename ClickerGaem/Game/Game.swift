@@ -15,12 +15,12 @@ protocol Resettable {
 class GameInstance: Resettable {
     static let shared = GameInstance()
     var state: GameState
-    var ticker: Ticker? = nil
+    var ticker: Ticker.DisplayTicker? = nil
     var saveTicker: Ticker? = nil
     
     init() {
         self.state = GameState()
-        self.ticker = Ticker(updateInterval: state.updateInterval, tick: self.tick)
+        self.ticker = Ticker.DisplayTicker(updateInterval: state.updateInterval, tick: self.tick)
         self.saveTicker = Ticker(updateInterval: 5, tick: self.saveTick)
         self.saveTicker?.startTimer()
     }

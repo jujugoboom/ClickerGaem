@@ -12,6 +12,24 @@ class Infinity: Resettable {
     
     let state: InfinityState
     
+    var infinityTime: Date = Date.distantPast
+    
+    private var _canCrunch = false
+    
+    var canCrunch: Bool {
+        get {
+            guard !_canCrunch else {
+                return _canCrunch
+            }
+            _canCrunch = Antimatter.shared.state.antimatter.gte(other: Decimals.infinity)
+            guard _canCrunch else {
+                return _canCrunch
+            }
+            infinityTime = Date()
+            return _canCrunch
+        }
+    }
+    
     init() {
         state = InfinityState()
     }
@@ -19,6 +37,18 @@ class Infinity: Resettable {
     func add(infinities: InfiniteDecimal) {
         state.infinities = state.infinities.add(value: infinities)
         Statistics.shared.totalInfinities = Statistics.shared.totalInfinities.add(value: infinities)
+    }
+    
+    func crunch() {
+        guard canCrunch else {
+            return
+        }
+        Antimatter.shared.state.reset()
+        // Start with 100 instead of 10
+        Antimatter.shared.state.antimatter = 100
+        Infinity.shared.add(infinities: 1)
+        Infinity.shared.state.infinityStartTime = Date()
+        Dimensions.shared.dimensions.forEach({$1.reset()})
     }
     
     static func reset() {

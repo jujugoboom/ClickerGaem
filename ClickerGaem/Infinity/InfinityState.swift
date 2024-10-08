@@ -12,6 +12,7 @@ class InfinityState: Saveable {
     var infinities: InfiniteDecimal = 0
     var infinitiesThisCrunch: InfiniteDecimal = 0
     var infinityPower: InfiniteDecimal = 0
+    var infinityStartTime: Date = Date()
     var infinityBroken = false
     
     init() {
@@ -28,6 +29,7 @@ class InfinityState: Saveable {
                 storedState?.infinitiesThisCrunch = infinitiesThisCrunch
                 storedState?.infinityPower = infinityPower
                 storedState?.infinityBroken = infinityBroken
+                storedState?.infinityStartTime = infinityStartTime
                 return
             }
             storedState = maybeStoredState
@@ -36,6 +38,7 @@ class InfinityState: Saveable {
         infinitiesThisCrunch = storedState!.infinitiesThisCrunch as! InfiniteDecimal
         infinityPower = storedState!.infinityPower as! InfiniteDecimal
         infinityBroken = storedState!.infinityBroken
+        infinityStartTime = storedState?.infinityStartTime ?? Date()
     }
     
     func save(objectContext: NSManagedObjectContext, notification: NotificationCenter.Publisher.Output?) {
@@ -46,6 +49,7 @@ class InfinityState: Saveable {
         storedState?.infinitiesThisCrunch = infinitiesThisCrunch
         storedState?.infinityPower = infinityPower
         storedState?.infinityBroken = infinityBroken
+        storedState?.infinityStartTime = infinityStartTime
         try? objectContext.save()
     }
 }
