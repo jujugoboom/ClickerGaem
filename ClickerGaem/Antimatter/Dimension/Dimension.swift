@@ -73,7 +73,7 @@ class Dimension: Identifiable, Tickable {
     }
     
     var canBuy: Bool {
-        state.unlocked && howManyCanBuy.gt(other: 0)
+        state.unlocked && howManyCanBuy.gt(other: 0) && (tier > 1 ? Dimensions.shared.dimensions[tier - 1]?.state.purchaseCount ?? 0 > 0 : true)
     }
     
     var infinityMultiplier: InfinityUpgrade

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AudioToolbox
 
 struct DimensionView: View {
     var tier: Int
@@ -35,7 +36,8 @@ struct DimensionView: View {
                 Text("Buy \(dimension.howManyCanBuy.toInt())")
                 Text("\(dimension.cost.mul(value: dimension.howManyCanBuy.max(other: 1)))").font(.system(size: 10))
             }.frame(maxWidth: .infinity, maxHeight: 100)
-        }.disabled(!dimension.canBuy).animation(.spring, value: dimension.howManyCanBuy).buttonStyle(.bordered).simultaneousGesture(LongPressGesture().onEnded {_ in 
+        }.disabled(!dimension.canBuy).animation(.smooth, value: dimension.howManyCanBuy).buttonStyle(.bordered).simultaneousGesture(LongPressGesture().onEnded {_ in
+            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
             viewingDetails.toggle()
         }).simultaneousGesture(TapGesture().onEnded {_ in
             buy()

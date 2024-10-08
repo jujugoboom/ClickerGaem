@@ -25,14 +25,14 @@ struct AntimatterView: View {
     
     var body: some View {
         VStack {
-            Text("You have \(state.antimatter) antimatter").font(.headline).foregroundStyle(.red)
-            Text("You are getting \(state.amPerSecond) AM/s").font(.subheadline)
+            Text("You have \(state.antimatter) antimatter").font(.headline).foregroundStyle(.red).animation(.smooth, value: state.antimatter)
+            Text("You are getting \(state.amPerSecond) AM/s").font(.subheadline).animation(.smooth, value: state.amPerSecond)
             HStack {
                 Button(action: buyTickspeedUpgrade) {
                     VStack {
                         Text("\(state.ticksPerSecond) ticks/s").font(.subheadline)
                         Text("Buy for \(state.tickspeedUpgradeCost)").font(.caption)
-                    }
+                    }.animation(.smooth, value: state.ticksPerSecond)
                 }.disabled(state.tickspeedUpgradeCost.gt(other: state.antimatter)).buttonStyle(.bordered)
                 Button(action: maxTickspeedUpgrade) {
                     Text("Max").disabled(state.tickspeedUpgradeCost.gt(other: state.antimatter)).font(.subheadline).padding(.vertical, 8)
