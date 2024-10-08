@@ -105,6 +105,7 @@ struct AntimatterView: View {
 }
 
 #Preview {
+    ClickerGaemData.shared.persistentContainer = ClickerGaemData.preview
     Statistics.shared.totalAntimatter = InfiniteDecimal(mantissa: 1, exponent: 200)
     Antimatter.shared.state.dimensionBoosts = 6
     return ContentView()

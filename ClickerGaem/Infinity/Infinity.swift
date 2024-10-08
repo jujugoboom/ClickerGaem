@@ -35,6 +35,9 @@ class Infinity: Resettable {
     }
     
     func add(infinities: InfiniteDecimal) {
+        if !state.firstInfinity {
+            state.firstInfinity = true
+        }
         state.infinities = state.infinities.add(value: infinities)
         Statistics.shared.totalInfinities = Statistics.shared.totalInfinities.add(value: infinities)
     }

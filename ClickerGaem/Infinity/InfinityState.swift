@@ -14,6 +14,7 @@ class InfinityState: Saveable {
     var infinityPower: InfiniteDecimal = 0
     var infinityStartTime: Date = Date()
     var infinityBroken = false
+    var firstInfinity = false
     
     init() {
         self.load()
@@ -30,6 +31,7 @@ class InfinityState: Saveable {
                 storedState?.infinityPower = infinityPower
                 storedState?.infinityBroken = infinityBroken
                 storedState?.infinityStartTime = infinityStartTime
+                storedState?.firstInfinity = firstInfinity
                 return
             }
             storedState = maybeStoredState
@@ -39,6 +41,7 @@ class InfinityState: Saveable {
         infinityPower = storedState!.infinityPower as! InfiniteDecimal
         infinityBroken = storedState!.infinityBroken
         infinityStartTime = storedState?.infinityStartTime ?? Date()
+        firstInfinity = storedState!.firstInfinity
     }
     
     func save(objectContext: NSManagedObjectContext, notification: NotificationCenter.Publisher.Output?) {
@@ -50,6 +53,7 @@ class InfinityState: Saveable {
         storedState?.infinityPower = infinityPower
         storedState?.infinityBroken = infinityBroken
         storedState?.infinityStartTime = infinityStartTime
+        storedState?.firstInfinity = firstInfinity
         try? objectContext.save()
     }
 }

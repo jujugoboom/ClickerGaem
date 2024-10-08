@@ -8,7 +8,7 @@ import SwiftUI
 import OrderedCollections
 
 struct AntimatterTab: View {
-    @State var selectedView: String? = "dimensions"
+    @State var currTab = 1
     var unlockedViews: OrderedDictionary<String, String> {
         var unlocked: OrderedDictionary<String, String> = ["dimensions": "Antimatter Dimensions"]
         if Statistics.shared.totalAntimatter.gte(other: Decimals.e40) {
@@ -17,14 +17,14 @@ struct AntimatterTab: View {
         return unlocked
     }
     var body: some View {
-        TabView {
+        TabView(selection: $currTab) {
             AntimatterView().tabItem {
                 Label("Antimatter Dimensions", systemImage: "circle.and.line.horizontal")
-            }
+            }.tag(1)
             if Statistics.shared.totalAntimatter.gte(other: Decimals.e40) {
                 AMAutobuyerView().tabItem {
                     Label("Autobuyers", systemImage: "autostartstop")
-                }
+                }.tag(2)
             }
         }
     }

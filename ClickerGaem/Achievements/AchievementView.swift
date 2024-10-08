@@ -27,5 +27,6 @@ struct AchievementView: View {
 }
 
 #Preview {
-    AchievementView()
+    ClickerGaemData.shared.persistentContainer = ClickerGaemData.preview
+    return AchievementView()
 }

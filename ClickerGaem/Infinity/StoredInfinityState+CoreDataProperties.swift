@@ -21,6 +21,7 @@ extension StoredInfinityState {
     @NSManaged public var infinityBroken: Bool
     @NSManaged public var infinityPower: NSObject?
     @NSManaged public var infinityStartTime: Date?
+    @NSManaged public var firstInfinity: Bool
 
 }
 

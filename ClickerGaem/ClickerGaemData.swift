@@ -39,10 +39,6 @@ class ClickerGaemData: ObservableObject {
                 fatalError("Failed to load persistent stores: \(error.localizedDescription)")
             }
         }
-        let inferredModel = try? NSMappingModel.inferredMappingModel(forSourceModel: container.managedObjectModel, destinationModel: container.managedObjectModel)
-        if (inferredModel != nil) {
-            // Lightweight migration is possible
-        }
 
         return container
     }()

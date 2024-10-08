@@ -92,5 +92,6 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView().environment(\.managedObjectContext, ClickerGaemData.preview.viewContext)
+    ClickerGaemData.shared.persistentContainer = ClickerGaemData.preview
+    return SettingsView().environment(\.managedObjectContext, ClickerGaemData.preview.viewContext)
 }

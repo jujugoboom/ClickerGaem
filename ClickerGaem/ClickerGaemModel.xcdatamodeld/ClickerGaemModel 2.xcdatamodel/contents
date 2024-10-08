@@ -29,6 +29,7 @@
         <attribute name="updateInterval" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
     <entity name="StoredInfinityState" representedClassName="StoredInfinityState" syncable="YES">
+        <attribute name="firstInfinity" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="infinities" optional="YES" attributeType="Transformable" valueTransformerName="InfiniteDecimalTransformer"/>
         <attribute name="infinitiesThisCrunch" optional="YES" attributeType="Transformable" valueTransformerName="InfiniteDecimalTransformer"/>
         <attribute name="infinityBroken" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>

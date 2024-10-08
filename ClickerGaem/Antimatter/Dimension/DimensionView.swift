@@ -82,5 +82,6 @@ struct DimensionDetails: View {
 }
 
 #Preview {
-    DimensionView(tier: 1)
+    ClickerGaemData.shared.persistentContainer = ClickerGaemData.preview
+    return DimensionView(tier: 1)
 }

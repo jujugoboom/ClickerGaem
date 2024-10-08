@@ -7,7 +7,7 @@
 import Foundation
 import CoreData
 
-class InfinityUpgrade: Saveable {
+class InfinityUpgrade: Saveable, Identifiable {
     var storedInfinityUpgradeState: StoredInfinityUpgrade?
     var bought = false
     var id: String;
@@ -15,6 +15,10 @@ class InfinityUpgrade: Saveable {
     var cost: InfiniteDecimal;
     var effect: () -> InfiniteDecimal
     var requirements: (() -> Bool)?
+    
+    var canBuy: Bool {
+        requirements?() ?? true && !bought && Infinity.shared.state.infinities.gte(other: cost)
+    }
     
     init(bought: Bool = false, id: String, description: String, cost: InfiniteDecimal, requirements: (() -> Bool)? = nil, effect: @escaping () -> InfiniteDecimal) {
         self.bought = bought
@@ -49,6 +53,14 @@ class InfinityUpgrade: Saveable {
         storedInfinityUpgradeState!.id = id
         storedInfinityUpgradeState!.bought = bought
         try? objectContext.save()
+    }
+    
+    func buy() {
+        guard canBuy else {
+            return
+        }
+        Infinity.shared.state.infinities = Infinity.shared.state.infinities.sub(value: cost)
+        bought = true
     }
 }
 

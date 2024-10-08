@@ -24,6 +24,9 @@ struct MainNavigation: View {
         if Achievements.shared.unlockedAchievements.count > 0 {
             views.append("Achievements")
         }
+        if Infinity.shared.state.firstInfinity {
+            views.append("Infinity")
+        }
         return views
     }
     
@@ -35,17 +38,13 @@ struct MainNavigation: View {
         } detail: {
             switch currentView {
             case "Antimatter":
-                Section {
-                    AntimatterTab()
-                }
+                AntimatterTab()
             case "Settings":
-                Section {
-                    SettingsView()
-                }
+                SettingsView()
             case "Achievements":
-                Section {
-                    AchievementView()
-                }
+                AchievementView()
+            case "Infinity":
+                InfinityTab()
             default:
                 Section {
                     EmptyView()
@@ -119,6 +118,7 @@ extension View {
 }
 
 #Preview {
-    ContentView()
+    ClickerGaemData.shared.persistentContainer = ClickerGaemData.preview
+    return ContentView()
         .environment(\.managedObjectContext, ClickerGaemData.preview.viewContext)
 }

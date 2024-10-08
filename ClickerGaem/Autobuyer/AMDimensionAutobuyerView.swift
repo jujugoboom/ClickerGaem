@@ -43,6 +43,7 @@ struct AMDimensionAutobuyerView: View {
 }
 
 #Preview {
+    ClickerGaemData.shared.persistentContainer = ClickerGaemData.preview
     Statistics.shared.totalAntimatter = InfiniteDecimal(mantissa: 1, exponent: 50)
     return AMDimensionAutobuyerView(autobuyer: AMDimensionAutobuyer(tier: 1))
 }
