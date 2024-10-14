@@ -88,7 +88,7 @@ class Achievement: Saveable, Identifiable {
 }
 
 @Observable
-class Achievements {
+class Achievements: Saveable {
     var newAchievementName = ""
     var unlockedNewAchievement = false
     
@@ -112,43 +112,43 @@ class Achievements {
         self.unlockedNewAchievement = true
     }
     
-    init(antimatter: Antimatter) {
-        eleventh = Achievement(id: 11, name: "You gotta start somewhere", description: "Buy first antimatter dimension", of: antimatter.dimensions.dimensions[1]!.purchaseCount) { purchaseCount, achievement in
+    init(antimatter: Antimatter, dimensions: Dimensions) {
+        eleventh = Achievement(id: 11, name: "You gotta start somewhere", description: "Buy first antimatter dimension", of: dimensions.dimensions[1]!.purchaseCount) { purchaseCount, achievement in
             if purchaseCount as! Int > 0 {
                 achievement.unlocked = true
             }
         }
-        twelfth = Achievement(id: 12, name: "100 antimatter is a lot", description: "Buy a 2nd Antimatter Dimension", of: antimatter.dimensions.dimensions[2]!.purchaseCount) { purchaseCount, achievement in
+        twelfth = Achievement(id: 12, name: "100 antimatter is a lot", description: "Buy a 2nd Antimatter Dimension", of: dimensions.dimensions[2]!.purchaseCount) { purchaseCount, achievement in
             if purchaseCount as! Int > 0 {
                 achievement.unlocked = true
             }
         }
-        thirteenth = Achievement(id: 13, name: "Half life 3 CONFIRMED", description: "Buy a 3rd Antimatter Dimension.", of: antimatter.dimensions.dimensions[3]!.purchaseCount) {purchaseCount, achievement in
+        thirteenth = Achievement(id: 13, name: "Half life 3 CONFIRMED", description: "Buy a 3rd Antimatter Dimension.", of: dimensions.dimensions[3]!.purchaseCount) {purchaseCount, achievement in
             if purchaseCount as! Int > 0 {
                 achievement.unlocked = true
             }
         }
-        fourteenth = Achievement(id: 14, name: "L4D: Left 4 Dimensions", description: "Buy a 4th Antimatter Dimension.", of: antimatter.dimensions.dimensions[4]!.purchaseCount) {purchaseCount, achievement in
+        fourteenth = Achievement(id: 14, name: "L4D: Left 4 Dimensions", description: "Buy a 4th Antimatter Dimension.", of: dimensions.dimensions[4]!.purchaseCount) {purchaseCount, achievement in
             if purchaseCount as! Int > 0 {
                 achievement.unlocked = true
             }
         }
-        fifteenth = Achievement(id: 15, name: "5 Dimension Antimatter Punch", description: "Buy a 5th Antimatter Dimension.", of: antimatter.dimensions.dimensions[5]!.purchaseCount) {purchaseCount, achievement in
+        fifteenth = Achievement(id: 15, name: "5 Dimension Antimatter Punch", description: "Buy a 5th Antimatter Dimension.", of: dimensions.dimensions[5]!.purchaseCount) {purchaseCount, achievement in
             if purchaseCount as! Int > 0 {
                 achievement.unlocked = true
             }
         }
-        sixteenth = Achievement(id: 16, name: "We couldn't afford 9", description: "Buy a 6th Antimatter Dimension.", of: antimatter.dimensions.dimensions[6]!.purchaseCount) {purchaseCount, achievement in
+        sixteenth = Achievement(id: 16, name: "We couldn't afford 9", description: "Buy a 6th Antimatter Dimension.", of: dimensions.dimensions[6]!.purchaseCount) {purchaseCount, achievement in
             if purchaseCount as! Int > 0 {
                 achievement.unlocked = true
             }
         }
-        seventeenth = Achievement(id: 17, name: "Not a luck related achievement", description: "Buy a 7th Antimatter Dimension.", of: antimatter.dimensions.dimensions[7]!.purchaseCount) {purchaseCount, achievement in
+        seventeenth = Achievement(id: 17, name: "Not a luck related achievement", description: "Buy a 7th Antimatter Dimension.", of: dimensions.dimensions[7]!.purchaseCount) {purchaseCount, achievement in
             if purchaseCount as! Int > 0 {
                 achievement.unlocked = true
             }
         }
-        eighteenth = Achievement(id: 18, name: "90 degrees to infinity", description: "Buy a 8th Antimatter Dimension.", of: antimatter.dimensions.dimensions[8]!.purchaseCount) {purchaseCount, achievement in
+        eighteenth = Achievement(id: 18, name: "90 degrees to infinity", description: "Buy a 8th Antimatter Dimension.", of: dimensions.dimensions[8]!.purchaseCount) {purchaseCount, achievement in
             if purchaseCount as! Int > 0 {
                 achievement.unlocked = true
             }
@@ -156,5 +156,14 @@ class Achievements {
 
         achievements.forEach({$0.unlockCallback = self.onUnlock})
         print("Achievements initialized")
+    }
+    
+    
+    func load() {
+        return
+    }
+    
+    func save(objectContext: NSManagedObjectContext, notification: NotificationCenter.Publisher.Output?) {
+        achievements.forEach({$0.save(objectContext: objectContext, notification: notification)})
     }
 }

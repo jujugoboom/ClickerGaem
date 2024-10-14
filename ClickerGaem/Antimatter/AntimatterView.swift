@@ -15,13 +15,12 @@ struct AntimatterView: View {
     var antimatter: Antimatter {
         gameInstance.antimatter
     }
-    
-    var dimensions: [Dimension] {
-        Array(antimatter.dimensions.dimensions.values)
+    var dimensions: Dimensions {
+        gameInstance.dimensions
     }
     
     var currSacrificeMultiplier: InfiniteDecimal {
-        Antimatter.dimensionSacrificeMultiplier(sacrificed: antimatter.sacrificedDimensions.add(value: dimensions.first?.currCount ?? 0)).div(value: antimatter.dimensionSacrificeMul)
+        Antimatter.dimensionSacrificeMultiplier(sacrificed: antimatter.sacrificedDimensions.add(value: dimensions.dimensions.values.first?.currCount ?? 0)).div(value: antimatter.dimensionSacrificeMul)
     }
     
     private let columns = [GridItem(.adaptive(minimum: 150))]
@@ -30,7 +29,7 @@ struct AntimatterView: View {
     var body: some View {
         VStack {
             Text("You have \(antimatter.antimatter) antimatter").font(.headline).foregroundStyle(.red).animation(.smooth, value: antimatter.antimatter)
-            Text("You are getting \(antimatter.amPerSecond) AM/s").font(.subheadline).animation(.smooth, value: antimatter.amPerSecond)
+            Text("You are getting \(dimensions.amPerSecond) AM/s").font(.subheadline).animation(.smooth, value: dimensions.amPerSecond)
             HStack {
                 Button(action: buyTickspeedUpgrade) {
                     VStack {
@@ -48,18 +47,18 @@ struct AntimatterView: View {
                         
                             Button(action: buyDimensionSacrifice) {
                                 Text("Buy: \(currSacrificeMultiplier)x").font(.subheadline)
-                            }.disabled(antimatter.dimensions.dimensions[8]!.purchaseCount == 0)
+                            }.disabled(dimensions.dimensions[8]!.purchaseCount == 0)
                     }
                 
             }
             LazyVGrid(columns: columns) {
-                ForEach(antimatter.dimensions.unlockedDimensions) { dimension in
+                ForEach(dimensions.unlockedDimensions) { dimension in
                     DimensionView(dimension: dimension)
                 }
             }
             Button(action: buyMaxDimensions) {
                 Text("Max all dimensions").font(.subheadline)
-            }.buttonStyle(.borderedProminent).disabled((dimensions.first(where: {dimension in antimatter.canBuyDimension(dimension.tier)}) == nil))
+            }.buttonStyle(.borderedProminent).disabled((dimensions.dimensions.values.first(where: {dimension in dimensions.canBuyDimension(dimension.tier)}) == nil))
 
             Spacer()
             DimensionBoostView()
@@ -67,13 +66,16 @@ struct AntimatterView: View {
         }.padding()
     }
     
+    @MainActor
     private func buyTickspeedUpgrade() {
         let antimatter = antimatter.antimatter
         let tickspeedUpgradeCost = self.antimatter.tickspeedUpgradeCost
         guard antimatter.gte(other: tickspeedUpgradeCost) else {
             return
         }
-        self.antimatter.antimatter = antimatter.sub(value: tickspeedUpgradeCost)
+        guard self.antimatter.sub(amount: tickspeedUpgradeCost) else {
+            return
+        }
         self.antimatter.tickSpeedUpgrades = (self.antimatter.tickSpeedUpgrades.add(value: 1))
     }
     
@@ -84,9 +86,9 @@ struct AntimatterView: View {
     }
     
     private func buyMaxDimensions() {
-        dimensions.reversed().forEach() { dimension in
-            while self.antimatter.canBuyDimension(dimension.tier) {
-                antimatter.buyDimension(dimension.tier)
+        dimensions.dimensions.values.reversed().forEach() { dimension in
+            while self.dimensions.canBuyDimension(dimension.tier) {
+                dimensions.buyDimension(dimension.tier)
             }
         }
     }
@@ -95,11 +97,11 @@ struct AntimatterView: View {
         guard self.antimatter.dimensionBoosts >= 5 else {
             return
         }
-        guard let firstDimension = dimensions.first else {
+        guard let firstDimension = dimensions.dimensions.values.first else {
             return
         }
         self.antimatter.sacrificedDimensions = self.antimatter.sacrificedDimensions.add(value: firstDimension.currCount)
-        for dimension in dimensions {
+        for dimension in dimensions.dimensions.values {
             guard dimension.tier != 8 else {
                 continue
             }

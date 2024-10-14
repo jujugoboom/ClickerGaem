@@ -25,7 +25,7 @@ struct InfinityTab: View {
 #Preview {
     ClickerGaemData.shared.persistentContainer = ClickerGaemData.preview
     let gameInstance = GameInstance()
-    gameInstance.infinity.infinityUpgrades.totalTimeMult.bought = true
+    gameInstance.infinityUpgrades.totalTimeMult.bought = true
     gameInstance.infinity.infinities = 10
     return InfinityTab().environment(gameInstance)
 }

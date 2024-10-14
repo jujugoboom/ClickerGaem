@@ -8,13 +8,13 @@ import Foundation
 import CoreData
 
 @Observable
-class Antimatter: Tickable {
-    let infinity: Infinity
+class Antimatter {
+//    let infinity: Infinity
     let statistics: Statistics
-    let dimensions: Dimensions
+//    let dimensions: Dimensions
     
     var storedState: StoredAntimatterState?
-    var antimatter: InfiniteDecimal = 10
+    public private(set) var antimatter: InfiniteDecimal = 10
     var tickSpeedUpgrades: InfiniteDecimal = 0
     var dimensionBoosts = 0
     var amGalaxies = 0
@@ -69,7 +69,6 @@ class Antimatter: Tickable {
     }
     
     func save(objectContext: NSManagedObjectContext, notification: NotificationCenter.Publisher.Output? = nil) {
-        self.dimensions.dimensions.values.forEach({$0.save(objectContext: objectContext, notification: notification)})
         if storedState == nil {
             storedState = StoredAntimatterState(context: objectContext)
         }
@@ -90,17 +89,11 @@ class Antimatter: Tickable {
         self.load()
     }
     
-    var amPerSecond: InfiniteDecimal {
-        guard dimensions.dimensions.keys.contains(1) else {
-            return 0
-        }
-        return dimensions.dimensions[1]!.perSecond(antimatter: self)
-    }
     
     init(infinity: Infinity, statistics: Statistics) {
-        self.infinity = infinity
+//        self.infinity = infinity
         self.statistics = statistics
-        self.dimensions = Dimensions(infinityUpgrades: infinity.infinityUpgrades)
+//        self.dimensions = Dimensions(infinityUpgrades: infinity.infinityUpgrades)
         self.load()
     }
     
@@ -108,52 +101,47 @@ class Antimatter: Tickable {
         InfiniteDecimal(source: sacrificed.log10() / 10).max(other: 1).pow(value: 2)
     }
     
-    func canBuyDimension(_ tier: Int) -> Bool {
-        if let dimension = dimensions.dimensions[tier] {
-            return dimension.unlocked && dimension.howManyCanBuy(antimatter: self).gt(other: 0) && (tier > 1 ? dimensions.dimensions[tier - 1]?.purchaseCount ?? 0 > 0 : true)
-        }
-        return false
-    }
     
-    func buyDimension(_ tier: Int, count: InfiniteDecimal? = nil) {
-        if let dimension = dimensions.dimensions[tier] {
-            let toBuy = count == nil ? dimension.howManyCanBuy(antimatter: self) : count!
-            let totalCost = dimension.cost.mul(value: toBuy)
-            guard antimatter.gte(other: totalCost) else {
-                return
-            }
-            antimatter = antimatter.sub(value: totalCost)
-            let intCount = toBuy.toInt()
-            dimension.purchaseCount += intCount
-            dimension.currCount = dimension.currCount.add(value: toBuy)
-        }
-    }
-    
+    @MainActor
     func add(amount: InfiniteDecimal) {
         antimatter = antimatter.add(value: amount).min(other: Decimals.infinity)
     }
     
-    func tick(diff: TimeInterval) {
-        dimensions.unlockedDimensions.forEach({
-            guard $0.purchaseCount > 0 else {
-                return
-            }
-            guard !infinity.infinityBroken && !antimatter.gte(other: Decimals.infinity) else {
-                return
-            }
-            if $0.tier == 1 {
-                let perSecond = $0.perSecond(antimatter: self)
-                if perSecond.gt(other: statistics.bestAMs) {
-                    statistics.bestAMs = perSecond
-                }
-                let generatedAntimatter = perSecond.mul(value: InfiniteDecimal(source: diff))
-                add(amount: generatedAntimatter)
-                statistics.addAntimatter(amount: generatedAntimatter, diff: diff)
-            } else {
-                // Get dimension the tier below this one
-                let lowerDimension = dimensions.dimensions[$0.tier - 1]!
-                lowerDimension.currCount = lowerDimension.currCount.add(value: $0.perSecond(antimatter: self).mul(value: InfiniteDecimal(source: diff / 10)))
-            }
-        })
+    @MainActor
+    func sub(amount: InfiniteDecimal) -> Bool {
+        guard antimatter.gte(other: amount) else {
+            return false
+        }
+        antimatter = antimatter.sub(value: amount)
+        return true
     }
+    
+    @MainActor
+    func set(amount: InfiniteDecimal) {
+        antimatter = amount
+    }
+    
+//    func tick(diff: TimeInterval) {
+//        dimensions.unlockedDimensions.forEach({
+//            guard $0.purchaseCount > 0 else {
+//                return
+//            }
+//            guard !infinity.infinityBroken && !antimatter.gte(other: Decimals.infinity) else {
+//                return
+//            }
+//            if $0.tier == 1 {
+//                let perSecond = $0.perSecond(antimatter: self)
+//                if perSecond.gt(other: statistics.bestAMs) {
+//                    statistics.bestAMs = perSecond
+//                }
+//                let generatedAntimatter = perSecond.mul(value: InfiniteDecimal(source: diff))
+//                add(amount: generatedAntimatter)
+//                statistics.addAntimatter(amount: generatedAntimatter, diff: diff)
+//            } else {
+//                // Get dimension the tier below this one
+//                let lowerDimension = dimensions.dimensions[$0.tier - 1]!
+//                lowerDimension.currCount = lowerDimension.currCount.add(value: $0.perSecond(antimatter: self).mul(value: InfiniteDecimal(source: diff / 10)))
+//            }
+//        })
+//    }
 }

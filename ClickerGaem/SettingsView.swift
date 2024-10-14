@@ -14,6 +14,7 @@ struct SettingsView: View {
     @Environment(\.gameReset) var gameReset
     
     var antimatter: Antimatter { gameInstance.antimatter }
+    var dimensions: Dimensions { gameInstance.dimensions }
     
     var fields: Dictionary<String, (String) -> Void> {
         ["Antimatter": {val in
@@ -21,7 +22,7 @@ struct SettingsView: View {
             guard split.count == 2, let mantissa = Double(split[0]), let exponent = Int(split[1]) else {
                 return
             }
-            antimatter.antimatter = InfiniteDecimal(mantissa: mantissa, exponent: exponent, shouldNormalize: true)
+            antimatter.set(amount: InfiniteDecimal(mantissa: mantissa, exponent: exponent, shouldNormalize: true))
         }, "Dimension Boosts": {val in guard let intVal = Int(val) else {
             return
         }
@@ -48,7 +49,7 @@ struct SettingsView: View {
                 TextField("Value", text: $updateValue)
                 Button("Save", action: updateSelectedValue).containerShape(.rect)
             }
-            Button("Unlock all dimensions", action: {antimatter.dimensions.dimensions.values.forEach({$0.unlocked = true})})
+            Button("Unlock all dimensions", action: {dimensions.dimensions.values.forEach({$0.unlocked = true})})
         }.alert("Are you sure?", isPresented: $wantToDelete) {
             Button(role: .destructive, action: clearSaveData) {
                 Text("Delete save data")

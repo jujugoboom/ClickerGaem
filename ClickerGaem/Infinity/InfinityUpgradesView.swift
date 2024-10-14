@@ -41,10 +41,14 @@ struct InfinityUpgradesView: View {
         gameInstance.infinity
     }
     
+    var infinityUpgrades: InfinityUpgrades {
+        gameInstance.infinityUpgrades
+    }
+    
     var body: some View {
         ScrollView {
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
-                ForEach(infinity.infinityUpgrades.upgrades) { upgrade in
+                ForEach(infinityUpgrades.upgrades) { upgrade in
                     InfinityUpgradeButton(upgrade: upgrade, infinity: infinity)
                 }
             }
@@ -56,7 +60,8 @@ struct InfinityUpgradesView: View {
     ClickerGaemData.shared.persistentContainer = ClickerGaemData.preview
     let gameInstance = GameInstance()
     let infinity = gameInstance.infinity
-    infinity.infinityUpgrades.totalTimeMult.bought = true
+    let infinityUpgrades = gameInstance.infinityUpgrades
+    infinityUpgrades.totalTimeMult.bought = true
     infinity.infinities = 10
     return InfinityUpgradesView().environment(gameInstance)
 }

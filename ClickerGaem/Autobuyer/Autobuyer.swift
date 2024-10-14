@@ -57,7 +57,7 @@ extension BuyableAutobuyer {
     }
 }
 
-class Autobuyers: Tickable {
+class Autobuyers: Tickable, Saveable {
     let dimensionAutobuyers: [AMDimensionAutobuyer]
     var autobuyers: [any Autobuyer] = []
     var unlockedAutobuyers: [any Autobuyer] {
@@ -67,13 +67,22 @@ class Autobuyers: Tickable {
         autobuyers.filter({$0.unlocked && $0.enabled})
     }
     
-    init (antimatter: Antimatter, statistics: Statistics) {
-        dimensionAutobuyers = (1...8).map({AMDimensionAutobuyer(antimatter: antimatter, statistics: statistics, tier: $0)})
+    init (antimatter: Antimatter, statistics: Statistics, dimensions: Dimensions) {
+        dimensionAutobuyers = (1...8).map({AMDimensionAutobuyer(antimatter: antimatter, statistics: statistics, dimensions: dimensions, tier: $0)})
         autobuyers.append(contentsOf: dimensionAutobuyers)
     }
     
     func tick(diff: TimeInterval) {
         autobuyers.forEach({$0.tick(diff: diff)})
+    }
+    
+    
+    func load() {
+        return
+    }
+    
+    func save(objectContext: NSManagedObjectContext, notification: NotificationCenter.Publisher.Output?) {
+        autobuyers.forEach({$0.save(objectContext: objectContext, notification: notification)})
     }
     
     func reset() {

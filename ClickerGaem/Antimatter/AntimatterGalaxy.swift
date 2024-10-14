@@ -14,7 +14,7 @@ struct AntimatterGalaxy: View {
         gameInstance.antimatter
     }
     var dimensions: Dimensions {
-        antimatter.dimensions
+        gameInstance.dimensions
     }
     var galaxyCost: Int {
         80 + antimatter.amGalaxies * 60
@@ -31,6 +31,7 @@ struct AntimatterGalaxy: View {
         }
     }
     
+    @MainActor
     func buyGalaxy() {
         guard canBuyGalaxy else {
             return
@@ -38,7 +39,7 @@ struct AntimatterGalaxy: View {
         dimensions.dimensions.values.forEach() { dimension in
             dimension.reset(keepUnlocked: false)
         }
-        antimatter.antimatter = 10
+        antimatter.set(amount: 10)
         antimatter.tickSpeedUpgrades = 0
         antimatter.dimensionBoosts = 0
         antimatter.sacrificedDimensions = 0

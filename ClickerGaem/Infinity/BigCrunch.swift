@@ -15,6 +15,9 @@ struct FirstBigCrunch: ViewModifier {
     var infinity: Infinity {
         gameInstance.infinity
     }
+    var dimensions: Dimensions {
+        gameInstance.dimensions
+    }
     @State private var _canCrunch = false
     
     var canCrunch: Bool{
@@ -46,8 +49,8 @@ struct FirstBigCrunch: ViewModifier {
         infinity.add(infinities: 1)
         infinity.infinityStartTime = Date()
         antimatter.reset()
-        antimatter.antimatter = 100
-        antimatter.dimensions.dimensions.values.forEach() { dimension in
+        antimatter.set(amount: 100)
+        dimensions.dimensions.values.forEach() { dimension in
             dimension.reset()
         }
     }

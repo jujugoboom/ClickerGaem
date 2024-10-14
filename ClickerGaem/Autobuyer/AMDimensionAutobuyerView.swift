@@ -46,5 +46,5 @@ struct AMDimensionAutobuyerView: View {
     ClickerGaemData.shared.persistentContainer = ClickerGaemData.preview
     let gameInstance = GameInstance()
     gameInstance.statistics.totalAntimatter = InfiniteDecimal(mantissa: 1, exponent: 50)
-    return AMDimensionAutobuyerView(autobuyer: AMDimensionAutobuyer(antimatter: gameInstance.antimatter, statistics: gameInstance.statistics, tier: 1))
+    return AMDimensionAutobuyerView(autobuyer: AMDimensionAutobuyer(antimatter: gameInstance.antimatter, statistics: gameInstance.statistics, dimensions: gameInstance.dimensions, tier: 1))
 }

@@ -53,17 +53,14 @@ class Infinity {
         storedState?.firstInfinity = firstInfinity
         try? objectContext.save()
     }
-    let infinityUpgrades: InfinityUpgrades
+    
     let statistics: Statistics
     
     var infinityTime: Date = Date.distantPast
     
     init(statistics: Statistics) {
         self.statistics = statistics
-        // TODO: Probably a better way to do this
-        self.infinityUpgrades = InfinityUpgrades(statistics: statistics)
         self.load()
-        self.infinityUpgrades.infinity = { [unowned self] in self}()
     }
     
     func add(infinities: InfiniteDecimal) {

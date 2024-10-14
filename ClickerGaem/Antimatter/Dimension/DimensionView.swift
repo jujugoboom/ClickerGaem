@@ -13,20 +13,23 @@ struct DimensionView: View {
     var antimatter: Antimatter {
         gameInstance.antimatter
     }
+    var dimensions: Dimensions {
+        gameInstance.dimensions
+    }
     let tier: Int
     let tierStr: String
     let dimension: Dimension
     
     var howManyCanBuy: InfiniteDecimal {
-        dimension.howManyCanBuy(antimatter: antimatter)
+        dimension.howManyCanBuy
     }
     
     var canBuy: Bool {
-        antimatter.canBuyDimension(tier)
+        dimensions.canBuyDimension(tier)
     }
     
     var multiplier: InfiniteDecimal {
-        dimension.multiplier(antimatter: antimatter)
+        dimension.multiplier
     }
     
     @State var viewingDetails = false
@@ -36,7 +39,7 @@ struct DimensionView: View {
             VStack {
                 Text("\(tierStr) dimension")
                 HStack{
-                    Text("Total: \(dimension.currCount)").font(.system(size: 10))
+                    Text("Total: \(dimension.currCount.floor())").font(.system(size: 10))
                     Text("x\(multiplier)").font(.system(size: 10))
                 }
                 Text("Buy \(howManyCanBuy.toInt())")
@@ -61,7 +64,7 @@ struct DimensionView: View {
     }
                 
     private func buy() {
-        antimatter.buyDimension(dimension.tier)
+        dimensions.buyDimension(dimension.tier)
     }
 }
 
@@ -69,6 +72,9 @@ struct DimensionDetails: View {
     @Environment(GameInstance.self) var gameInstance: GameInstance
     var antimatter: Antimatter {
         gameInstance.antimatter
+    }
+    var dimensions: Dimensions {
+        gameInstance.dimensions
     }
     let tier: Int
     let tierString: String
@@ -78,7 +84,7 @@ struct DimensionDetails: View {
         guard tier != 8 else {
             return 0
         }
-        return antimatter.dimensions.dimensions[tier + 1]?.perSecond(antimatter: antimatter).div(value: dimension.currCount.max(other: 1)).mul(value: 100).mul(value: 0.1) ?? 0
+        return dimensions.dimensions[tier + 1]?.perSecond.div(value: dimension.currCount.max(other: 1)).mul(value: 100).mul(value: 0.1) ?? 0
     }
     
     var body: some View {
@@ -90,7 +96,7 @@ struct DimensionDetails: View {
             }
             HStack{
                 Text("+\(growthRate)%/s")
-                Text("Multiplier x\(dimension.multiplier(antimatter: antimatter))")
+                Text("Multiplier x\(dimension.multiplier)")
             }
         }
     }
@@ -109,6 +115,7 @@ struct DimensionDetails: View {
     let statistics = Statistics()
     let infinity = Infinity(statistics: statistics)
     let antimatter = Antimatter(infinity: infinity, statistics: statistics)
-    
-    return DimensionView(dimension: antimatter.dimensions.dimensions[1]!)
+    let infinityUpgrades = InfinityUpgrades(statistics: statistics, infinity: infinity)
+    let dimensions = Dimensions(antimatter: antimatter, infinity: infinity, statistics: statistics, infinityUpgrades: infinityUpgrades)
+    return DimensionView(dimension: dimensions.dimensions[1]!)
 }

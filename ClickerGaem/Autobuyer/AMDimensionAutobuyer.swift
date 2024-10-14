@@ -11,6 +11,7 @@ import CoreData
 class AMDimensionAutobuyer: BuyableAutobuyer {
     var antimatter: Antimatter
     var statistics: Statistics
+    var dimensions: Dimensions
     var purchased: Bool = false
     var id: String
     var enabled: Bool = false
@@ -24,7 +25,7 @@ class AMDimensionAutobuyer: BuyableAutobuyer {
         Decimals.e10.pow(value: InfiniteDecimal(integerLiteral: tier - 1)).mul(value: Decimals.e40);
     }
     var purchaseableCount: InfiniteDecimal {
-        antimatter.dimensions.dimensions[tier]?.howManyCanBuy(antimatter: antimatter) ?? InfiniteDecimal.zeroDecimal
+        dimensions.dimensions[tier]?.howManyCanBuy ?? InfiniteDecimal.zeroDecimal
     }
     var buyRate: Double {
         [0, 500, 600, 700, 800, 900, 1000, 1100, 1200][tier] / 1000
@@ -36,9 +37,10 @@ class AMDimensionAutobuyer: BuyableAutobuyer {
     
     var elapsedSinceBuy: Double = 0
     
-    init(antimatter: Antimatter, statistics: Statistics, tier: Int, purchaseAmount: Int = 10) {
+    init(antimatter: Antimatter, statistics: Statistics, dimensions: Dimensions, tier: Int, purchaseAmount: Int = 10) {
         self.antimatter = antimatter
         self.statistics = statistics
+        self.dimensions = dimensions
         self.tier = tier
         self.type = .amdimension
         self.id = "dimension-autobuyer-\(tier)"
@@ -48,6 +50,7 @@ class AMDimensionAutobuyer: BuyableAutobuyer {
         }
     }
     
+    @MainActor
     func tick(diff: TimeInterval) {
         guard enabled && unlocked else {
             return
@@ -63,7 +66,7 @@ class AMDimensionAutobuyer: BuyableAutobuyer {
         guard purchaseableCount.gte(other: InfiniteDecimal(integerLiteral: autobuyCount)) else {
             return
         }
-        antimatter.buyDimension(tier, count: InfiniteDecimal(integerLiteral: autobuyCount))
+        dimensions.buyDimension(tier, count: InfiniteDecimal(integerLiteral: autobuyCount))
     }
     
     

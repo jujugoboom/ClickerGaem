@@ -67,6 +67,8 @@ class GameInstance: Saveable {
     var statistics: Statistics
     var antimatter: Antimatter
     var infinity: Infinity
+    var infinityUpgrades: InfinityUpgrades
+    var dimensions: Dimensions
     var achievements: Achievements
     var autobuyers: Autobuyers
     
@@ -74,18 +76,24 @@ class GameInstance: Saveable {
         self.updateInterval = updateInterval
         let statistics = Statistics()
         let infinity = Infinity(statistics: statistics)
+        let infinityUpgrades = InfinityUpgrades(statistics: statistics, infinity: infinity)
         let antimatter = Antimatter(infinity: infinity, statistics: statistics)
-        let autobuyers = Autobuyers(antimatter: antimatter, statistics: statistics)
-        let achievements = Achievements(antimatter: antimatter)
+        let dimensions = Dimensions(antimatter: antimatter, infinity: infinity, statistics: statistics, infinityUpgrades: infinityUpgrades)
+        let autobuyers = Autobuyers(antimatter: antimatter, statistics: statistics, dimensions: dimensions)
+        let achievements = Achievements(antimatter: antimatter, dimensions: dimensions)
         self.statistics = statistics
         self.infinity = infinity
         self.antimatter = antimatter
         self.autobuyers = autobuyers
         self.achievements = achievements
+        self.dimensions = dimensions
+        self.infinityUpgrades = infinityUpgrades
         self.load()
-        self.ticker = Ticker.DisplayTicker(updateInterval: updateInterval, tick: self.tick)
-        self.saveTicker = Ticker(updateInterval: 5, tick: self.saveTick)
-        self.saveTicker?.startTimer()
+        Task { @MainActor in
+            self.ticker = Ticker.DisplayTicker(updateInterval: updateInterval, tick: self.tick)
+            self.saveTicker = Ticker(updateInterval: 5, tick: self.saveTick)
+            self.saveTicker?.startTimer()
+        }
     }
     
     func simulateSinceLastSave() {
@@ -132,8 +140,9 @@ class GameInstance: Saveable {
         }
     }
     
+    @MainActor
     func tick(diff: TimeInterval) {
-        antimatter.tick(diff: diff)
+        dimensions.tick(diff: diff)
         for autobuyer in autobuyers.enabledAutobuyers {
             autobuyer.tick(diff: diff)
         }
@@ -147,8 +156,10 @@ class GameInstance: Saveable {
         ClickerGaemData.shared.persistentContainer.viewContext.performAndWait {
             let context = ClickerGaemData.shared.persistentContainer.viewContext
             antimatter.save(objectContext: context)
-            achievements.achievements.forEach({$0.save(objectContext: context)})
-            autobuyers.autobuyers.forEach({$0.save(objectContext: context, notification: nil)})
+            dimensions.save(objectContext: context, notification: nil)
+            infinityUpgrades.save(objectContext: context, notification: nil)
+            achievements.save(objectContext: context, notification: nil)
+            autobuyers.save(objectContext: context, notification: nil)
             self.save(objectContext: context)
         }
     }

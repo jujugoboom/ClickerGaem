@@ -13,11 +13,14 @@ struct DimensionBoostView: View {
     var antimatter: Antimatter {
         gameInstance.antimatter
     }
+    var dimensions: Dimensions {
+        gameInstance.dimensions
+    }
     var dimensionBoostCost: [Int: Dimension] {
         guard antimatter.dimensionBoosts >= 4 else {
-            return [20: antimatter.dimensions.dimensions[antimatter.dimensionBoosts + 4]!]
+            return [20: dimensions.dimensions[antimatter.dimensionBoosts + 4]!]
         }
-        return [-40 + (15 * antimatter.dimensionBoosts): antimatter.dimensions.dimensions[8]!]
+        return [-40 + (15 * antimatter.dimensionBoosts): dimensions.dimensions[8]!]
     }
     
     var canBuyDimensionBoost: Bool {
@@ -38,17 +41,18 @@ struct DimensionBoostView: View {
         }
     }
     
+    @MainActor
     func buyDimensionBoost() {
         guard canBuyDimensionBoost else {
             return
         }
-        antimatter.dimensions.dimensions.values.forEach() { dimension in
+        dimensions.dimensions.values.forEach() { dimension in
             dimension.reset(keepUnlocked: true)
         }
-        antimatter.antimatter = 10
+        antimatter.set(amount: 10)
         antimatter.tickSpeedUpgrades = 0
         antimatter.dimensionBoosts += 1
         antimatter.sacrificedDimensions = 0
-        antimatter.dimensions.dimensions[antimatter.dimensionBoosts + 4]?.unlocked = true
+        dimensions.dimensions[antimatter.dimensionBoosts + 4]?.unlocked = true
     }
 }

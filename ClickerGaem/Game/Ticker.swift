@@ -9,6 +9,7 @@ import Foundation
 import QuartzCore
 
 /// Basic utility to call a function on a given interval and pass the time since the last call
+@MainActor
 class Ticker {
     private var timer: Timer? = nil
     let tick: (TimeInterval) -> Void
@@ -51,6 +52,7 @@ class Ticker {
 }
 
 protocol Tickable: Identifiable {
+    @MainActor
     func tick(diff: TimeInterval)
 }
 

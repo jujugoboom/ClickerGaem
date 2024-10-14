@@ -58,9 +58,9 @@ class InfinityUpgrade: Saveable, Identifiable {
 
 }
 
-class InfinityUpgrades {
+class InfinityUpgrades: Saveable {
     let statistics: Statistics
-    var infinity: Infinity?
+    let infinity: Infinity
     
     let totalTimeMult: InfinityUpgrade
     
@@ -102,8 +102,9 @@ class InfinityUpgrades {
     
     var upgrades: [InfinityUpgrade] { [totalTimeMult, dim18Mult, dim27Mult, dim36Mult, dim45Mult, resetBoost, buy10Mult, galaxyBoost, thisInfinityTimeMult, unspentIPMult, dimboostMult, ipGen, skipReset1, skipReset2, skipReset3, skipResetGalaxy] }
 
-    init(statistics: Statistics) {
+    init(statistics: Statistics, infinity: Infinity) {
         self.statistics = statistics
+        self.infinity = infinity
         self.totalTimeMult = InfinityUpgrade(id: "timeMult", description: "Antimatter Dimensions gain a multiplier based on time played", cost: 1, effect: {
             InfiniteDecimal(source: pow(abs(statistics.startDate.timeIntervalSinceNow) / 2, 0.15))
         })
@@ -132,12 +133,20 @@ class InfinityUpgrades {
         self.resetBoost.requirements = {self.dim36Mult.bought}
         self.galaxyBoost.requirements = {self.dim45Mult.bought}
         self.thisInfinityTimeMult.effect = {
-            InfiniteDecimal(source: max(pow(abs(self.infinity?.infinityStartTime.timeIntervalSinceNow ?? 0) / 4, 0.25), 1))
+            InfiniteDecimal(source: max(pow(abs(self.infinity.infinityStartTime.timeIntervalSinceNow) / 4, 0.25), 1))
         }
         self.unspentIPMult.effect = {
-            self.infinity?.infinities.div(value: 2).pow(value: 1.5).add(value: 1) ?? 1
+            self.infinity.infinities.div(value: 2).pow(value: 1.5).add(value: 1)
         }
         self.dimboostMult.requirements = {self.unspentIPMult.bought}
         self.ipGen.requirements = {self.dimboostMult.bought}
+    }
+    
+    func load() {
+        return
+    }
+    
+    func save(objectContext: NSManagedObjectContext, notification: NotificationCenter.Publisher.Output?) {
+        upgrades.forEach({$0.save(objectContext: objectContext, notification: notification)})
     }
 }
