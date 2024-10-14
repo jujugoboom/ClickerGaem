@@ -7,8 +7,9 @@
 import SwiftUI
 
 struct AMAutobuyerView: View {
+    @Environment(GameInstance.self) var gameInstance
     var autobuyers: [AMDimensionAutobuyer] {
-        Autobuyers.shared.dimensionAutobuyers
+        gameInstance.autobuyers.dimensionAutobuyers
     }
     
     let columns: [GridItem] = [
@@ -29,6 +30,7 @@ struct AMAutobuyerView: View {
 
 #Preview {
     ClickerGaemData.shared.persistentContainer = ClickerGaemData.preview
-    Statistics.shared.totalAntimatter = InfiniteDecimal(mantissa: 1, exponent: 200)
-    return AMAutobuyerView()
+    let gameInstance = GameInstance()
+    gameInstance.statistics.totalAntimatter = InfiniteDecimal(mantissa: 1, exponent: 200)
+    return AMAutobuyerView().environment(gameInstance)
 }

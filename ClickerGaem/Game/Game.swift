@@ -6,27 +6,90 @@
 //
 
 import Foundation
+import CoreData
 
 protocol Resettable {
     static func reset() async
 }
 
-/// Right now just exists to setup the main game loop, but may handle more in the future
-class GameInstance: Resettable {
-    static let shared = GameInstance()
-    var state: GameState
+protocol Saveable {
+    func load()
+    func save(objectContext: NSManagedObjectContext, notification: NotificationCenter.Publisher.Output?)
+}
+
+extension Saveable {
+    
+}
+
+/// Main game model
+@Observable
+class GameInstance: Saveable {
+    var storedState: StoredGameState?
+    var updateInterval: Double = 0.05
+    
+    @MainActor
+    var simulating = false
+    @MainActor
+    var currSimulatingTick = 0
+    
+    func load() {
+        // TODO: Store autobuyers
+        ClickerGaemData.shared.persistentContainer.viewContext.performAndWait {
+            let fetchRequest = StoredGameState.fetchRequest()
+            fetchRequest.fetchLimit = 1
+            guard let maybeStoredState = try? ClickerGaemData.shared.persistentContainer.viewContext.fetch(fetchRequest).first else {
+                storedState = StoredGameState(context: ClickerGaemData.shared.persistentContainer.viewContext)
+                storedState!.updateInterval = updateInterval
+                return
+            }
+            storedState = maybeStoredState
+        }
+        updateInterval = storedState!.updateInterval
+        return
+    }
+    
+    func save(objectContext: NSManagedObjectContext, notification: NotificationCenter.Publisher.Output? = nil) {
+        if storedState == nil {
+            storedState = StoredGameState(context: objectContext)
+        }
+        storedState!.updateInterval = updateInterval
+        storedState!.lastSaveTime = Date().timeIntervalSinceReferenceDate
+        try! objectContext.save()
+    }
+    
+    func reset() {
+        updateInterval = 0.05
+    }
+    
     var ticker: Ticker.DisplayTicker? = nil
     var saveTicker: Ticker? = nil
     
-    init() {
-        self.state = GameState()
-        self.ticker = Ticker.DisplayTicker(updateInterval: state.updateInterval, tick: self.tick)
+    var statistics: Statistics
+    var antimatter: Antimatter
+    var infinity: Infinity
+    var achievements: Achievements
+    var autobuyers: Autobuyers
+    
+    init(updateInterval: Double = 0.05) {
+        self.updateInterval = updateInterval
+        let statistics = Statistics()
+        let infinity = Infinity(statistics: statistics)
+        let antimatter = Antimatter(infinity: infinity, statistics: statistics)
+        let autobuyers = Autobuyers(antimatter: antimatter, statistics: statistics)
+        let achievements = Achievements(antimatter: antimatter)
+        self.statistics = statistics
+        self.infinity = infinity
+        self.antimatter = antimatter
+        self.autobuyers = autobuyers
+        self.achievements = achievements
+        self.load()
+        self.ticker = Ticker.DisplayTicker(updateInterval: updateInterval, tick: self.tick)
         self.saveTicker = Ticker(updateInterval: 5, tick: self.saveTick)
         self.saveTicker?.startTimer()
     }
     
     func simulateSinceLastSave() {
-        guard let lastSave = state.storedState?.lastSaveTime else { return }
+        guard let lastSave = storedState?.lastSaveTime else { return }
         let timeOffline = Date.timeIntervalSinceReferenceDate - lastSave
         print("Offline for \(timeOffline)s")
         guard timeOffline > 5 else {
@@ -36,19 +99,19 @@ class GameInstance: Resettable {
             }
             simulate(diff: timeOffline, maxTicks: 10000)
             DispatchQueue.main.asyncAndWait {
-                state.currSimulatingTick = 0
+                currSimulatingTick = 0
                 ticker?.startTimer()
             }
             return
         }
         DispatchQueue.main.asyncAndWait {
             ticker?.stopTimer()
-            self.state.simulating = true
+            self.simulating = true
         }
         simulate(diff: timeOffline, maxTicks: 1000)
         DispatchQueue.main.asyncAndWait {
-            state.simulating = false
-            state.currSimulatingTick = 0
+            simulating = false
+            currSimulatingTick = 0
 
             ticker?.startTimer()
         }
@@ -57,30 +120,23 @@ class GameInstance: Resettable {
     private func simulate(diff: TimeInterval, maxTicks: Int) {
         var ticks = maxTicks
         var perTick = diff / Double(ticks)
-        if perTick < state.updateInterval {
-            perTick = state.updateInterval
+        if perTick < updateInterval {
+            perTick = updateInterval
             ticks = Int(diff / perTick)
         }
         for i in 0...ticks {
             DispatchQueue.main.asyncAndWait {
                 tick(diff: perTick)
-                self.state.currSimulatingTick = i
+                self.currSimulatingTick = i
             }
         }
     }
     
     func tick(diff: TimeInterval) {
-        for dimension in Dimensions.shared.dimensions.values.reversed() {
-            dimension.tick(diff: diff)
-        }
-        for autobuyer in Autobuyers.shared.enabledAutobuyers {
+        antimatter.tick(diff: diff)
+        for autobuyer in autobuyers.enabledAutobuyers {
             autobuyer.tick(diff: diff)
         }
-    }
-    
-    static func reset() {
-        shared.state.reset()
-        shared.state.load()
     }
     
     func saveTick(diff: TimeInterval) {
@@ -90,11 +146,10 @@ class GameInstance: Resettable {
     func saveGame() {
         ClickerGaemData.shared.persistentContainer.viewContext.performAndWait {
             let context = ClickerGaemData.shared.persistentContainer.viewContext
-            Antimatter.shared.state.save(objectContext: context)
-            Dimensions.shared.dimensions.values.forEach({$0.state.save(objectContext: context)})
-            Achievements.shared.achievements.forEach({$0.save(objectContext: context)})
-            Autobuyers.shared.autobuyers.forEach({$0.state.save(objectContext: context)})
-            GameInstance.shared.state.save(objectContext: context)
+            antimatter.save(objectContext: context)
+            achievements.achievements.forEach({$0.save(objectContext: context)})
+            autobuyers.autobuyers.forEach({$0.save(objectContext: context, notification: nil)})
+            self.save(objectContext: context)
         }
     }
 }

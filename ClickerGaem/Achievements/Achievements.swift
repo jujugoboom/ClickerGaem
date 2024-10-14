@@ -7,7 +7,6 @@
 import Foundation
 import CoreData
 
-@Observable
 class Achievement: Saveable, Identifiable {
     let id: Int
     let name: String
@@ -15,14 +14,14 @@ class Achievement: Saveable, Identifiable {
     let value: () -> Any
     let execute: (Any, Achievement) -> Void
     var storedState: StoredAchievementState?
+    var unlockCallback: ((String) -> Void)? = nil
     private var initialized = false
     var unlocked = false {
         didSet {
             guard initialized && unlocked else {
                 return
             }
-            Achievements.shared.newAchievementName = name
-            Achievements.shared.unlockedNewAchievement = true
+            (unlockCallback ?? {_ in })(name)
         }
     }
     
@@ -81,7 +80,7 @@ class Achievement: Saveable, Identifiable {
         withObservationTracking { [weak self] in
             execute(value(), self!)
         } onChange: {
-            Task { @MainActor [weak self] in
+            Task { [weak self] in
                 self!.withContinousObservation(of: value(), execute: execute)
             }
         }
@@ -89,57 +88,18 @@ class Achievement: Saveable, Identifiable {
 }
 
 @Observable
-class Achievements: Resettable {
-    static var shared: Achievements = Achievements()
-    var unlockedNewAchievement = false
+class Achievements {
     var newAchievementName = ""
-    let eleventh = Achievement(id: 11, name: "You gotta start somewhere", description: "Buy first antimatter dimension", of: Dimensions.shared.dimensions[1]!.state.purchaseCount) { purchaseCount, achievement in
-        if purchaseCount as! Int > 0 {
-            achievement.unlocked = true
-        }
-    }
+    var unlockedNewAchievement = false
     
-    let twelfth = Achievement(id: 12, name: "100 antimatter is a lot", description: "Buy a 2nd Antimatter Dimension", of: Dimensions.shared.dimensions[2]!.state.purchaseCount) { purchaseCount, achievement in
-        if purchaseCount as! Int > 0 {
-            achievement.unlocked = true
-        }
-    }
-    
-    let thirteenth = Achievement(id: 13, name: "Half life 3 CONFIRMED", description: "Buy a 3rd Antimatter Dimension.", of: Dimensions.shared.dimensions[3]!.state.purchaseCount) {purchaseCount, achievement in
-        if purchaseCount as! Int > 0 {
-            achievement.unlocked = true
-        }
-    }
-    
-    let fourteenth = Achievement(id: 14, name: "L4D: Left 4 Dimensions", description: "Buy a 4th Antimatter Dimension.", of: Dimensions.shared.dimensions[4]!.state.purchaseCount) {purchaseCount, achievement in
-        if purchaseCount as! Int > 0 {
-            achievement.unlocked = true
-        }
-    }
-    
-    let fifteenth = Achievement(id: 15, name: "5 Dimension Antimatter Punch", description: "Buy a 5th Antimatter Dimension.", of: Dimensions.shared.dimensions[5]!.state.purchaseCount) {purchaseCount, achievement in
-        if purchaseCount as! Int > 0 {
-            achievement.unlocked = true
-        }
-    }
-    
-    let sixteenth = Achievement(id: 16, name: "We couldn't afford 9", description: "Buy a 6th Antimatter Dimension.", of: Dimensions.shared.dimensions[6]!.state.purchaseCount) {purchaseCount, achievement in
-        if purchaseCount as! Int > 0 {
-            achievement.unlocked = true
-        }
-    }
-    
-    let seventeenth = Achievement(id: 17, name: "Not a luck related achievement", description: "Buy a 7th Antimatter Dimension.", of: Dimensions.shared.dimensions[7]!.state.purchaseCount) {purchaseCount, achievement in
-        if purchaseCount as! Int > 0 {
-            achievement.unlocked = true
-        }
-    }
-    
-    let eighteenth = Achievement(id: 18, name: "90 degrees to infinity", description: "Buy a 8th Antimatter Dimension.", of: Dimensions.shared.dimensions[8]!.state.purchaseCount) {purchaseCount, achievement in
-        if purchaseCount as! Int > 0 {
-            achievement.unlocked = true
-        }
-    }
+    let eleventh: Achievement
+    let twelfth: Achievement
+    let thirteenth: Achievement
+    let fourteenth: Achievement
+    let fifteenth: Achievement
+    let sixteenth: Achievement
+    let seventeenth: Achievement
+    let eighteenth: Achievement
     
     var achievements: [Achievement] { [eleventh, twelfth, thirteenth, fourteenth, fifteenth, sixteenth, seventeenth, eighteenth] }
     
@@ -147,13 +107,54 @@ class Achievements: Resettable {
         achievements.filter(\.unlocked)
     }
     
-    init() {
-        print("Achievements initialized")
+    func onUnlock(_ name: String) {
+        self.newAchievementName = name
+        self.unlockedNewAchievement = true
     }
     
-    static func reset() {
-        shared.achievements.forEach({$0.reset()})
-        shared.achievements.forEach({$0.load()})
-        shared.achievements.forEach({$0.withContinousObservation(of: $0.value, execute: $0.execute)})
+    init(antimatter: Antimatter) {
+        eleventh = Achievement(id: 11, name: "You gotta start somewhere", description: "Buy first antimatter dimension", of: antimatter.dimensions.dimensions[1]!.purchaseCount) { purchaseCount, achievement in
+            if purchaseCount as! Int > 0 {
+                achievement.unlocked = true
+            }
+        }
+        twelfth = Achievement(id: 12, name: "100 antimatter is a lot", description: "Buy a 2nd Antimatter Dimension", of: antimatter.dimensions.dimensions[2]!.purchaseCount) { purchaseCount, achievement in
+            if purchaseCount as! Int > 0 {
+                achievement.unlocked = true
+            }
+        }
+        thirteenth = Achievement(id: 13, name: "Half life 3 CONFIRMED", description: "Buy a 3rd Antimatter Dimension.", of: antimatter.dimensions.dimensions[3]!.purchaseCount) {purchaseCount, achievement in
+            if purchaseCount as! Int > 0 {
+                achievement.unlocked = true
+            }
+        }
+        fourteenth = Achievement(id: 14, name: "L4D: Left 4 Dimensions", description: "Buy a 4th Antimatter Dimension.", of: antimatter.dimensions.dimensions[4]!.purchaseCount) {purchaseCount, achievement in
+            if purchaseCount as! Int > 0 {
+                achievement.unlocked = true
+            }
+        }
+        fifteenth = Achievement(id: 15, name: "5 Dimension Antimatter Punch", description: "Buy a 5th Antimatter Dimension.", of: antimatter.dimensions.dimensions[5]!.purchaseCount) {purchaseCount, achievement in
+            if purchaseCount as! Int > 0 {
+                achievement.unlocked = true
+            }
+        }
+        sixteenth = Achievement(id: 16, name: "We couldn't afford 9", description: "Buy a 6th Antimatter Dimension.", of: antimatter.dimensions.dimensions[6]!.purchaseCount) {purchaseCount, achievement in
+            if purchaseCount as! Int > 0 {
+                achievement.unlocked = true
+            }
+        }
+        seventeenth = Achievement(id: 17, name: "Not a luck related achievement", description: "Buy a 7th Antimatter Dimension.", of: antimatter.dimensions.dimensions[7]!.purchaseCount) {purchaseCount, achievement in
+            if purchaseCount as! Int > 0 {
+                achievement.unlocked = true
+            }
+        }
+        eighteenth = Achievement(id: 18, name: "90 degrees to infinity", description: "Buy a 8th Antimatter Dimension.", of: antimatter.dimensions.dimensions[8]!.purchaseCount) {purchaseCount, achievement in
+            if purchaseCount as! Int > 0 {
+                achievement.unlocked = true
+            }
+        }
+
+        achievements.forEach({$0.unlockCallback = self.onUnlock})
+        print("Achievements initialized")
     }
 }

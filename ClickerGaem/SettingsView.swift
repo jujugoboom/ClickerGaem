@@ -10,21 +10,28 @@ import SwiftUI
 import CoreData
 
 struct SettingsView: View {
-    let fields: Dictionary<String, (String) -> Void> = ["Antimatter": {val in
-        let split = val.split(separator: "e")
-        guard split.count == 2, let mantissa = Double(split[0]), let exponent = Int(split[1]) else {
+    @Environment(GameInstance.self) var gameInstance
+    @Environment(\.gameReset) var gameReset
+    
+    var antimatter: Antimatter { gameInstance.antimatter }
+    
+    var fields: Dictionary<String, (String) -> Void> {
+        ["Antimatter": {val in
+            let split = val.split(separator: "e")
+            guard split.count == 2, let mantissa = Double(split[0]), let exponent = Int(split[1]) else {
+                return
+            }
+            antimatter.antimatter = InfiniteDecimal(mantissa: mantissa, exponent: exponent, shouldNormalize: true)
+        }, "Dimension Boosts": {val in guard let intVal = Int(val) else {
             return
         }
-        Antimatter.shared.state.antimatter = InfiniteDecimal(mantissa: mantissa, exponent: exponent, shouldNormalize: true)
-    }, "Dimension Boosts": {val in guard let intVal = Int(val) else {
-        return
+            antimatter.dimensionBoosts = intVal
+        }, "Galaxies": {val in guard let intVal = Int(val) else {
+            return
+        }
+            antimatter.amGalaxies = intVal
+        }]
     }
-        Antimatter.shared.state.dimensionBoosts = intVal
-    }, "Galaxies": {val in guard let intVal = Int(val) else {
-        return
-    }
-        Antimatter.shared.state.amGalaxies = intVal
-    }]
     @Environment(\.managedObjectContext) private var viewContext
     @State private var wantToDelete = false
     @State private var fieldToUpdate = "Antimatter"
@@ -41,7 +48,7 @@ struct SettingsView: View {
                 TextField("Value", text: $updateValue)
                 Button("Save", action: updateSelectedValue).containerShape(.rect)
             }
-            Button("Unlock all dimensions", action: {Dimensions.shared.dimensions.values.forEach({$0.state.unlocked = true})})
+            Button("Unlock all dimensions", action: {antimatter.dimensions.dimensions.values.forEach({$0.unlocked = true})})
         }.alert("Are you sure?", isPresented: $wantToDelete) {
             Button(role: .destructive, action: clearSaveData) {
                 Text("Delete save data")
@@ -56,8 +63,8 @@ struct SettingsView: View {
     }
     
     private func clearSaveData() {
-        GameInstance.shared.ticker?.stopTimer()
-        GameInstance.shared.saveTicker?.stopTimer()
+        gameInstance.ticker?.stopTimer()
+        gameInstance.saveTicker?.stopTimer()
         let deleteRequests: [NSBatchDeleteRequest] = ["StoredDimensionState", "StoredAchievementState", "StoredGameState", "StoredAntimatterState", "StoredAutobuyerState", "StoredStatistics", "StoredInfinityState", "StoredInfinityUpgrade"].map({getDeleteRequest($0)})
         do {
             try deleteRequests.forEach({try viewContext.execute($0)})
@@ -65,22 +72,14 @@ struct SettingsView: View {
             try viewContext.save()
             
             
-            GameInstance.reset()
-            Antimatter.reset()
-            Dimensions.reset()
-            Autobuyers.reset()
-            Infinity.reset()
-            InfinityUpgrades.reset()
-            Statistics.reset()
-            // Always do achievements last so they can reset themselves properly
-            Achievements.reset()
+            gameReset()
             
         } catch let error as NSError{
             debugPrint(error)
         }
         // Restart game loop
-        GameInstance.shared.ticker?.startTimer()
-        GameInstance.shared.saveTicker?.startTimer()
+//        gameInstance.ticker?.startTimer()
+//        gameInstance.saveTicker?.startTimer()
     }
     
     private func updateSelectedValue() {

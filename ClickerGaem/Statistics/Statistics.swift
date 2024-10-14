@@ -8,10 +8,9 @@ import Foundation
 import CoreData
 
 @Observable
-class Statistics: Saveable, Resettable {
-    static var shared = Statistics()
+class Statistics: Saveable {
     var storedStatistics: StoredStatistics?
-    var totalAntimatter: InfiniteDecimal = Antimatter.shared.state.antimatter
+    var totalAntimatter: InfiniteDecimal = 10
     var totalInfinities: InfiniteDecimal = 0
     var startDate: Date = Date()
     var bestAMs: InfiniteDecimal = 0
@@ -45,34 +44,6 @@ class Statistics: Saveable, Resettable {
     
     init() {
         self.load()
-        self.withContinousObservation(of: Dimensions.shared.dimensions[1]!.perSecond) { perSecond, statistics in
-            let currAMs = perSecond as! InfiniteDecimal
-            guard currAMs.gt(other: statistics.bestAMs) else {
-                return
-            }
-            statistics.bestAMs = currAMs
-        }
-        self.withContinousObservation(of: Infinity.shared.infinityTime) { maybeTime, statistics in
-            let infinityTime = maybeTime as! Date
-            guard infinityTime > Infinity.shared.state.infinityStartTime else {
-                return
-            }
-            let infinityInterval = infinityTime.timeIntervalSince(Infinity.shared.state.infinityStartTime)
-            guard infinityInterval > statistics.fastestInfinity else {
-                return
-            }
-            statistics.fastestInfinity = infinityInterval
-        }
-    }
-    
-    func withContinousObservation(of value: @escaping @autoclosure () -> Any, execute: @escaping (Any, Statistics) -> Void) {
-        withObservationTracking { [weak self] in
-            execute(value(), self!)
-        } onChange: {
-            Task { @MainActor [weak self] in
-                self!.withContinousObservation(of: value(), execute: execute)
-            }
-        }
     }
     
     func save(objectContext: NSManagedObjectContext, notification: NotificationCenter.Publisher.Output?) {
@@ -106,12 +77,5 @@ class Statistics: Saveable, Resettable {
         bestAMs = storedStatistics!.bestAMs as! InfiniteDecimal
         bestInfinitiesS = storedStatistics!.bestInfinitiesS as! InfiniteDecimal
         fastestInfinity = storedStatistics!.fastestInfinity
-    }
-    
-    static func reset() {
-        shared.totalAntimatter = Antimatter.shared.state.antimatter
-        shared.totalInfinities = 0
-        shared.bestAMs = 0
-        shared.bestInfinitiesS = 0
     }
 }

@@ -5,59 +5,84 @@
 //  Created by Justin Covell on 10/5/24.
 //
 import Foundation
+import CoreData
 
 @Observable
-class Infinity: Resettable {
-    static let shared = Infinity()
+class Infinity {
+    var storedState: StoredInfinityState?
+    var infinities: InfiniteDecimal = 0
+    var infinitiesThisCrunch: InfiniteDecimal = 0
+    var infinityPower: InfiniteDecimal = 0
+    var infinityStartTime: Date = Date()
+    var infinityBroken = false
+    var firstInfinity = false
     
-    let state: InfinityState
+    func load() {
+        ClickerGaemData.shared.persistentContainer.viewContext.performAndWait {
+            let req = StoredInfinityState.fetchRequest()
+            req.fetchLimit = 1
+            guard let maybeStoredState = try? ClickerGaemData.shared.persistentContainer.viewContext.fetch(req).first else {
+                storedState = StoredInfinityState(context: ClickerGaemData.shared.persistentContainer.viewContext)
+                storedState?.infinities = infinities
+                storedState?.infinitiesThisCrunch = infinitiesThisCrunch
+                storedState?.infinityPower = infinityPower
+                storedState?.infinityBroken = infinityBroken
+                storedState?.infinityStartTime = infinityStartTime
+                storedState?.firstInfinity = firstInfinity
+                return
+            }
+            storedState = maybeStoredState
+        }
+        infinities = storedState!.infinities as! InfiniteDecimal
+        infinitiesThisCrunch = storedState!.infinitiesThisCrunch as! InfiniteDecimal
+        infinityPower = storedState!.infinityPower as! InfiniteDecimal
+        infinityBroken = storedState!.infinityBroken
+        infinityStartTime = storedState?.infinityStartTime ?? Date()
+        firstInfinity = storedState!.firstInfinity
+    }
+    
+    func save(objectContext: NSManagedObjectContext, notification: NotificationCenter.Publisher.Output?) {
+        if storedState == nil {
+            storedState = StoredInfinityState(context: objectContext)
+        }
+        storedState?.infinities = infinities
+        storedState?.infinitiesThisCrunch = infinitiesThisCrunch
+        storedState?.infinityPower = infinityPower
+        storedState?.infinityBroken = infinityBroken
+        storedState?.infinityStartTime = infinityStartTime
+        storedState?.firstInfinity = firstInfinity
+        try? objectContext.save()
+    }
+    let infinityUpgrades: InfinityUpgrades
+    let statistics: Statistics
     
     var infinityTime: Date = Date.distantPast
     
-    private var _canCrunch = false
-    
-    var canCrunch: Bool {
-        get {
-            guard !_canCrunch else {
-                return _canCrunch
-            }
-            _canCrunch = Antimatter.shared.state.antimatter.gte(other: Decimals.infinity)
-            guard _canCrunch else {
-                return _canCrunch
-            }
-            infinityTime = Date()
-            return _canCrunch
-        }
-    }
-    
-    init() {
-        state = InfinityState()
+    init(statistics: Statistics) {
+        self.statistics = statistics
+        // TODO: Probably a better way to do this
+        self.infinityUpgrades = InfinityUpgrades(statistics: statistics)
+        self.load()
+        self.infinityUpgrades.infinity = { [unowned self] in self}()
     }
     
     func add(infinities: InfiniteDecimal) {
-        if !state.firstInfinity {
-            state.firstInfinity = true
+        if !firstInfinity {
+            firstInfinity = true
         }
-        state.infinities = state.infinities.add(value: infinities)
-        Statistics.shared.totalInfinities = Statistics.shared.totalInfinities.add(value: infinities)
+        self.infinities = self.infinities.add(value: infinities)
+        statistics.totalInfinities = statistics.totalInfinities.add(value: infinities)
     }
     
     func crunch() {
-        guard canCrunch else {
-            return
-        }
-        Antimatter.shared.state.reset()
-        // Start with 100 instead of 10
-        Antimatter.shared.state.antimatter = 100
-        Infinity.shared.add(infinities: 1)
-        Infinity.shared.state.infinityStartTime = Date()
-        Dimensions.shared.dimensions.forEach({$1.reset()})
+        add(infinities: 1)
+        infinityStartTime = Date()
     }
     
-    static func reset() {
-        shared.state.infinities = 0
-        shared.state.infinitiesThisCrunch = 0
-        shared.state.infinityPower = 0
-        shared.state.infinityBroken = false
+    func reset() {
+        infinities = 0
+        infinitiesThisCrunch = 0
+        infinityPower = 0
+        infinityBroken = false
     }
 }

@@ -7,10 +7,12 @@
 import SwiftUI
 
 struct InfinityTab: View {
+    @Environment(GameInstance.self) var gameInstance
+    var infinity: Infinity { gameInstance.infinity }
     @State var currTab = 1
     var body: some View {
         VStack {
-            Text("\(Infinity.shared.state.infinities) infinities")
+            Text("\(infinity.infinities) infinities")
             TabView(selection: $currTab) {
                 InfinityUpgradesView().tabItem {
                     Label("Infinity Upgrades", systemImage: "infinity")
@@ -22,8 +24,8 @@ struct InfinityTab: View {
 
 #Preview {
     ClickerGaemData.shared.persistentContainer = ClickerGaemData.preview
-    _ = InfinityUpgrades.shared
-    InfinityUpgrades.shared.totalTimeMult.bought = true
-    Infinity.shared.state.infinities = 10
-    return InfinityTab()
+    let gameInstance = GameInstance()
+    gameInstance.infinity.infinityUpgrades.totalTimeMult.bought = true
+    gameInstance.infinity.infinities = 10
+    return InfinityTab().environment(gameInstance)
 }

@@ -17,7 +17,7 @@ struct AMDimensionAutobuyerView: View {
     
     var body: some View {
         VStack{
-            if !autobuyer.buyableState.purchased {
+            if !autobuyer.purchased {
                 if !autobuyer.canBuy {
                     Text("Unlocked at \(autobuyer.cost) total AM")
                 } else {
@@ -31,10 +31,10 @@ struct AMDimensionAutobuyerView: View {
                 Text("Current interval \(autobuyer.buyRate.formatted())s").font(.system(size: 10))
                 HStack(spacing: 30) {
                     Button(action: {autobuyer.toggleEnabled()}) {
-                        autobuyer.state.enabled ? Label("Enabled", systemImage: "checkmark.circle.fill").labelStyle(.iconOnly) : Label("Disabled", systemImage: "checkmark.circle").labelStyle(.iconOnly)
+                        autobuyer.enabled ? Label("Enabled", systemImage: "checkmark.circle.fill").labelStyle(.iconOnly) : Label("Disabled", systemImage: "checkmark.circle").labelStyle(.iconOnly)
                     }
-                    Button(action: {autobuyer.state.autobuyCount = autobuyer.state.autobuyCount == 10 ? 1 : 10}) {
-                        autobuyer.state.autobuyCount == 10 ? Label("Buys 10", systemImage: "10.square.fill").labelStyle(.iconOnly) : Label("Buys 1", systemImage: "01.square.fill").labelStyle(.iconOnly)
+                    Button(action: {autobuyer.autobuyCount = autobuyer.autobuyCount == 10 ? 1 : 10}) {
+                        autobuyer.autobuyCount == 10 ? Label("Buys 10", systemImage: "10.square.fill").labelStyle(.iconOnly) : Label("Buys 1", systemImage: "01.square.fill").labelStyle(.iconOnly)
                     }
                 }.padding(.top)
             }
@@ -44,6 +44,7 @@ struct AMDimensionAutobuyerView: View {
 
 #Preview {
     ClickerGaemData.shared.persistentContainer = ClickerGaemData.preview
-    Statistics.shared.totalAntimatter = InfiniteDecimal(mantissa: 1, exponent: 50)
-    return AMDimensionAutobuyerView(autobuyer: AMDimensionAutobuyer(tier: 1))
+    let gameInstance = GameInstance()
+    gameInstance.statistics.totalAntimatter = InfiniteDecimal(mantissa: 1, exponent: 50)
+    return AMDimensionAutobuyerView(autobuyer: AMDimensionAutobuyer(antimatter: gameInstance.antimatter, statistics: gameInstance.statistics, tier: 1))
 }

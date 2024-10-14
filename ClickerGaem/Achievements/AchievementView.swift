@@ -7,8 +7,9 @@
 import SwiftUI
 
 struct AchievementView: View {
+    @Environment(GameInstance.self) var gameInstance: GameInstance
     var achievements: [Achievement] {
-        Achievements.shared.achievements
+        gameInstance.achievements.achievements
     }
     var body: some View {
         List{
@@ -28,5 +29,5 @@ struct AchievementView: View {
 
 #Preview {
     ClickerGaemData.shared.persistentContainer = ClickerGaemData.preview
-    return AchievementView()
+    return AchievementView().environment(GameInstance())
 }
