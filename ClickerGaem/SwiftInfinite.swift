@@ -19,6 +19,7 @@ let expMax = Int.max
 struct PowersOf10 {
     static let indexOf0 = 323;
     static var powersOf10: [Double] = []
+    static var powersOf1000: [Double] = []
     
     init() {
         guard PowersOf10.powersOf10.isEmpty else {
@@ -26,6 +27,7 @@ struct PowersOf10 {
         }
         for i in numExpMin + 1...numExpMax {
             PowersOf10.powersOf10.append(Double("1e\(i)")!)
+            PowersOf10.powersOf1000.append(Darwin.pow(1000, Double(i)))
         }
     }
     
@@ -33,11 +35,16 @@ struct PowersOf10 {
         let _ = PowersOf10()
         return PowersOf10.powersOf10[power + indexOf0]
     }
+    
+    static func getPowerMille(power: Int) -> Double {
+        let _ = PowersOf10()
+        return PowersOf10.powersOf1000[power + indexOf0]
+    }
 }
 
 /// A conversion of break\_infinity.js to swift. I have no idea if the performance is good, but it seems to work fine when not listening for breakpoints
 /// A very basic representation of float values with a Double mantissa and Integer exponent. There are minimal checks for overflows or other unwanted behavior, but generally holds up
-class InfiniteDecimal: NSObject, ExpressibleByIntegerLiteral, ExpressibleByFloatLiteral, Codable {
+final class InfiniteDecimal: NSObject, ExpressibleByIntegerLiteral, ExpressibleByFloatLiteral, Codable {
     var m: Double
     var e: Int
     
@@ -275,7 +282,7 @@ class InfiniteDecimal: NSObject, ExpressibleByIntegerLiteral, ExpressibleByFloat
         return Double(e) + Darwin.log10(Swift.abs(m))
     }
     
-    func log(base: Double) -> Double{
+    func log(base: Double) -> Double {
         return (InfiniteDecimal.ln10 / Darwin.log(base)) * self.log10()
     }
     
@@ -424,8 +431,8 @@ extension InfiniteDecimal {
             return "0"
         }
         guard e >= 33 || e <= -7 else {
-            let exponent = Swift.max(Darwin.floor(self.log(base: 1000)), 0)
-            let mantissa = self.div(value: InfiniteDecimal(source: Darwin.pow(1000, exponent))).toDouble()
+            let exponent = Swift.max(Int(self.log(base: 1000)), 0)
+            let mantissa = self.div(value: InfiniteDecimal(source: PowersOf10.getPowerMille(power: exponent))).toDouble()
             guard exponent > 0 else {
                 return mantissa.formatted(.number.precision(.fractionLength(2)))
             }

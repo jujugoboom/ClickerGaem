@@ -9,12 +9,40 @@ import Foundation
 import SwiftUI
 
 struct AntimatterGalaxy: View {
+    @Environment(GameInstance.self) var gameInstance: GameInstance
+    var antimatter: Antimatter {
+        gameInstance.antimatter
+    }
+    var dimensions: Dimensions {
+        antimatter.dimensions
+    }
+    var galaxyCost: Int {
+        80 + antimatter.amGalaxies * 60
+    }
+    var canBuyGalaxy: Bool {
+        dimensions.dimensions[8]?.currCount.gte(other: InfiniteDecimal(integerLiteral: galaxyCost)) ?? false
+    }
     var body: some View {
         HStack{
-            Text("\(Antimatter.shared.state.amGalaxies) galaxies")
-            Button(action: Antimatter.shared.buyGalaxy) {
-                Text("\(Antimatter.shared.galaxyCost) 8th dimensions").contentShape(.rect)
-            }.disabled(!Antimatter.shared.canBuyGalaxy)
+            Text("\(antimatter.amGalaxies) galaxies")
+            Button(action: buyGalaxy) {
+                Text("\(galaxyCost) 8th dimensions").contentShape(.rect)
+            }.disabled(!canBuyGalaxy)
         }
     }
+    
+    func buyGalaxy() {
+        guard canBuyGalaxy else {
+            return
+        }
+        dimensions.dimensions.values.forEach() { dimension in
+            dimension.reset(keepUnlocked: false)
+        }
+        antimatter.antimatter = 10
+        antimatter.tickSpeedUpgrades = 0
+        antimatter.dimensionBoosts = 0
+        antimatter.sacrificedDimensions = 0
+        antimatter.amGalaxies += 1
+    }
+
 }

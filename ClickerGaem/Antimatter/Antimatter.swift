@@ -4,79 +4,156 @@
 //
 //  Created by Justin Covell on 9/24/24.
 //
+import Foundation
+import CoreData
 
-class Antimatter: Resettable {
-    static var shared = Antimatter()
-    let state: AntimatterState
+@Observable
+class Antimatter: Tickable {
+    let infinity: Infinity
+    let statistics: Statistics
+    let dimensions: Dimensions
     
-    var dimensionBoostCost: [Int: Dimension] {
-        guard state.dimensionBoosts >= 4 else {
-            return [20: Dimensions.shared.dimensions[state.dimensionBoosts + 4]!]
+    var storedState: StoredAntimatterState?
+    var antimatter: InfiniteDecimal = 10
+    var tickSpeedUpgrades: InfiniteDecimal = 0
+    var dimensionBoosts = 0
+    var amGalaxies = 0
+    var sacrificedDimensions: InfiniteDecimal = 0
+    var dimensionSacrificeMul: InfiniteDecimal {
+        Antimatter.dimensionSacrificeMultiplier(sacrificed: sacrificedDimensions)
+    }
+    var totalDimensionBoost: InfiniteDecimal {
+        (2 as InfiniteDecimal).pow(value: InfiniteDecimal(integerLiteral: dimensionBoosts))
+    }
+    var tickspeedMultiplier: InfiniteDecimal {
+        guard amGalaxies > 3 else {
+            var baseMultiplier = 1 / 1.1245;
+            if amGalaxies == 1 { baseMultiplier = 1 / 1.11888888 }
+            if amGalaxies == 2 { baseMultiplier = 1 / 1.11267177 }
+            let perGalaxy = 0.02
+            return InfiniteDecimal(source: 0.01).max(other: InfiniteDecimal(source: baseMultiplier - (Double(amGalaxies) * perGalaxy)))
         }
-        return [-40 + (15 * state.dimensionBoosts): Dimensions.shared.dimensions[8]!]
+        let baseMultiplier = 0.8
+        let galaxies = amGalaxies - 2
+        let perGalaxy = InfiniteDecimal(source: 0.965)
+        return perGalaxy.pow(value: InfiniteDecimal(integerLiteral: galaxies - 2)).mul(value: InfiniteDecimal(source: baseMultiplier))
+    }
+    var ticksPerSecond: InfiniteDecimal {
+        InfiniteDecimal(source: 1e3).div(value: InfiniteDecimal(source: 1e3).mul(value: tickspeedMultiplier.pow(value: tickSpeedUpgrades)))
     }
     
-    var canBuyDimensionBoost: Bool {
-        return dimensionBoostCost.values.first!.state.currCount.gte(other: InfiniteDecimal(integerLiteral: dimensionBoostCost.keys.first!))
+    var tickspeedUpgradeCost: InfiniteDecimal {
+        InfiniteDecimal().pow10(value: tickSpeedUpgrades.add(value: 3).toDouble())
     }
     
-    var howManyDimensionBoostsCanBuy: InfiniteDecimal {
-        if state.dimensionBoosts < 4 {
-            if canBuyDimensionBoost { return 1 } else { return 0 }
+    func load() {
+        ClickerGaemData.shared.persistentContainer.viewContext.performAndWait {
+            let req = StoredAntimatterState.fetchRequest()
+            req.fetchLimit = 1
+            guard let maybeStoredState = try? ClickerGaemData.shared.persistentContainer.viewContext.fetch(req).first else {
+                self.storedState = StoredAntimatterState(context: ClickerGaemData.shared.persistentContainer.viewContext)
+                self.storedState?.antimatter = antimatter
+                self.storedState?.tickSpeedUpgrades = tickSpeedUpgrades
+                self.storedState?.sacrificedDimensions = sacrificedDimensions
+                self.storedState?.dimensionBoosts = Int64(dimensionBoosts)
+                self.storedState?.galaxies = Int64(amGalaxies)
+                return
+            }
+            self.storedState = maybeStoredState
         }
-        return Dimensions.shared.dimensions[8]!.state.currCount.div(value: InfiniteDecimal(integerLiteral: dimensionBoostCost.keys.first!)).floor()
+        self.antimatter = storedState!.antimatter as! InfiniteDecimal
+        self.tickSpeedUpgrades = storedState!.tickSpeedUpgrades as! InfiniteDecimal
+        self.sacrificedDimensions = storedState!.sacrificedDimensions as! InfiniteDecimal
+        self.dimensionBoosts = Int(storedState!.dimensionBoosts)
+        self.amGalaxies = Int(storedState!.galaxies)
     }
     
-    var galaxyCost: Int {
-        80 + state.amGalaxies * 60
+    func save(objectContext: NSManagedObjectContext, notification: NotificationCenter.Publisher.Output? = nil) {
+        self.dimensions.dimensions.values.forEach({$0.save(objectContext: objectContext, notification: notification)})
+        if storedState == nil {
+            storedState = StoredAntimatterState(context: objectContext)
+        }
+        self.storedState!.antimatter = antimatter
+        self.storedState!.tickSpeedUpgrades = tickSpeedUpgrades
+        self.storedState!.sacrificedDimensions = sacrificedDimensions
+        self.storedState!.dimensionBoosts = Int64(dimensionBoosts)
+        self.storedState!.galaxies = Int64(amGalaxies)
+        try? objectContext.save()
     }
     
-    var canBuyGalaxy: Bool {
-        Dimensions.shared.dimensions[8]?.state.currCount.gte(other: InfiniteDecimal(integerLiteral: galaxyCost)) ?? false
+    func reset() {
+        self.antimatter = 10
+        self.tickSpeedUpgrades = 0
+        self.sacrificedDimensions = 0
+        self.dimensionBoosts = 0
+        self.amGalaxies = 0
+        self.load()
     }
     
-    init() {
-        self.state = AntimatterState()
+    var amPerSecond: InfiniteDecimal {
+        guard dimensions.dimensions.keys.contains(1) else {
+            return 0
+        }
+        return dimensions.dimensions[1]!.perSecond(antimatter: self)
+    }
+    
+    init(infinity: Infinity, statistics: Statistics) {
+        self.infinity = infinity
+        self.statistics = statistics
+        self.dimensions = Dimensions(infinityUpgrades: infinity.infinityUpgrades)
+        self.load()
     }
     
     static func dimensionSacrificeMultiplier(sacrificed: InfiniteDecimal) -> InfiniteDecimal {
         InfiniteDecimal(source: sacrificed.log10() / 10).max(other: 1).pow(value: 2)
     }
     
+    func canBuyDimension(_ tier: Int) -> Bool {
+        if let dimension = dimensions.dimensions[tier] {
+            return dimension.unlocked && dimension.howManyCanBuy(antimatter: self).gt(other: 0) && (tier > 1 ? dimensions.dimensions[tier - 1]?.purchaseCount ?? 0 > 0 : true)
+        }
+        return false
+    }
+    
+    func buyDimension(_ tier: Int, count: InfiniteDecimal? = nil) {
+        if let dimension = dimensions.dimensions[tier] {
+            let toBuy = count == nil ? dimension.howManyCanBuy(antimatter: self) : count!
+            let totalCost = dimension.cost.mul(value: toBuy)
+            guard antimatter.gte(other: totalCost) else {
+                return
+            }
+            antimatter = antimatter.sub(value: totalCost)
+            let intCount = toBuy.toInt()
+            dimension.purchaseCount += intCount
+            dimension.currCount = dimension.currCount.add(value: toBuy)
+        }
+    }
+    
     func add(amount: InfiniteDecimal) {
-        self.state.antimatter = self.state.antimatter.add(value: amount).min(other: Decimals.infinity)
+        antimatter = antimatter.add(value: amount).min(other: Decimals.infinity)
     }
     
-    func buyDimensionBoost() {
-        guard canBuyDimensionBoost else {
-            return
-        }
-        Dimensions.shared.dimensions.values.forEach() { dimension in
-            dimension.reset()
-        }
-        state.antimatter = 10
-        state.tickSpeedUpgrades = 0
-        state.dimensionBoosts += 1
-        state.sacrificedDimensions = 0
-        Dimensions.shared.dimensions[state.dimensionBoosts + 4]?.state.unlocked = true
-    }
-    
-    func buyGalaxy() {
-        guard canBuyGalaxy else {
-            return
-        }
-        Dimensions.shared.dimensions.values.forEach() { dimension in
-            dimension.reset(keepUnlocked: false)
-        }
-        state.antimatter = 10
-        state.tickSpeedUpgrades = 0
-        state.dimensionBoosts = 0
-        state.sacrificedDimensions = 0
-        state.amGalaxies += 1
-    }
-    
-    static func reset() {
-        Antimatter.shared.state.reset()
-        Antimatter.shared.state.load()
+    func tick(diff: TimeInterval) {
+        dimensions.unlockedDimensions.forEach({
+            guard $0.purchaseCount > 0 else {
+                return
+            }
+            guard !infinity.infinityBroken && !antimatter.gte(other: Decimals.infinity) else {
+                return
+            }
+            if $0.tier == 1 {
+                let perSecond = $0.perSecond(antimatter: self)
+                if perSecond.gt(other: statistics.bestAMs) {
+                    statistics.bestAMs = perSecond
+                }
+                let generatedAntimatter = perSecond.mul(value: InfiniteDecimal(source: diff))
+                add(amount: generatedAntimatter)
+                statistics.addAntimatter(amount: generatedAntimatter, diff: diff)
+            } else {
+                // Get dimension the tier below this one
+                let lowerDimension = dimensions.dimensions[$0.tier - 1]!
+                lowerDimension.currCount = lowerDimension.currCount.add(value: $0.perSecond(antimatter: self).mul(value: InfiniteDecimal(source: diff / 10)))
+            }
+        })
     }
 }

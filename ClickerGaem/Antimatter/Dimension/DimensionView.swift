@@ -9,18 +9,24 @@ import SwiftUI
 import AudioToolbox
 
 struct DimensionView: View {
-    var tier: Int
-    var dimension: Dimension {
-        Dimensions.shared.dimensions[tier]!
+    @Environment(GameInstance.self) var gameInstance: GameInstance
+    var antimatter: Antimatter {
+        gameInstance.antimatter
     }
-    var dimensionState: DimensionState {
-        self.dimension.state
+    let tier: Int
+    let tierStr: String
+    let dimension: Dimension
+    
+    var howManyCanBuy: InfiniteDecimal {
+        dimension.howManyCanBuy(antimatter: antimatter)
     }
     
-    var tierFormatter: NumberFormatter {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .ordinal
-        return formatter
+    var canBuy: Bool {
+        antimatter.canBuyDimension(tier)
+    }
+    
+    var multiplier: InfiniteDecimal {
+        dimension.multiplier(antimatter: antimatter)
     }
     
     @State var viewingDetails = false
@@ -28,62 +34,81 @@ struct DimensionView: View {
     var body: some View {
         Button(action: {}) {
             VStack {
-                Text("\(tierFormatter.string(from: dimensionState.tier as NSNumber) ?? "0th") dimension")
+                Text("\(tierStr) dimension")
                 HStack{
-                    Text("Total: \(dimension.state.currCount.floor())").font(.system(size: 10))
-                    Text("x\(dimension.multiplier)").font(.system(size: 10))
+                    Text("Total: \(dimension.currCount))").font(.system(size: 10))
+                    Text("x\(multiplier)").font(.system(size: 10))
                 }
-                Text("Buy \(dimension.howManyCanBuy.toInt())")
-                Text("\(dimension.cost.mul(value: dimension.howManyCanBuy.max(other: 1)))").font(.system(size: 10))
+                Text("Buy \(howManyCanBuy.toInt())")
+                Text("\(dimension.cost.mul(value: howManyCanBuy.max(other: 1)))").font(.system(size: 10))
             }.frame(maxWidth: .infinity, maxHeight: 100)
-        }.disabled(!dimension.canBuy).animation(.smooth, value: dimension.howManyCanBuy).buttonStyle(.bordered).simultaneousGesture(LongPressGesture().onEnded {_ in
+        }.disabled(!canBuy).buttonStyle(.bordered).simultaneousGesture(LongPressGesture().onEnded {_ in
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
             viewingDetails.toggle()
         }).simultaneousGesture(TapGesture().onEnded {_ in
             buy()
         }).popover(isPresented: $viewingDetails) {
-            DimensionDetails(tier: tier)
+            DimensionDetails(dimension: dimension)
         }
+    }
+    
+    init(dimension: Dimension) {
+        self.dimension = dimension
+        self.tier = dimension.tier
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .ordinal
+        self.tierStr = formatter.string(from: tier as NSNumber) ?? "0th"
     }
                 
     private func buy() {
-        dimension.buy(count: dimension.howManyCanBuy)
+        antimatter.buyDimension(dimension.tier)
     }
 }
 
 struct DimensionDetails: View {
-    var tier: Int
-    var dimension: Dimension {
-        Dimensions.shared.dimensions[tier]!
+    @Environment(GameInstance.self) var gameInstance: GameInstance
+    var antimatter: Antimatter {
+        gameInstance.antimatter
     }
+    let tier: Int
+    let tierString: String
+    let dimension: Dimension
     
-    var dimensionState: DimensionState {
-        self.dimension.state
-    }
-    
-    var tierFormatter: NumberFormatter {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .ordinal
-        return formatter
+    var growthRate: InfiniteDecimal {
+        guard tier != 8 else {
+            return 0
+        }
+        return antimatter.dimensions.dimensions[tier + 1]?.perSecond(antimatter: antimatter).div(value: dimension.currCount.max(other: 1)).mul(value: 100).mul(value: 0.1) ?? 0
     }
     
     var body: some View {
         VStack {
-            Text("\(tierFormatter.string(from: dimensionState.tier as NSNumber) ?? "0th") dimension").font(.title)
+            Text("\(tierString) dimension").font(.title)
             HStack{
-                Text("Total: \(dimension.state.currCount.floor())")
-                Text("Purchased: \(dimension.state.purchaseCount)")
+                Text("Total: \(dimension.currCount.floor())")
+                Text("Purchased: \(dimension.purchaseCount)")
             }
             HStack{
-                Text("+\(dimension.growthRate)%/s")
-                Text("Multiplier x\(dimension.multiplier)")
+                Text("+\(growthRate)%/s")
+                Text("Multiplier x\(dimension.multiplier(antimatter: antimatter))")
             }
         }
-
+    }
+    
+    init(dimension: Dimension) {
+        self.dimension = dimension
+        self.tier = dimension.tier
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .ordinal
+        self.tierString = formatter.string(from: tier as NSNumber) ?? "0th"
     }
 }
 
 #Preview {
     ClickerGaemData.shared.persistentContainer = ClickerGaemData.preview
-    return DimensionView(tier: 1)
+    let statistics = Statistics()
+    let infinity = Infinity(statistics: statistics)
+    let antimatter = Antimatter(infinity: infinity, statistics: statistics)
+    
+    return DimensionView(dimension: antimatter.dimensions.dimensions[1]!)
 }

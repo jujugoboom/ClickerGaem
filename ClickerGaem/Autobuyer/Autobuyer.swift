@@ -6,15 +6,20 @@
 //
 
 import Foundation
+import CoreData
 
 enum AutobuyerType {
     case amdimension
     case none
 }
 
-protocol Autobuyer: Identifiable, Tickable {
+protocol Autobuyer: AnyObject, Identifiable, Tickable, Saveable {
     var type: AutobuyerType { get set }
-    var state: AutobuyerState { get set }
+    var id: String { get }
+    var enabled: Bool { get set }
+    var unlocked: Bool { get set }
+    var autobuyCount: Int { get set }
+    var storedState: StoredAutobuyerState? { get set }
     
     func unlock()
     func toggleEnabled()
@@ -23,42 +28,47 @@ protocol Autobuyer: Identifiable, Tickable {
 extension Autobuyer {
     func tick(diff: TimeInterval) {}
     
+    func reset() {
+        self.enabled = false
+        self.unlocked = false
+        self.load()
+    }
+    
     func unlock() {
-        state.unlocked = true
+        unlocked = true
     }
     
     func toggleEnabled() {
-        state.enabled = !state.enabled
+        enabled = !enabled
     }
 }
 
-protocol BuyableAutobuyer: Autobuyer {
-    var buyableState: BuyableAutobuyerState { get }
-    
+protocol BuyableAutobuyer: AnyObject, Autobuyer {
+    var purchased: Bool { get set }
     var canBuy: Bool { get }
     
     func purchase()
 }
 
 extension BuyableAutobuyer {
-   func purchase() {
-       guard canBuy else { return }
-       buyableState.purchased = true
-   }
+    func purchase() {
+        guard canBuy else { return }
+        purchased = true
+    }
 }
 
-class Autobuyers: Tickable, Resettable {
-    static let shared = Autobuyers()
-    let dimensionAutobuyers: [AMDimensionAutobuyer] = (1...8).map({AMDimensionAutobuyer(tier: $0)})
+class Autobuyers: Tickable {
+    let dimensionAutobuyers: [AMDimensionAutobuyer]
     var autobuyers: [any Autobuyer] = []
     var unlockedAutobuyers: [any Autobuyer] {
-        autobuyers.filter({$0.state.unlocked})
+        autobuyers.filter({$0.unlocked})
     }
     var enabledAutobuyers: [any Autobuyer] {
-        autobuyers.filter({$0.state.unlocked && $0.state.enabled})
+        autobuyers.filter({$0.unlocked && $0.enabled})
     }
     
-    init () {
+    init (antimatter: Antimatter, statistics: Statistics) {
+        dimensionAutobuyers = (1...8).map({AMDimensionAutobuyer(antimatter: antimatter, statistics: statistics, tier: $0)})
         autobuyers.append(contentsOf: dimensionAutobuyers)
     }
     
@@ -66,7 +76,7 @@ class Autobuyers: Tickable, Resettable {
         autobuyers.forEach({$0.tick(diff: diff)})
     }
     
-    static func reset() {
-        Autobuyers.shared.autobuyers.forEach({$0.state.reset()})
+    func reset() {
+        autobuyers.forEach({$0.reset()})
     }
 }
