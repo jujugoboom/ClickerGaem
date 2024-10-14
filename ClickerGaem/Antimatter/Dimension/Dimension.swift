@@ -60,7 +60,7 @@ class Dimension: Identifiable {
     func reset(keepUnlocked: Bool = false) {
         self.purchaseCount = 0
         self.currCount = .zeroDecimal
-        self.unlocked = keepUnlocked ? unlocked : false
+        self.unlocked = keepUnlocked ? unlocked : tier <= 4
     }
     
     var timesBought: InfiniteDecimal {

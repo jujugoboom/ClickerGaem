@@ -36,7 +36,7 @@ struct DimensionView: View {
             VStack {
                 Text("\(tierStr) dimension")
                 HStack{
-                    Text("Total: \(dimension.currCount))").font(.system(size: 10))
+                    Text("Total: \(dimension.currCount)").font(.system(size: 10))
                     Text("x\(multiplier)").font(.system(size: 10))
                 }
                 Text("Buy \(howManyCanBuy.toInt())")

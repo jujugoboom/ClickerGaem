@@ -43,7 +43,7 @@ struct DimensionBoostView: View {
             return
         }
         antimatter.dimensions.dimensions.values.forEach() { dimension in
-            dimension.reset()
+            dimension.reset(keepUnlocked: true)
         }
         antimatter.antimatter = 10
         antimatter.tickSpeedUpgrades = 0
