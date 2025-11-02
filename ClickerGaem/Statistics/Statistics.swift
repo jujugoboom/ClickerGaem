@@ -16,6 +16,7 @@ class Statistics: Saveable {
     var bestAMs: InfiniteDecimal = 0
     var bestInfinitiesS: InfiniteDecimal = 0
     var fastestInfinity: Double = Double.infinity
+    var bestIPMsWithoutMaxAll: InfiniteDecimal = 0
     
     private var _firstInfinity: Bool = false
     var firstInfinity: Bool {

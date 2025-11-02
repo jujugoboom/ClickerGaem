@@ -62,33 +62,35 @@ class InfinityUpgrades: Saveable {
     let statistics: Statistics
     let infinity: Infinity
     
-    let totalTimeMult: InfinityUpgrade
+    let totalTimeMult: InfinityUpgrade = InfinityUpgrade(id: "timeMult", description: "Antimatter Dimensions gain a multiplier based on time played", cost: 1)
     
     func dimInfinityMult() -> InfiniteDecimal {
         statistics.totalInfinities.mul(value: 0.2).add(value: 1)
     }
     
-    let dim18Mult: InfinityUpgrade
+    let dim18Mult = InfinityUpgrade(id: "18Mult", description: "1st and 8th Antimatter Dimensions gain a multiplier based on Infinities", cost: 1)
     
-    let dim27Mult: InfinityUpgrade
+    let dim27Mult = InfinityUpgrade(id: "27Mult", description: "2nd and 7th Antimatter Dimensions gain a multiplier based on Infinities", cost: 1)
     
-    let dim36Mult: InfinityUpgrade
+    let dim36Mult = InfinityUpgrade(id: "36Mult", description: "3rd and 6th Antimatter Dimensions gain a multiplier based on Infinities", cost: 1)
     
-    let dim45Mult: InfinityUpgrade
+    let dim45Mult = InfinityUpgrade(id: "45Mult", description: "4th and 5th Antimatter Dimensions gain a multiplier based on Infinities", cost: 1)
     
-    let resetBoost: InfinityUpgrade
+    let resetBoost = InfinityUpgrade(id: "resetBoost", description: "Decrease the number of Dimensions needed for Dimension Boosts and Antimatter Galaxies by 9", cost: 1, effect: {9})
     
-    let buy10Mult : InfinityUpgrade
+    let buy10Mult = InfinityUpgrade(id: "dimMult", description: "Increase the multiplier for buying 10 Antimatter Dimensions", cost: 1, effect: {
+        1.1
+    })
     
-    let galaxyBoost: InfinityUpgrade
+    let galaxyBoost = InfinityUpgrade(id: "galaxyBoost", description: "All Galaxies are twice as strong", cost: 2, effect: {2})
     
-    let thisInfinityTimeMult: InfinityUpgrade
+    let thisInfinityTimeMult = InfinityUpgrade(id: "timeMult2", description: "Antimatter Dimensions gain a multiplier based on time spent in current Infinity", cost: 3)
     
-    let unspentIPMult: InfinityUpgrade
+    let unspentIPMult = InfinityUpgrade(id: "unspentBonus", description: "Multiplier to 1st Antimatter Dimension based on unspent Infinity Points", cost: 5)
     
-    let dimboostMult: InfinityUpgrade
+    let dimboostMult = InfinityUpgrade(id: "resetMult", description: "Increase Dimension Boost multiplier", cost: 7, effect: {2.5})
     
-    let ipGen: InfinityUpgrade
+    let ipGen = InfinityUpgrade(id: "passiveGen", description: "Passively generate Infinity Points 10 times slower than your fastest Infinity", cost: 10, effect: {1})
     
     let skipReset1 = InfinityUpgrade(id: "skipReset1", description: "Start every reset with 1 Dimension Boost, automatically unlocking the 5th Antimatter Dimension", cost: 20, effect: {1})
     
@@ -98,30 +100,16 @@ class InfinityUpgrades: Saveable {
     
     let skipResetGalaxy = InfinityUpgrade(id: "skipResetGalaxy", description: "Start every reset with 4 Dimension Boosts, automatically unlocking the 8th Antimatter Dimension; and an Antimatter Galaxy", cost: 300, effect: {1})
     
-//    let ipOffline = InfinityUpgrade(id: "ipOffline")
+    let ipOffline = InfinityUpgrade(id: "ipOffline", description: "Only while offline, gain 50% of your best IP/min without using Max All", cost: 1000)
     
     var upgrades: [InfinityUpgrade] { [totalTimeMult, dim18Mult, dim27Mult, dim36Mult, dim45Mult, resetBoost, buy10Mult, galaxyBoost, thisInfinityTimeMult, unspentIPMult, dimboostMult, ipGen, skipReset1, skipReset2, skipReset3, skipResetGalaxy] }
 
     init(statistics: Statistics, infinity: Infinity) {
         self.statistics = statistics
         self.infinity = infinity
-        self.totalTimeMult = InfinityUpgrade(id: "timeMult", description: "Antimatter Dimensions gain a multiplier based on time played", cost: 1, effect: {
+        self.totalTimeMult.effect = {
             InfiniteDecimal(source: pow(abs(statistics.startDate.timeIntervalSinceNow) / 2, 0.15))
-        })
-        self.dim18Mult = InfinityUpgrade(id: "18Mult", description: "1st and 8th Antimatter Dimensions gain a multiplier based on Infinities", cost: 1)
-        self.dim27Mult = InfinityUpgrade(id: "27Mult", description: "2nd and 7th Antimatter Dimensions gain a multiplier based on Infinities", cost: 1)
-        self.dim36Mult = InfinityUpgrade(id: "36Mult", description: "3rd and 6th Antimatter Dimensions gain a multiplier based on Infinities", cost: 1)
-        self.dim45Mult = InfinityUpgrade(id: "45Mult", description: "4th and 5th Antimatter Dimensions gain a multiplier based on Infinities", cost: 1)
-        self.resetBoost = InfinityUpgrade(id: "resetBoost", description: "Decrease the number of Dimensions needed for Dimension Boosts and Antimatter Galaxies by 9", cost: 1, effect: {9})
-        self.buy10Mult = InfinityUpgrade(id: "dimMult", description: "Increase the multiplier for buying 10 Antimatter Dimensions", cost: 1, effect: {
-            1.1
-        })
-        self.galaxyBoost = InfinityUpgrade(id: "galaxyBoost", description: "All Galaxies are twice as strong", cost: 2, effect: {2})
-        self.thisInfinityTimeMult = InfinityUpgrade(id: "timeMult2", description: "Antimatter Dimensions gain a multiplier based on time spent in current Infinity", cost: 3)
-        self.unspentIPMult = InfinityUpgrade(id: "unspentBonus", description: "Multiplier to 1st Antimatter Dimension based on unspent Infinity Points", cost: 5)
-        self.dimboostMult = InfinityUpgrade(id: "resetMult", description: "Increase Dimension Boost multiplier", cost: 7, effect: {2.5})
-        self.ipGen = InfinityUpgrade(id: "passiveGen", description: "Passively generate Infinity Points 10 times slower than your fastest Infinity", cost: 10, effect: {1})
-        
+        }
         self.dim18Mult.requirements = {self.totalTimeMult.bought}
         self.dim18Mult.effect = self.dimInfinityMult
         self.dim27Mult.requirements = {self.buy10Mult.bought}
@@ -140,6 +128,7 @@ class InfinityUpgrades: Saveable {
         }
         self.dimboostMult.requirements = {self.unspentIPMult.bought}
         self.ipGen.requirements = {self.dimboostMult.bought}
+        self.ipOffline.effect = {statistics.bestIPMsWithoutMaxAll.mul(value: 30000)}
     }
     
     func load() {
